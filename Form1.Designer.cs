@@ -1,4 +1,6 @@
-﻿namespace roundBtn
+﻿using BankSystem;
+
+namespace roundBtn
 {
     partial class Form1
     {
@@ -28,38 +30,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-             CustomButton customButton = new CustomButton();
+            customButton = new CustomButton();
             SuspendLayout();
             // 
-            // button1
+            // customButton
             // 
-            button1.FlatStyle = FlatStyle.System;
-            button1.Location = new Point(261, 258);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            
-            button1.UseVisualStyleBackColor = true;
-            // 
-            //Custom Button
-            
-            customButton.Location = new Point(61, 58);
-            customButton.Name = "click me";
+            customButton.BackColor = Color.FromArgb(169, 196, 235);
+            customButton.BorderColor = Color.FromArgb(255, 242, 204);
+            customButton.BorderRadius = 24;
+            customButton.BorderSize = 8;
+            customButton.FlatStyle = FlatStyle.Flat;
+            customButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customButton.ForeColor = Color.FromArgb(0, 51, 102);
+            customButton.Location = new Point(12, 258);
+            customButton.Name = "customButton";
             customButton.Size = new Size(240, 60);
             customButton.TabIndex = 0;
-            customButton.Text = "click me";
-            customButton.BorderRadius = 24;
-            customButton.BorderSize = 11;
-            customButton.BorderColor = Color.Black;
-            //
+            customButton.Text = "Deposit";
+            customButton.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            BackColor = Color.FromArgb(0, 51, 102);
+            ClientSize = new Size(934, 661);
             Controls.Add(customButton);
             Name = "Form1";
             Text = "Form1";
@@ -67,8 +62,6 @@
         }
 
         #endregion
-
-        private Button button1;
         private CustomButton customButton;
         
     }
