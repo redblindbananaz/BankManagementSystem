@@ -31,6 +31,9 @@ namespace roundBtn
         private void InitializeComponent()
         {
             customButton = new CustomButton();
+            customButton2 = new CustomButton();
+            customButton3 = new CustomButton();
+            customButton4 = new CustomButton();
             SuspendLayout();
             // 
             // customButton
@@ -42,12 +45,60 @@ namespace roundBtn
             customButton.FlatStyle = FlatStyle.Flat;
             customButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             customButton.ForeColor = Color.FromArgb(0, 51, 102);
-            customButton.Location = new Point(12, 258);
+            customButton.Location = new Point(12, 313);
             customButton.Name = "customButton";
             customButton.Size = new Size(240, 60);
-            customButton.TabIndex = 0;
+            customButton.TabIndex = 1;
             customButton.Text = "Deposit";
             customButton.UseVisualStyleBackColor = false;
+            // 
+            // customButton2
+            // 
+            customButton2.BackColor = Color.FromArgb(169, 196, 235);
+            customButton2.BorderColor = Color.FromArgb(255, 242, 204);
+            customButton2.BorderRadius = 24;
+            customButton2.BorderSize = 8;
+            customButton2.FlatStyle = FlatStyle.Flat;
+            customButton2.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customButton2.ForeColor = Color.FromArgb(0, 51, 102);
+            customButton2.Location = new Point(12, 393);
+            customButton2.Name = "customButton2";
+            customButton2.Size = new Size(240, 60);
+            customButton2.TabIndex = 2;
+            customButton2.Text = "Withdraw";
+            customButton2.UseVisualStyleBackColor = false;
+            // 
+            // customButton3
+            // 
+            customButton3.BackColor = Color.FromArgb(169, 196, 235);
+            customButton3.BorderColor = Color.FromArgb(255, 242, 204);
+            customButton3.BorderRadius = 24;
+            customButton3.BorderSize = 8;
+            customButton3.FlatStyle = FlatStyle.Flat;
+            customButton3.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customButton3.ForeColor = Color.FromArgb(0, 51, 102);
+            customButton3.Location = new Point(12, 473);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new Size(240, 60);
+            customButton3.TabIndex = 3;
+            customButton3.Text = "History";
+            customButton3.UseVisualStyleBackColor = false;
+            // 
+            // customButton4
+            // 
+            customButton4.BackColor = Color.FromArgb(255, 242, 204);
+            customButton4.BorderColor = Color.FromArgb(215, 155, 0);
+            customButton4.BorderRadius = 24;
+            customButton4.BorderSize = 8;
+            customButton4.FlatStyle = FlatStyle.Flat;
+            customButton4.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customButton4.ForeColor = Color.FromArgb(215, 155, 0);
+            customButton4.Location = new Point(12, 573);
+            customButton4.Name = "customButton4";
+            customButton4.Size = new Size(240, 76);
+            customButton4.TabIndex = 4;
+            customButton4.Text = "EXIT";
+            customButton4.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -56,6 +107,9 @@ namespace roundBtn
             BackColor = Color.FromArgb(0, 51, 102);
             ClientSize = new Size(934, 661);
             Controls.Add(customButton);
+            Controls.Add(customButton2);
+            Controls.Add(customButton3);
+            Controls.Add(customButton4);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -63,6 +117,12 @@ namespace roundBtn
 
         #endregion
         private CustomButton customButton;
-        
+
+        private CustomButton customButton2;
+
+        private CustomButton customButton3;
+
+        private CustomButton customButton4;
+
     }
 }

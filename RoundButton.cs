@@ -18,6 +18,7 @@ namespace roundBtn
         private int borderSize = 0;
         private int borderRadius = 24;
         private Color borderColor = Color.Black;
+        
 
         [Category("Custom Properties")]
         public int BorderSize
@@ -49,6 +50,7 @@ namespace roundBtn
                 this.Invalidate();
             }
         }
+  
 
 
         //Constructor:
@@ -88,9 +90,14 @@ namespace roundBtn
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            
             Rectangle rectSurface = this.ClientRectangle;
+
             Rectangle rectBorder = Rectangle.Inflate(rectSurface, -borderSize, -borderSize);
             int smoothSize = 2;
+
+         
+      
             if (borderSize > 0)
                 smoothSize = borderSize;
             if (borderSize > 2) // Rounded Button
