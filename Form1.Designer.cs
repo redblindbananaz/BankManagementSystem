@@ -34,6 +34,7 @@ namespace roundBtn
             customButton2 = new CustomButton();
             customButton3 = new CustomButton();
             customButton4 = new CustomButton();
+            customPanel1 = new CustomPanel();
             SuspendLayout();
             // 
             // customButton
@@ -100,6 +101,18 @@ namespace roundBtn
             customButton4.Text = "EXIT";
             customButton4.UseVisualStyleBackColor = false;
             // 
+            // customPanel1
+            // 
+            customPanel1.BackColor = Color.FromArgb(169, 196, 235);
+            customPanel1.BackgroundColor = Color.FromArgb(169, 196, 235);
+            customPanel1.BorderColor = Color.FromArgb(215, 155, 0);
+            customPanel1.BorderRadius = 24;
+            customPanel1.BorderSize = 8;
+            customPanel1.Location = new Point(273, 12);
+            customPanel1.Name = "customPanel1";
+            customPanel1.Size = new Size(649, 637);
+            customPanel1.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -110,6 +123,9 @@ namespace roundBtn
             Controls.Add(customButton2);
             Controls.Add(customButton3);
             Controls.Add(customButton4);
+            Controls.Add(customPanel1);
+            MaximumSize = new Size(950, 700);
+            MinimumSize = new Size(950, 700);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -124,5 +140,6 @@ namespace roundBtn
 
         private CustomButton customButton4;
 
+        private CustomPanel customPanel1;
     }
 }
