@@ -1,4 +1,5 @@
 ﻿using BankSystem.Components;
+using System.Windows.Forms.VisualStyles;
 
 namespace roundBtn
 {
@@ -127,7 +128,7 @@ namespace roundBtn
             MaximumSize = new Size(950, 700);
             MinimumSize = new Size(950, 700);
             Name = "Form1";
-            Text = "Form1";
+            Text = "B-Bank";
             ResumeLayout(false);
         }
 
