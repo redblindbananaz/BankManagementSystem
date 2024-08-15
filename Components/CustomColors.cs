@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace BankSystem
+namespace BankSystem.Components
 {
     public static class CustomColors
     {

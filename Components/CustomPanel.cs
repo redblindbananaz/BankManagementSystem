@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 
-namespace BankSystem
+namespace BankSystem.Components
 {
-    public class CustomPanel :Panel
+    public class CustomPanel : Panel
     {
         private int borderSize = 8;
         private int borderRadius = 24;
@@ -25,7 +25,7 @@ namespace BankSystem
             set
             {
                 borderSize = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
         [Category("Custom Properties")]
@@ -35,7 +35,7 @@ namespace BankSystem
             set
             {
                 borderRadius = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
         [Category("Custom Properties")]
@@ -45,7 +45,7 @@ namespace BankSystem
             set
             {
                 borderColor = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
         [Category("Custom Properties")]
@@ -55,21 +55,21 @@ namespace BankSystem
             set
             {
                 backgroundColor = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         //Constructor:
         public CustomPanel()
         {
-            this.DoubleBuffered = true; // REduce the flickering of Graphics with double buffering
+            DoubleBuffered = true; // REduce the flickering of Graphics with double buffering
 
         }
 
         //Methods to create the rounded corner rectangle panel:
         private GraphicsPath GetFigurePath(Rectangle rect, float radius)
         {
-            
+
             GraphicsPath path2 = new GraphicsPath();
             float curveSize = radius * 2F;
 
@@ -87,7 +87,7 @@ namespace BankSystem
         {
             base.OnPaint(e);
 
-            Rectangle rectSurface = this.ClientRectangle;
+            Rectangle rectSurface = ClientRectangle;
             Rectangle rectBorder = Rectangle.Inflate(rectSurface, -borderSize, -borderSize);
             int smoothSize = 2;
 
@@ -98,12 +98,12 @@ namespace BankSystem
 
                 using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius))
                 using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
-                using (Pen penSurface = new Pen(this.Parent.BackColor, borderSize))
+                using (Pen penSurface = new Pen(Parent.BackColor, borderSize))
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     //Button surface:
-                    this.Region = new Region(pathSurface);
+                    Region = new Region(pathSurface);
                     //Draw the surface border for HD results:
                     e.Graphics.DrawPath(penSurface, pathSurface);
                     // Button Border:
@@ -116,14 +116,14 @@ namespace BankSystem
             {
                 e.Graphics.SmoothingMode = SmoothingMode.None;
                 //Button surface:
-                this.Region = new Region(rectSurface);
+                Region = new Region(rectSurface);
                 //Button Border:
                 if (borderSize >= 1)
                 {
                     using (Pen penBorder = new Pen(borderColor, borderSize))
                     {
                         penBorder.Alignment = PenAlignment.Inset;
-                        e.Graphics.DrawRectangle(penBorder, 0, 0, this.Width - 1, this.Height - 1);
+                        e.Graphics.DrawRectangle(penBorder, 0, 0, Width - 1, Height - 1);
                     }
 
                 }
@@ -131,5 +131,5 @@ namespace BankSystem
             }
 
         }
-}
+    }
 }
