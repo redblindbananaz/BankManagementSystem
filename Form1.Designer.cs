@@ -36,6 +36,10 @@ namespace roundBtn
             customButton3 = new CustomButton();
             customButton4 = new CustomButton();
             customPanel1 = new CustomPanel();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            label2 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // customButton
@@ -114,12 +118,48 @@ namespace roundBtn
             customPanel1.Size = new Size(649, 637);
             customPanel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Image = BankSystem.Properties.Resources.bankLogo1;
+            pictureBox1.Location = new Point(12, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(240, 186);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Verdana", 15.75F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(53, 189);
+            label1.Name = "label1";
+            label1.Size = new Size(163, 25);
+            label1.TabIndex = 6;
+            label1.Text = "Total Balance:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.FlatStyle = FlatStyle.Flat;
+            label2.Font = new Font("Tahoma", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(215, 155, 0);
+            label2.Location = new Point(33, 220);
+            label2.Name = "label2";
+            label2.Size = new Size(195, 39);
+            label2.TabIndex = 7;
+            label2.Text = "$ 5, 037.36";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 51, 102);
             ClientSize = new Size(934, 661);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
             Controls.Add(customButton);
             Controls.Add(customButton2);
             Controls.Add(customButton3);
@@ -129,7 +169,9 @@ namespace roundBtn
             MinimumSize = new Size(950, 700);
             Name = "Form1";
             Text = "B-Bank";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -142,5 +184,8 @@ namespace roundBtn
         private CustomButton customButton4;
 
         private CustomPanel customPanel1;
+        private PictureBox pictureBox1;
+        private Label label1;
+        private Label label2;
     }
 }
