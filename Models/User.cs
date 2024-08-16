@@ -42,6 +42,8 @@ namespace BankSystem.Models
             ContactDetails = contactDetails;
             accounts = new List<Account>();
         }
+
+        
     }
     
     public class Employee : User

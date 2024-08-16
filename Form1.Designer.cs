@@ -35,10 +35,10 @@ namespace BankSystem
             customButton2 = new CustomButton();
             customButton3 = new CustomButton();
             customButton4 = new CustomButton();
-            customPanel1 = new CustomPanel();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             label2 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -106,27 +106,16 @@ namespace BankSystem
             customButton4.Text = "EXIT";
             customButton4.UseVisualStyleBackColor = false;
             // 
-            // customPanel1
-            // 
-            customPanel1.BackColor = Color.FromArgb(169, 196, 235);
-            customPanel1.BackgroundColor = Color.FromArgb(169, 196, 235);
-            customPanel1.BorderColor = Color.FromArgb(215, 155, 0);
-            customPanel1.BorderRadius = 24;
-            customPanel1.BorderSize = 8;
-            customPanel1.Location = new Point(273, 12);
-            customPanel1.Name = "customPanel1";
-            customPanel1.Size = new Size(649, 637);
-            customPanel1.TabIndex = 0;
-            // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
-            pictureBox1.Image = BankSystem.Properties.Resources.bankLogo1;
+            pictureBox1.Image = Properties.Resources.bankLogo1;
             pictureBox1.Location = new Point(12, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(240, 186);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // label1
             // 
@@ -151,6 +140,14 @@ namespace BankSystem
             label2.TabIndex = 7;
             label2.Text = "$ 5, 037.36";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Transparent;
+            panel1.Location = new Point(273, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(649, 637);
+            panel1.TabIndex = 8;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -164,7 +161,7 @@ namespace BankSystem
             Controls.Add(customButton2);
             Controls.Add(customButton3);
             Controls.Add(customButton4);
-            Controls.Add(customPanel1);
+            Controls.Add(panel1);
             MaximumSize = new Size(950, 700);
             MinimumSize = new Size(950, 700);
             Name = "Form1";
@@ -183,9 +180,9 @@ namespace BankSystem
 
         private CustomButton customButton4;
 
-        private CustomPanel customPanel1;
         private PictureBox pictureBox1;
         private Label label1;
         private Label label2;
+        private Panel panel1;
     }
 }
