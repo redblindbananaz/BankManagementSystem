@@ -1,7 +1,7 @@
 ﻿using BankSystem.Components;
 using System.Windows.Forms.VisualStyles;
 
-namespace roundBtn
+namespace BankSystem
 {
     partial class Form1
     {
