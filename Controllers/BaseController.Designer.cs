@@ -31,8 +31,6 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             customPanel = new CustomPanel();
-            UserNameLabel = new Label();
-            customPanel.SuspendLayout();
             SuspendLayout();
             // 
             // customPanel
@@ -42,39 +40,25 @@ namespace BankSystem.Controllers
             customPanel.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel.BorderRadius = 24;
             customPanel.BorderSize = 8;
-            customPanel.Controls.Add(UserNameLabel);
             customPanel.Location = new Point(0, 0);
             customPanel.Name = "customPanel";
             customPanel.Size = new Size(649, 637);
             customPanel.TabIndex = 0;
             // 
-            // UserNameLabel
-            // 
-            UserNameLabel.AutoSize = true;
-            UserNameLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            UserNameLabel.Location = new Point(221, 41);
-            UserNameLabel.Name = "UserNameLabel";
-            UserNameLabel.Size = new Size(181, 32);
-            UserNameLabel.TabIndex = 0;
-            UserNameLabel.Text = "Welcome Page";
-            // 
-            // HomeControl
+            // BaseController
             // 
             BackColor = Color.FromArgb(0, 51, 102);
             Controls.Add(customPanel);
             DoubleBuffered = true;
             MaximumSize = new Size(648, 637);
             MinimumSize = new Size(648, 637);
-            Name = "HomeControl";
+            Name = "BaseController";
             Size = new Size(648, 637);
-            customPanel.ResumeLayout(false);
-            customPanel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Components.CustomPanel customPanel;
-        private Label UserNameLabel;
+        private CustomPanel customPanel;
     }
 }

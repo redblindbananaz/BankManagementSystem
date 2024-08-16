@@ -6,7 +6,7 @@ namespace BankSystem
     public partial class Form1 : Form
     {
 
-        BaseController homeControl = new BaseController();
+        BaseController homeController = new BaseController();
 
         public Form1()
         {
@@ -15,13 +15,13 @@ namespace BankSystem
 
         }
 
-        private void ShowControl()
+        public void ShowControl()
         {
             
-            homeControl.Dock = DockStyle.Fill;
-            homeControl.BringToFront();
+            homeController.Dock = DockStyle.Fill;
+            homeController.BringToFront();
             panel1.Controls.Clear();
-            panel1.Controls.Add(homeControl);
+            panel1.Controls.Add(homeController);
 
         }
         //Default user for the application:
