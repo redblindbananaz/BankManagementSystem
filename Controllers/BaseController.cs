@@ -12,6 +12,7 @@ using BankSystem.Models;
 
 namespace BankSystem.Controllers
 {
+    
     public partial class BaseController : UserControl
     {
        
@@ -19,11 +20,13 @@ namespace BankSystem.Controllers
         public BaseController()
         {
             if (!DesignMode) {
-                InitializeComponent();
+                InitializeComponent(); 
             }
             
-            
+
         }
+
+        
        
     }
 }

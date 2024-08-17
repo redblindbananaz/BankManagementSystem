@@ -8,24 +8,33 @@ namespace BankSystem
 
         BaseController homeController = new BaseController();
 
+
         public Form1()
         {
             InitializeComponent();
+            Customer.SetCurrentUser("JD12345","John Doe");
             ShowControl();
 
         }
 
         public void ShowControl()
         {
-            
+
             homeController.Dock = DockStyle.Fill;
             homeController.BringToFront();
             panel1.Controls.Clear();
             panel1.Controls.Add(homeController);
+            if (Customer.CurrentUser != null)
+            {
+                homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
+            }
+            else
+            {
+                homeController.userNameLabel.Text = "Guest";
+            }
+
 
         }
-        //Default user for the application:
-        User customer1 = new Customer("JD1234", "John", "JohnD@xtra.co.nz");
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {

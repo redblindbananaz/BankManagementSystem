@@ -16,26 +16,32 @@ namespace BankSystem.Models
 
         public string UserID
         {
-            get => userID; 
-            set => userID = value; 
+            get => userID;
+            set => userID = value;
         }
 
         public string UserName
         {
-            get => userName; 
-            set => userName = value; 
+            get => userName;
+            set => userName = value;
         }
 
         public string ContactDetails
         {
-            get => contactDetails; 
-            set => contactDetails = value; 
+            get => contactDetails;
+            set => contactDetails = value;
         }
 
         public List<Account> Accounts
-            { get => accounts;  }
+        { get => accounts; }
 
-        protected User(string userID, string userName, string contactDetails )
+        protected User(string userID, string userName)
+        {
+            UserID = userID;
+            UserName = userName;
+            accounts = new List<Account>();
+        }
+        protected User(string userID, string userName, string contactDetails)
         {
             UserID = userID;
             UserName = userName;
@@ -43,10 +49,9 @@ namespace BankSystem.Models
             accounts = new List<Account>();
         }
 
-        
-    }
-    
-    public class Employee : User
+    } 
+
+        public class Employee : User
     {
         private int employeeID;
         private static double discountRate;
