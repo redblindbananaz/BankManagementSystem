@@ -10,7 +10,12 @@ namespace BankSystem.Models
     {
         private static int nextID = 12;
         private int accountID;
-        private enum AccountName;
+        private enum AccountName
+        {
+            Everyday,
+            Omni,
+            Invest
+        };
         private decimal balance;
         public double interestRate;
         private double overdraftLimit;
