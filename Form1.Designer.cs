@@ -31,10 +31,10 @@ namespace BankSystem
         /// </summary>
         private void InitializeComponent()
         {
-            customButton = new CustomButton();
-            customButton2 = new CustomButton();
-            customButton3 = new CustomButton();
-            customButton4 = new CustomButton();
+            depositButton = new CustomButton();
+            withdrawButton = new CustomButton();
+            historyButton = new CustomButton();
+            outButton = new CustomButton();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             label2 = new Label();
@@ -42,73 +42,81 @@ namespace BankSystem
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // customButton
+            // depositButton
             // 
-            customButton.BackColor = Color.FromArgb(169, 196, 235);
-            customButton.BorderColor = Color.FromArgb(255, 242, 204);
-            customButton.BorderRadius = 24;
-            customButton.BorderSize = 8;
-            customButton.FlatStyle = FlatStyle.Flat;
-            customButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            customButton.ForeColor = Color.FromArgb(0, 51, 102);
-            customButton.Location = new Point(12, 313);
-            customButton.Name = "customButton";
-            customButton.Size = new Size(240, 60);
-            customButton.TabIndex = 1;
-            customButton.Text = "Deposit";
-            customButton.UseVisualStyleBackColor = false;
+            depositButton.BackColor = Color.FromArgb(169, 196, 235);
+            depositButton.BorderColor = Color.FromArgb(255, 242, 204);
+            depositButton.BorderRadius = 24;
+            depositButton.BorderSize = 8;
+            depositButton.Cursor = Cursors.Hand;
+            depositButton.FlatStyle = FlatStyle.Flat;
+            depositButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            depositButton.ForeColor = Color.FromArgb(0, 51, 102);
+            depositButton.Location = new Point(12, 313);
+            depositButton.Name = "depositButton";
+            depositButton.Size = new Size(240, 60);
+            depositButton.TabIndex = 1;
+            depositButton.Text = "Deposit";
+            depositButton.UseVisualStyleBackColor = false;
+            depositButton.Click += depositButton_Click;
             // 
-            // customButton2
+            // withdrawButton
             // 
-            customButton2.BackColor = Color.FromArgb(169, 196, 235);
-            customButton2.BorderColor = Color.FromArgb(255, 242, 204);
-            customButton2.BorderRadius = 24;
-            customButton2.BorderSize = 8;
-            customButton2.FlatStyle = FlatStyle.Flat;
-            customButton2.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            customButton2.ForeColor = Color.FromArgb(0, 51, 102);
-            customButton2.Location = new Point(12, 393);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new Size(240, 60);
-            customButton2.TabIndex = 2;
-            customButton2.Text = "Withdraw";
-            customButton2.UseVisualStyleBackColor = false;
+            withdrawButton.BackColor = Color.FromArgb(169, 196, 235);
+            withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
+            withdrawButton.BorderRadius = 24;
+            withdrawButton.BorderSize = 8;
+            withdrawButton.Cursor = Cursors.Hand;
+            withdrawButton.FlatStyle = FlatStyle.Flat;
+            withdrawButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            withdrawButton.ForeColor = Color.FromArgb(0, 51, 102);
+            withdrawButton.Location = new Point(12, 393);
+            withdrawButton.Name = "withdrawButton";
+            withdrawButton.Size = new Size(240, 60);
+            withdrawButton.TabIndex = 2;
+            withdrawButton.Text = "Withdraw";
+            withdrawButton.UseVisualStyleBackColor = false;
+            withdrawButton.Click += withdrawButton_Click;
             // 
-            // customButton3
+            // historyButton
             // 
-            customButton3.BackColor = Color.FromArgb(169, 196, 235);
-            customButton3.BorderColor = Color.FromArgb(255, 242, 204);
-            customButton3.BorderRadius = 24;
-            customButton3.BorderSize = 8;
-            customButton3.FlatStyle = FlatStyle.Flat;
-            customButton3.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            customButton3.ForeColor = Color.FromArgb(0, 51, 102);
-            customButton3.Location = new Point(12, 473);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(240, 60);
-            customButton3.TabIndex = 3;
-            customButton3.Text = "History";
-            customButton3.UseVisualStyleBackColor = false;
+            historyButton.BackColor = Color.FromArgb(169, 196, 235);
+            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
+            historyButton.BorderRadius = 24;
+            historyButton.BorderSize = 8;
+            historyButton.Cursor = Cursors.Hand;
+            historyButton.FlatStyle = FlatStyle.Flat;
+            historyButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            historyButton.ForeColor = Color.FromArgb(0, 51, 102);
+            historyButton.Location = new Point(12, 473);
+            historyButton.Name = "historyButton";
+            historyButton.Size = new Size(240, 60);
+            historyButton.TabIndex = 3;
+            historyButton.Text = "History";
+            historyButton.UseVisualStyleBackColor = false;
             // 
-            // customButton4
+            // outButton
             // 
-            customButton4.BackColor = Color.FromArgb(255, 242, 204);
-            customButton4.BorderColor = Color.FromArgb(215, 155, 0);
-            customButton4.BorderRadius = 24;
-            customButton4.BorderSize = 8;
-            customButton4.FlatStyle = FlatStyle.Flat;
-            customButton4.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            customButton4.ForeColor = Color.FromArgb(215, 155, 0);
-            customButton4.Location = new Point(12, 573);
-            customButton4.Name = "customButton4";
-            customButton4.Size = new Size(240, 76);
-            customButton4.TabIndex = 4;
-            customButton4.Text = "EXIT";
-            customButton4.UseVisualStyleBackColor = false;
+            outButton.BackColor = Color.FromArgb(255, 242, 204);
+            outButton.BorderColor = Color.FromArgb(215, 155, 0);
+            outButton.BorderRadius = 24;
+            outButton.BorderSize = 8;
+            outButton.Cursor = Cursors.Hand;
+            outButton.FlatStyle = FlatStyle.Flat;
+            outButton.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            outButton.ForeColor = Color.FromArgb(215, 155, 0);
+            outButton.Location = new Point(12, 573);
+            outButton.Name = "outButton";
+            outButton.Size = new Size(240, 76);
+            outButton.TabIndex = 4;
+            outButton.Text = "EXIT";
+            outButton.UseVisualStyleBackColor = false;
+            outButton.Click += outButton_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = Properties.Resources.bankLogo1;
             pictureBox1.Location = new Point(12, 0);
             pictureBox1.Name = "pictureBox1";
@@ -157,10 +165,10 @@ namespace BankSystem
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            Controls.Add(customButton);
-            Controls.Add(customButton2);
-            Controls.Add(customButton3);
-            Controls.Add(customButton4);
+            Controls.Add(depositButton);
+            Controls.Add(withdrawButton);
+            Controls.Add(historyButton);
+            Controls.Add(outButton);
             Controls.Add(panel1);
             MaximumSize = new Size(950, 700);
             MinimumSize = new Size(950, 700);
@@ -172,13 +180,13 @@ namespace BankSystem
         }
 
         #endregion
-        private CustomButton customButton;
+        private CustomButton depositButton;
 
-        private CustomButton customButton2;
+        private CustomButton withdrawButton;
 
-        private CustomButton customButton3;
+        private CustomButton historyButton;
 
-        private CustomButton customButton4;
+        private CustomButton outButton;
 
         private PictureBox pictureBox1;
         private Label label1;

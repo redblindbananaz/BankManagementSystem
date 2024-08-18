@@ -32,13 +32,13 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             customPanel = new CustomPanel();
+            panel2 = new Panel();
+            label3 = new Label();
+            panel1 = new Panel();
             label2 = new Label();
             seperationLine = new Panel();
             userNameLabel = new Label();
             label1 = new Label();
-            panel1 = new Panel();
-            label3 = new Label();
-            panel2 = new Panel();
             customPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,6 +60,33 @@ namespace BankSystem.Controllers
             customPanel.Name = "customPanel";
             customPanel.Size = new Size(649, 637);
             customPanel.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(17, 170);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(616, 266);
+            panel2.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.FromArgb(169, 196, 235);
+            label3.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(255, 242, 204);
+            label3.Location = new Point(34, 439);
+            label3.Name = "label3";
+            label3.Size = new Size(155, 18);
+            label3.TabIndex = 5;
+            label3.Text = "Last Transactions";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(255, 242, 204);
+            panel1.Location = new Point(34, 460);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(580, 4);
+            panel1.TabIndex = 4;
             // 
             // label2
             // 
@@ -100,33 +127,6 @@ namespace BankSystem.Controllers
             label1.Size = new Size(181, 38);
             label1.TabIndex = 0;
             label1.Text = "Welcome";
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(255, 242, 204);
-            panel1.Location = new Point(34, 460);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(580, 4);
-            panel1.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.FromArgb(169, 196, 235);
-            label3.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(255, 242, 204);
-            label3.Location = new Point(34, 439);
-            label3.Name = "label3";
-            label3.Size = new Size(155, 18);
-            label3.TabIndex = 5;
-            label3.Text = "Last Transactions";
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(34, 170);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(580, 266);
-            panel2.TabIndex = 6;
             // 
             // BaseController
             // 

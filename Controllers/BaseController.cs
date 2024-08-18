@@ -19,14 +19,9 @@ namespace BankSystem.Controllers
 
         public BaseController()
         {
-            if (!DesignMode) {
-                InitializeComponent(); 
-            }
             
+            InitializeComponent();  
 
-        }
-
-        
-       
+        } 
     }
 }
