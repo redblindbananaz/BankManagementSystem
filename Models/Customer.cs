@@ -21,9 +21,9 @@ namespace BankSystem.Models
 
             if (CurrentUser != null)
             {
-                CurrentUser.CreateAccount(new Everyday());
-                CurrentUser.CreateAccount(new Omni());
-                CurrentUser.CreateAccount(new Invest());
+                CurrentUser.CreateAccount(new Everyday(500));
+                CurrentUser.CreateAccount(new Omni(200, 100));
+                CurrentUser.CreateAccount(new Invest(300, 0.03M, 10));
             }
 
         }

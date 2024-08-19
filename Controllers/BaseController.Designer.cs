@@ -32,14 +32,13 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             customPanel = new CustomPanel();
-            
-            panel2 = new Panel();
             label3 = new Label();
             panel1 = new Panel();
             label2 = new Label();
             seperationLine = new Panel();
             userNameLabel = new Label();
             label1 = new Label();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             customPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,7 +49,7 @@ namespace BankSystem.Controllers
             customPanel.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel.BorderRadius = 24;
             customPanel.BorderSize = 8;
-            customPanel.Controls.Add(panel2);
+            customPanel.Controls.Add(flowLayoutPanel1);
             customPanel.Controls.Add(label3);
             customPanel.Controls.Add(panel1);
             customPanel.Controls.Add(label2);
@@ -61,13 +60,6 @@ namespace BankSystem.Controllers
             customPanel.Name = "customPanel";
             customPanel.Size = new Size(649, 637);
             customPanel.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(17, 170);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(616, 266);
-            panel2.TabIndex = 6;
             // 
             // label3
             // 
@@ -129,6 +121,13 @@ namespace BankSystem.Controllers
             label1.TabIndex = 0;
             label1.Text = "Welcome";
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Location = new Point(14, 170);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(623, 266);
+            flowLayoutPanel1.TabIndex = 6;
+            // 
             // BaseController
             // 
             BackColor = Color.FromArgb(0, 51, 102);
@@ -152,6 +151,6 @@ namespace BankSystem.Controllers
         private Label label2;
         private Label label3;
         private Panel panel1;
-        private Panel panel2;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

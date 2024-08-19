@@ -14,40 +14,44 @@ namespace BankSystem.Controllers
 {
     public partial class AccountCardController : UserControl
     {
-        private Account account;
         
-        public AccountCardController(Account account)
+        
+        public AccountCardController()
         {
             InitializeComponent();
-            this.account = account;
-            SetupCard();
-        }
-
-        private void SetupCard()
-        {
-            accountNameLabel.Text = account.GetType().Name;
-            accountIDLabel.Text = account.AccountID.ToString();
-            pictureBox1.Image = GetAccountImage(account.GetType());
-            //accountButton.BackgroundImage = GetAccountImage(account.GetType());
             accountButton.BringToFront();
-            balanceLabel.Text = account.Balance.ToString("C");
+            
         }
 
-        private Image GetAccountImage(Type accountType)
+        public string AccountName
         {
-            if (accountType == typeof(Everyday))
-            {
-                return Properties.Resources.Everyday;
-            }
-            if (accountType == typeof(Omni))
-            {
-                return Properties.Resources.Omni;
-            }
-            else if (accountType == typeof(Invest))
-            {
-                return Properties.Resources.Invest;
-            }
-            return null;
+            get => accountNameLabel.Text;
+            set => accountNameLabel.Text = value;
         }
+
+        public int AccountID
+        {
+            get => int.Parse(accountIDLabel.Text);
+            set => accountIDLabel.Text = value.ToString();
         }
+
+        public decimal Balance
+        {
+            get => decimal.Parse(balanceLabel.Text.Trim('$'));
+            set => balanceLabel.Text = $"${value:F2}";
+        }
+        public Image AccountImage
+        {
+            get => pictureBox1.Image;
+            set => pictureBox1.Image = value;
+        }
+        
+        //Event to handle when the card is clicked
+        public event EventHandler AccountCardClicked;
+
+        private void AccountCardController_Click(object sender, EventArgs e)
+        {
+            AccountCardClicked?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

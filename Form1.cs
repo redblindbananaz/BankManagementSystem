@@ -11,9 +11,7 @@ namespace BankSystem
         ActionController depositController = new ActionController(ActionType.Deposit);
         ActionController withdrawController = new ActionController(ActionType.Withdraw);
 
-        private Everyday everydayAccount = new Everyday();
-        private Omni omniAccount = new Omni();
-        private Invest investAccount = new Invest();
+        
 
 
 
