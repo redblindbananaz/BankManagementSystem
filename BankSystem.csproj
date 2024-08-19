@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Invest.png" />
+    <None Remove="Images\omni.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Images\bankLogo1.png" />
+    <EmbeddedResource Include="Images\Everyday.png" />
+    <EmbeddedResource Include="Images\Invest.png" />
+    <EmbeddedResource Include="Images\omni.png" />
   </ItemGroup>
 
   <ItemGroup>

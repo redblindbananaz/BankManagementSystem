@@ -15,6 +15,7 @@ namespace BankSystem.Controllers
     public partial class AccountCardController : UserControl
     {
         private Account account;
+        
         public AccountCardController(Account account)
         {
             InitializeComponent();
@@ -26,7 +27,9 @@ namespace BankSystem.Controllers
         {
             accountNameLabel.Text = account.GetType().Name;
             accountIDLabel.Text = account.AccountID.ToString();
-            accountButton.BackgroundImage = GetAccountImage(account.GetType());
+            pictureBox1.Image = GetAccountImage(account.GetType());
+            //accountButton.BackgroundImage = GetAccountImage(account.GetType());
+            accountButton.BringToFront();
             balanceLabel.Text = account.Balance.ToString("C");
         }
 
@@ -34,15 +37,15 @@ namespace BankSystem.Controllers
         {
             if (accountType == typeof(Everyday))
             {
-                return Properties.Resources.everyday;
+                return Properties.Resources.Everyday;
             }
             if (accountType == typeof(Omni))
             {
-                return Properties.Resources.omni;
+                return Properties.Resources.Omni;
             }
             else if (accountType == typeof(Invest))
             {
-                return Properties.Resources.invest;
+                return Properties.Resources.Invest;
             }
             return null;
         }

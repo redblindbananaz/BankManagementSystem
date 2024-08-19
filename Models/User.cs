@@ -33,7 +33,10 @@ namespace BankSystem.Models
         }
 
         public List<Account> Accounts
-        { get => accounts; }
+        { get => accounts;
+            protected set => accounts = value;
+
+        }
 
         protected User(string userID, string userName)
         {
@@ -49,9 +52,20 @@ namespace BankSystem.Models
             accounts = new List<Account>();
         }
 
-    } 
 
-        public class Employee : User
+        //Methods:
+
+        public void CreateAccount(Account account)
+        {
+            accounts.Add(account);
+        }
+
+        
+
+    }
+
+
+    public class Employee : User
     {
         private int employeeID;
         private static double discountRate;

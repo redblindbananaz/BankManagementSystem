@@ -34,11 +34,13 @@ namespace BankSystem.Controllers
             accountNameLabel = new Label();
             accountIDLabel = new Label();
             balanceLabel = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // accountButton
             // 
-            accountButton.BackColor = Color.White;
+            accountButton.BackColor = Color.Transparent;
             accountButton.BorderColor = Color.FromArgb(0, 51, 102);
             accountButton.BorderRadius = 24;
             accountButton.BorderSize = 6;
@@ -78,17 +80,29 @@ namespace BankSystem.Controllers
             balanceLabel.TabIndex = 3;
             balanceLabel.Text = "label1";
             // 
+            // pictureBox1
+            // 
+            
+            pictureBox1.Location = new Point(25, 58);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(140, 140);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
             // AccountCardController
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(169, 196, 235);
+            Controls.Add(pictureBox1);
             Controls.Add(balanceLabel);
             Controls.Add(accountIDLabel);
             Controls.Add(accountNameLabel);
             Controls.Add(accountButton);
             Name = "AccountCardController";
             Size = new Size(192, 283);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -99,5 +113,6 @@ namespace BankSystem.Controllers
         private Label accountNameLabel;
         private Label accountIDLabel;
         private Label balanceLabel;
+        private PictureBox pictureBox1;
     }
 }

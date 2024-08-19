@@ -11,6 +11,11 @@ namespace BankSystem
         ActionController depositController = new ActionController(ActionType.Deposit);
         ActionController withdrawController = new ActionController(ActionType.Withdraw);
 
+        private Everyday everydayAccount = new Everyday();
+        private Omni omniAccount = new Omni();
+        private Invest investAccount = new Invest();
+
+
 
         public Form1()
         {
@@ -39,9 +44,11 @@ namespace BankSystem
         private void showHome()
         {
             LoadUserControl(homeController);
+
             if (Customer.CurrentUser != null)
             {
-                homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
+            homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
+                
             }
             else
             {

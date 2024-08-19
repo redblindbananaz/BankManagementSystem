@@ -32,6 +32,7 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             customPanel = new CustomPanel();
+            
             panel2 = new Panel();
             label3 = new Label();
             panel1 = new Panel();
