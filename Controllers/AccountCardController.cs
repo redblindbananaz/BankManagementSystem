@@ -53,5 +53,14 @@ namespace BankSystem.Controllers
         {
             AccountCardClicked?.Invoke(this, EventArgs.Empty);
         }
+
+        //Method to set up the data for the account card
+        public void SetupData(Account account, Image accountImage)
+        {
+            AccountName = account.AccountName.ToString();
+            AccountID = account.AccountID;
+            Balance = account.Balance;
+            AccountImage = accountImage;
+        }
     }
 }

@@ -25,11 +25,6 @@ namespace BankSystem
 
         private void LoadUserControl(UserControl control)
         {
-            /*if (currentControl != null)
-            {
-                panel1.Controls.Remove(currentControl);
-                currentControl.Dispose();
-            }*/
             panel1.Controls.Clear();
             //set the new control as the current control:
             currentControl = control;
@@ -42,6 +37,8 @@ namespace BankSystem
         private void showHome()
         {
             LoadUserControl(homeController);
+
+            
 
             if (Customer.CurrentUser != null)
             {
