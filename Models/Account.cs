@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace BankSystem.Models
 {
-    public enum AccountName
-    {
-        Everyday,
-        Omni,
-        Invest
-    };
+   
     public abstract class Account
     {
         private static int nextID = 12;
         private int accountID;
-        private AccountName accountName;
+        private string accountName;
         private decimal balance;
         public decimal interestRate;
         private decimal overdraftLimit;
@@ -28,7 +23,7 @@ namespace BankSystem.Models
         {
             get => accountID;
         }
-        public AccountName AccountName 
+        public string AccountName 
         {
             get => accountName;
             protected set => accountName = value;

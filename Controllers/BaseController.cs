@@ -45,24 +45,23 @@ namespace BankSystem.Controllers
 
         private void SetupAccountCard(AccountCardController accountcard, Account account)
         {
-            accountcard.AccountName = account.AccountName.ToString();
-            accountcard.AccountID = account.AccountID;
+            accountcard.AccountName = account.AccountName;
             accountcard.Balance = account.Balance;
             accountcard.AccountImage = GetAccountImage(account.AccountName);
             accountcard.AccountCardClicked += AccountCard_Clicked;
         }
 
-        private Image GetAccountImage(AccountName accountName)
+        private Image GetAccountImage(string accountName)
         {
             switch (accountName)
             {
-                case AccountName.Everyday:
+                case "Everyday":
                     var image1= ResizeImage(Properties.Resources.Everyday, 110, 110);
                     return image1;
-                case AccountName.Omni:
+                case "Omni":
                     var image2 = ResizeImage(Properties.Resources.Omni, 110, 110);
                     return image2;
-                case AccountName.Invest:
+                case "Invest":
                     var image3 = ResizeImage(Properties.Resources.Invest, 110, 110);
                     return image3;
                 default:

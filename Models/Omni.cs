@@ -17,8 +17,9 @@ namespace BankSystem.Models
     internal class Omni : Account
     {
         //( string accountName, decimal balance, decimal interestRate, decimal overdraftLimit, decimal transactionFee)
-        public Omni(decimal balance, decimal overdraft ) : base ("Omni", balance, 0, overdraft, 0)
+        public Omni(decimal balance, decimal overdraft ) : base ("Omni",  balance, 0, overdraft, 0)
         {
+            this.AccountName = "Omni";
         }
     }
 }

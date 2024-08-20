@@ -16,6 +16,10 @@ namespace BankSystem.Models
     internal class Everyday : Account
     {
         //( string accountName, decimal balance, decimal interestRate, decimal overdraftLimit, decimal transactionFee)
-        public Everyday(decimal balance): base("Everyday", balance, 0, 0, 0) { }
+        public Everyday(decimal balance): base("Everyday", balance, 0, 0, 0)
+        {
+            this.AccountName = "Everyday";
+            
+        }
     }
 }

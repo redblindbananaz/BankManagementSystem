@@ -18,6 +18,7 @@ namespace BankSystem.Models
         //( string accountName, decimal balance, decimal interestRate, decimal overdraftLimit, decimal transactionFee)
         public Invest(decimal balance, decimal interestRate, decimal transactionFee) : base ("Invest", balance, interestRate, 0, transactionFee)
         { 
+            this.AccountName = "Invest";
         }
     }
 }

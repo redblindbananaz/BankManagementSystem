@@ -32,7 +32,6 @@ namespace BankSystem.Controllers
         {
             accountButton = new CustomButton();
             accountNameLabel = new Label();
-            accountIDLabel = new Label();
             balanceLabel = new Label();
             SuspendLayout();
             // 
@@ -61,33 +60,26 @@ namespace BankSystem.Controllers
             accountNameLabel.CausesValidation = false;
             accountNameLabel.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             accountNameLabel.ForeColor = Color.FromArgb(0, 51, 102);
-            accountNameLabel.Location = new Point(64, 9);
+            accountNameLabel.Location = new Point(25, 26);
             accountNameLabel.Name = "accountNameLabel";
-            accountNameLabel.Size = new Size(58, 18);
+            accountNameLabel.Size = new Size(140, 18);
             accountNameLabel.TabIndex = 1;
             accountNameLabel.Text = "label1";
+            accountNameLabel.TextAlign = ContentAlignment.TopCenter;
             accountNameLabel.UseCompatibleTextRendering = true;
-            // 
-            // accountIDLabel
-            // 
-            accountIDLabel.AutoSize = true;
-            accountIDLabel.Location = new Point(84, 40);
-            accountIDLabel.Name = "accountIDLabel";
-            accountIDLabel.Size = new Size(19, 15);
-            accountIDLabel.TabIndex = 2;
-            accountIDLabel.Text = "10";
             // 
             // balanceLabel
             // 
-            balanceLabel.AutoSize = true;
+            balanceLabel.FlatStyle = FlatStyle.Flat;
             balanceLabel.Font = new Font("Verdana", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             balanceLabel.ForeColor = Color.FromArgb(0, 51, 102);
-            balanceLabel.Location = new Point(37, 222);
+            balanceLabel.Location = new Point(25, 220);
             balanceLabel.Name = "balanceLabel";
-            balanceLabel.Size = new Size(89, 26);
+            balanceLabel.Size = new Size(140, 26);
             balanceLabel.TabIndex = 3;
             balanceLabel.Text = "label1";
             balanceLabel.TextAlign = ContentAlignment.MiddleCenter;
+            balanceLabel.UseCompatibleTextRendering = true;
             // 
             // AccountCardController
             // 
@@ -95,20 +87,17 @@ namespace BankSystem.Controllers
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(169, 196, 235);
             Controls.Add(balanceLabel);
-            Controls.Add(accountIDLabel);
             Controls.Add(accountNameLabel);
             Controls.Add(accountButton);
             Name = "AccountCardController";
             Size = new Size(192, 283);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Components.CustomButton accountButton;
         private Label accountNameLabel;
-        private Label accountIDLabel;
         private Label balanceLabel;
     }
 }

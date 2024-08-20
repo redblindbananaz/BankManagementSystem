@@ -48,6 +48,7 @@ namespace BankSystem
             {
                 homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
                 homeController.LoadAccountCards();
+                
 
             }
             else
@@ -88,7 +89,5 @@ namespace BankSystem
         {
             showHome();
         }
-
-
     }
 }

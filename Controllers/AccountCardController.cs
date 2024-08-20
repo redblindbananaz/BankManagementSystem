@@ -15,27 +15,21 @@ namespace BankSystem.Controllers
 {
     public partial class AccountCardController : UserControl
     {
-        
-        
+
         public AccountCardController()
         {
             InitializeComponent();
             //accountButton.BringToFront();
-            
-            
+            accountButton.Click += AccountCardController_Click;
+
+
         }
 
         public  string AccountName
         {
             get => accountNameLabel.Text;
-            set => accountNameLabel.Text = value.ToString();
+            set => accountNameLabel.Text = value;
             
-        }
-
-        public int AccountID
-        {
-            get => int.Parse(accountIDLabel.Text);
-            set => accountIDLabel.Text = value.ToString();
         }
 
         public decimal Balance
