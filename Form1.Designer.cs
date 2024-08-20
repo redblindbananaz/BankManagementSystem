@@ -35,11 +35,11 @@ namespace BankSystem
             withdrawButton = new CustomButton();
             historyButton = new CustomButton();
             outButton = new CustomButton();
-            pictureBox1 = new PictureBox();
+            LogoBox = new PictureBox();
             label1 = new Label();
             label2 = new Label();
             panel1 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LogoBox).BeginInit();
             SuspendLayout();
             // 
             // depositButton
@@ -113,17 +113,17 @@ namespace BankSystem
             outButton.UseVisualStyleBackColor = false;
             outButton.Click += outButton_Click;
             // 
-            // pictureBox1
+            // LogoBox
             // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = Properties.Resources.bankLogo1;
-            pictureBox1.Location = new Point(12, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(240, 186);
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            LogoBox.BackgroundImageLayout = ImageLayout.Center;
+            LogoBox.Cursor = Cursors.Hand;
+            LogoBox.Image = Properties.Resources.bankLogo1;
+            LogoBox.Location = new Point(12, 0);
+            LogoBox.Name = "LogoBox";
+            LogoBox.Size = new Size(240, 186);
+            LogoBox.TabIndex = 5;
+            LogoBox.TabStop = false;
+            LogoBox.Click += logoBox_Click;
             // 
             // label1
             // 
@@ -164,7 +164,7 @@ namespace BankSystem
             ClientSize = new Size(934, 661);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(pictureBox1);
+            Controls.Add(LogoBox);
             Controls.Add(depositButton);
             Controls.Add(withdrawButton);
             Controls.Add(historyButton);
@@ -174,7 +174,7 @@ namespace BankSystem
             MinimumSize = new Size(950, 700);
             Name = "Form1";
             Text = "B-Bank";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)LogoBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -188,7 +188,7 @@ namespace BankSystem
 
         private CustomButton outButton;
 
-        private PictureBox pictureBox1;
+        private PictureBox LogoBox;
         private Label label1;
         private Label label2;
         private Panel panel1;

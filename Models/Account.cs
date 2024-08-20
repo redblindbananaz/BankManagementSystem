@@ -31,6 +31,7 @@ namespace BankSystem.Models
         public AccountName AccountName 
         {
             get => accountName;
+            protected set => accountName = value;
         }
         public decimal Balance
         {

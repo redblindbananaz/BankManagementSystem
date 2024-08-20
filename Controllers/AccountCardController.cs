@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,14 +20,16 @@ namespace BankSystem.Controllers
         public AccountCardController()
         {
             InitializeComponent();
-            accountButton.BringToFront();
+            //accountButton.BringToFront();
+            
             
         }
 
-        public string AccountName
+        public  string AccountName
         {
             get => accountNameLabel.Text;
-            set => accountNameLabel.Text = value;
+            set => accountNameLabel.Text = value.ToString();
+            
         }
 
         public int AccountID
@@ -42,8 +45,8 @@ namespace BankSystem.Controllers
         }
         public Image AccountImage
         {
-            get => pictureBox1.Image;
-            set => pictureBox1.Image = value;
+            get => accountButton.Image;
+            set => accountButton.Image = value;
         }
         
         //Event to handle when the card is clicked
@@ -52,15 +55,6 @@ namespace BankSystem.Controllers
         private void AccountCardController_Click(object sender, EventArgs e)
         {
             AccountCardClicked?.Invoke(this, EventArgs.Empty);
-        }
-
-        //Method to set up the data for the account card
-        public void SetupData(Account account, Image accountImage)
-        {
-            AccountName = account.AccountName.ToString();
-            AccountID = account.AccountID;
-            Balance = account.Balance;
-            AccountImage = accountImage;
         }
     }
 }

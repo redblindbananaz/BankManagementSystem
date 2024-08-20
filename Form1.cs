@@ -19,9 +19,14 @@ namespace BankSystem
         {
             InitializeComponent();
             Customer.SetCurrentUser("JD12345", "John Doe");
-            showHome(); 
+            showHome();
         }
- 
+        
+        private void Testing()
+        {
+            // This is a test method
+            MessageBox.Show($"Testing:{ Customer.CurrentUser.Accounts[1]}");
+        }
 
         private void LoadUserControl(UserControl control)
         {
@@ -38,12 +43,12 @@ namespace BankSystem
         {
             LoadUserControl(homeController);
 
-            
 
             if (Customer.CurrentUser != null)
             {
-            homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
-                
+                homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
+                homeController.LoadAccountCards();
+
             }
             else
             {
@@ -53,7 +58,7 @@ namespace BankSystem
 
         // BASIC BUTTONS FUNCTIONALITY:
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void logoBox_Click(object sender, EventArgs e)
         {
             showHome();
         }

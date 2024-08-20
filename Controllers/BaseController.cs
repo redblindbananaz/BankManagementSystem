@@ -21,30 +21,35 @@ namespace BankSystem.Controllers
         {
 
             InitializeComponent();
-            LoadAccountCards();
-
         }
 
-        private void LoadAccountCards()
+        public AccountCardController accountCard1 => accountCardController1;
+        public AccountCardController accountCard2 => accountCardController2;
+        public AccountCardController accountCard3 => accountCardController3;
+
+
+
+        public void LoadAccountCards()
         {
             var currentUser = Customer.CurrentUser;
+            
             if (currentUser == null)
                 return;
 
-            foreach (var account in currentUser.Accounts)
-            {
-                var accountCard = new AccountCardController
-                {
-                    AccountName = account.AccountName.ToString(),
-                    AccountID = account.AccountID,
-                    Balance = account.Balance,
-                    AccountImage = GetAccountImage(account.AccountName)
+            SetupAccountCard(accountCard1, currentUser.Accounts[0]);
+            SetupAccountCard(accountCard2, currentUser.Accounts[1]);
+            SetupAccountCard(accountCard3, currentUser.Accounts[2]);
 
 
-                };
-                accountCard.AccountCardClicked += AccountCard_Clicked;
-                flowLayoutPanel1.Controls.Add(accountCard);
-            }
+        }
+
+        private void SetupAccountCard(AccountCardController accountcard, Account account)
+        {
+            accountcard.AccountName = account.AccountName.ToString();
+            accountcard.AccountID = account.AccountID;
+            accountcard.Balance = account.Balance;
+            accountcard.AccountImage = GetAccountImage(account.AccountName);
+            accountcard.AccountCardClicked += AccountCard_Clicked;
         }
 
         private Image GetAccountImage(AccountName accountName)
@@ -52,14 +57,27 @@ namespace BankSystem.Controllers
             switch (accountName)
             {
                 case AccountName.Everyday:
-                    return Properties.Resources.Everyday;
+                    var image1= ResizeImage(Properties.Resources.Everyday, 110, 110);
+                    return image1;
                 case AccountName.Omni:
-                    return Properties.Resources.Omni;
+                    var image2 = ResizeImage(Properties.Resources.Omni, 110, 110);
+                    return image2;
                 case AccountName.Invest:
-                    return Properties.Resources.Invest;
+                    var image3 = ResizeImage(Properties.Resources.Invest, 110, 110);
+                    return image3;
                 default:
                     return null;
             }
+        }
+
+        public Image ResizeImage(Image image, int width, int height)
+        {
+            var resizedImage = new Bitmap(width, height);
+            using (var graphics = Graphics.FromImage(resizedImage))
+            {
+                graphics.DrawImage(image, 0, 0, width, height);
+            }
+            return resizedImage;
         }
 
         private void AccountCard_Clicked(object sender, EventArgs e)

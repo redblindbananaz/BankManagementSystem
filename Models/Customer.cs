@@ -18,16 +18,14 @@ namespace BankSystem.Models
         {
             // This method should set the current user of the system
             CurrentUser = new Customer(userID, userName);
-
             if (CurrentUser != null)
             {
                 CurrentUser.CreateAccount(new Everyday(500));
                 CurrentUser.CreateAccount(new Omni(200, 100));
                 CurrentUser.CreateAccount(new Invest(300, 0.03M, 10));
             }
-
         }
-       
+
     }
 
 }

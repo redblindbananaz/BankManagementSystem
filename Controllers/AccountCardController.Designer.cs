@@ -34,75 +34,72 @@ namespace BankSystem.Controllers
             accountNameLabel = new Label();
             accountIDLabel = new Label();
             balanceLabel = new Label();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // accountButton
             // 
-            accountButton.BackColor = Color.Transparent;
+            accountButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            accountButton.BackColor = Color.FromArgb(255, 242, 204);
+            accountButton.BackgroundImageLayout = ImageLayout.Zoom;
             accountButton.BorderColor = Color.FromArgb(0, 51, 102);
             accountButton.BorderRadius = 24;
             accountButton.BorderSize = 6;
+            accountButton.Cursor = Cursors.Hand;
             accountButton.FlatAppearance.BorderSize = 0;
             accountButton.FlatStyle = FlatStyle.Flat;
-            accountButton.ForeColor = Color.Blue;
+            accountButton.ForeColor = Color.Transparent;
             accountButton.Location = new Point(25, 58);
             accountButton.Name = "accountButton";
             accountButton.Size = new Size(140, 140);
             accountButton.TabIndex = 0;
+            accountButton.TextAlign = ContentAlignment.BottomCenter;
+            accountButton.TextImageRelation = TextImageRelation.ImageAboveText;
             accountButton.UseVisualStyleBackColor = false;
             // 
             // accountNameLabel
             // 
-            accountNameLabel.AutoSize = true;
-            accountNameLabel.Location = new Point(73, 16);
+            accountNameLabel.CausesValidation = false;
+            accountNameLabel.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            accountNameLabel.ForeColor = Color.FromArgb(0, 51, 102);
+            accountNameLabel.Location = new Point(64, 9);
             accountNameLabel.Name = "accountNameLabel";
-            accountNameLabel.Size = new Size(38, 15);
+            accountNameLabel.Size = new Size(58, 18);
             accountNameLabel.TabIndex = 1;
             accountNameLabel.Text = "label1";
+            accountNameLabel.UseCompatibleTextRendering = true;
             // 
             // accountIDLabel
             // 
             accountIDLabel.AutoSize = true;
-            accountIDLabel.Location = new Point(81, 38);
+            accountIDLabel.Location = new Point(84, 40);
             accountIDLabel.Name = "accountIDLabel";
-            accountIDLabel.Size = new Size(38, 15);
+            accountIDLabel.Size = new Size(19, 15);
             accountIDLabel.TabIndex = 2;
-            accountIDLabel.Text = "label1";
+            accountIDLabel.Text = "10";
             // 
             // balanceLabel
             // 
             balanceLabel.AutoSize = true;
-            balanceLabel.Location = new Point(97, 223);
+            balanceLabel.Font = new Font("Verdana", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            balanceLabel.ForeColor = Color.FromArgb(0, 51, 102);
+            balanceLabel.Location = new Point(37, 222);
             balanceLabel.Name = "balanceLabel";
-            balanceLabel.Size = new Size(38, 15);
+            balanceLabel.Size = new Size(89, 26);
             balanceLabel.TabIndex = 3;
             balanceLabel.Text = "label1";
-            // 
-            // pictureBox1
-            // 
-            
-            pictureBox1.Location = new Point(25, 58);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(140, 140);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 4;
-            pictureBox1.TabStop = false;
+            balanceLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // AccountCardController
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(169, 196, 235);
-            Controls.Add(pictureBox1);
             Controls.Add(balanceLabel);
             Controls.Add(accountIDLabel);
             Controls.Add(accountNameLabel);
             Controls.Add(accountButton);
             Name = "AccountCardController";
             Size = new Size(192, 283);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -113,6 +110,5 @@ namespace BankSystem.Controllers
         private Label accountNameLabel;
         private Label accountIDLabel;
         private Label balanceLabel;
-        private PictureBox pictureBox1;
     }
 }
