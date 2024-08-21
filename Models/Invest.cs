@@ -13,12 +13,30 @@ namespace BankSystem.Models
      * Incurs a Fee for Failed Transactions
      * Ability to calculate and add interest to the balance
      */
-    internal class Invest: Account
+
+
+    public class Invest: Account
     {
-        //( string accountName, decimal balance, decimal interestRate, decimal overdraftLimit, decimal transactionFee)
-        public Invest(decimal balance, decimal interestRate, decimal transactionFee) : base ("Invest", balance, interestRate, 0, transactionFee)
+        public decimal InterestRate { get; set; }
+        public decimal FailingFee { get; set; }
+
+        public Invest(int accountID, string accountName, decimal balance, decimal interestRate, decimal failingFee) : base(accountID, accountName, balance)
         { 
-            this.AccountName = "Invest";
+            AccountName = "Invest";
+            Balance = balance;
+            InterestRate = interestRate;
+            FailingFee = failingFee;
+        }
+
+
+        public override void Deposit(decimal amount)
+        {
+            Balance += amount;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            Balance -= amount;
         }
     }
 }

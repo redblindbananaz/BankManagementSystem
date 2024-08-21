@@ -13,13 +13,26 @@ namespace BankSystem.Models
      * No Transaction Fees
      */
 
-    internal class Everyday : Account
+    public class Everyday : Account
     {
-        //( string accountName, decimal balance, decimal interestRate, decimal overdraftLimit, decimal transactionFee)
-        public Everyday(decimal balance): base("Everyday", balance, 0, 0, 0)
+       
+        
+        public Everyday(int accountID,  string accountName, decimal balance ): base (accountID, accountName, balance)
         {
-            this.AccountName = "Everyday";
-            
+            AccountID = 0;
+            AccountName = "Everyday";
+            Balance = balance;
+
+        }
+
+        public override void Deposit(decimal amount)
+        {
+            Balance += amount;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            Balance -= amount;
         }
     }
 }

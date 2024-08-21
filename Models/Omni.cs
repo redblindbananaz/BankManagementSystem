@@ -21,5 +21,15 @@ namespace BankSystem.Models
         {
             this.AccountName = "Omni";
         }
+
+        public override void Deposit(decimal amount)
+        {
+            Balance += amount;
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            Balance -= amount;
+        }
     }
 }
