@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace BankSystem.Models
 {
@@ -17,26 +18,51 @@ namespace BankSystem.Models
 
     public class Invest: Account
     {
-        public decimal InterestRate { get; set; }
-        public decimal FailingFee { get; set; }
+        private const decimal InterestRate = 0.05m;
+        private const decimal FailingFee = 10m;
 
-        public Invest(int accountID, string accountName, decimal balance, decimal interestRate, decimal failingFee) : base(accountID, accountName, balance)
-        { 
-            AccountName = "Invest";
-            Balance = balance;
-            InterestRate = interestRate;
-            FailingFee = failingFee;
-        }
-
-
-        public override void Deposit(decimal amount)
+        public Invest(decimal balance) : base("Invest", balance)
         {
-            Balance += amount;
         }
+        public Invest(string accountName, decimal balance) : base("Invest", balance)
+        { 
+           
+        }
+
+        public void AddInvestTransaction(string type, decimal amount, bool isSuccessful)
+        {
+            base.AddTransaction(type, amount, isSuccessful);
+            if (!isSuccessful) 
+            {
+                Balance -= FailingFee;
+                Transactions.Add($"- Fee: {FailingFee}");
+            }
+        }
+
+
+        // Deposit method is Done in Base class.
 
         public override void Withdraw(decimal amount)
         {
+            if (amount <= 0) // Just not penalities for withdrawing 0 :)
+            {
+                throw new ArgumentException("Withdraw amount must be greater than 0");
+            }
+            if (amount > Balance)
+            {
+                Balance -= FailingFee;
+                AddInvestTransaction("Withdraw", amount, false);
+            }
             Balance -= amount;
+            AddInvestTransaction("Withdraw", amount, true);
+        }
+
+        public void AddInterest()
+        {
+            decimal interest = Balance * InterestRate;
+            Balance += interest;
+            AddInvestTransaction("Interest Added", interest, true);
+            Transactions.Add($"- Interest: {interest}");
         }
     }
 }

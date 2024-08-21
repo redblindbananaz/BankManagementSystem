@@ -11,23 +11,14 @@ namespace BankSystem
         ActionController depositController = new ActionController(ActionType.Deposit);
         ActionController withdrawController = new ActionController(ActionType.Withdraw);
 
-        
-
-
-
         public Form1()
         {
             InitializeComponent();
-            Customer.SetCurrentUser("JD12345", "John Doe");
+            Customer.SetCurrentUser("JD12345", "John Doe");// All accounts with inital balance are instanciated here.
+            UpdateTotalBalance();
             showHome();
         }
-        
-        private void Testing()
-        {
-            // This is a test method
-            MessageBox.Show($"Testing:{ Customer.CurrentUser.Accounts[1]}");
-        }
-
+       
         private void LoadUserControl(UserControl control)
         {
             panel1.Controls.Clear();
@@ -37,6 +28,21 @@ namespace BankSystem
             control.BringToFront();
 
             panel1.Controls.Add(control);
+        }
+
+        public decimal CalculateTotalBalance()
+        {
+            decimal total = 0;
+            foreach (var account in Customer.CurrentUser.Accounts)
+            {
+                total += account.Balance;
+            }
+            return total;
+        }
+
+        private void UpdateTotalBalance()
+        {
+            totalBalanceLabel.Text = $"{CalculateTotalBalance():C}";
         }
 
         private void showHome()

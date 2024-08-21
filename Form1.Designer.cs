@@ -37,7 +37,7 @@ namespace BankSystem
             outButton = new CustomButton();
             LogoBox = new PictureBox();
             label1 = new Label();
-            label2 = new Label();
+            totalBalanceLabel = new Label();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)LogoBox).BeginInit();
             SuspendLayout();
@@ -136,17 +136,17 @@ namespace BankSystem
             label1.TabIndex = 6;
             label1.Text = "Total Balance:";
             // 
-            // label2
+            // totalBalanceLabel
             // 
-            label2.AutoSize = true;
-            label2.FlatStyle = FlatStyle.Flat;
-            label2.Font = new Font("Tahoma", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(215, 155, 0);
-            label2.Location = new Point(33, 220);
-            label2.Name = "label2";
-            label2.Size = new Size(195, 39);
-            label2.TabIndex = 7;
-            label2.Text = "$ 5, 037.36";
+            totalBalanceLabel.FlatStyle = FlatStyle.Flat;
+            totalBalanceLabel.Font = new Font("Tahoma", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            totalBalanceLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            totalBalanceLabel.Location = new Point(12, 220);
+            totalBalanceLabel.Name = "totalBalanceLabel";
+            totalBalanceLabel.Size = new Size(240, 39);
+            totalBalanceLabel.TabIndex = 7;
+            totalBalanceLabel.Text = "$ 5, 037.36";
+            totalBalanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -162,7 +162,7 @@ namespace BankSystem
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 51, 102);
             ClientSize = new Size(934, 661);
-            Controls.Add(label2);
+            Controls.Add(totalBalanceLabel);
             Controls.Add(label1);
             Controls.Add(LogoBox);
             Controls.Add(depositButton);
@@ -190,7 +190,7 @@ namespace BankSystem
 
         private PictureBox LogoBox;
         private Label label1;
-        private Label label2;
+        private Label totalBalanceLabel;
         private Panel panel1;
     }
 }

@@ -46,14 +46,29 @@ namespace BankSystem.Models
             
         }
 
-        protected void AddTransaction(string type, decimal amount, string status)
+        protected void AddTransaction(string type, decimal amount, bool isSuccessful)
         {
-            _transactions.Add($"{localDate} - AccountID: {_accountID} - Account: {_accountName} - {type} - ${amount} - Status: {status}");
+            string TDetails = ($"{localDate}  - Account: {_accountName} - ID: {_accountID} - Operation: {type} - ${amount} - Status: {(isSuccessful ? "Approved": "Declined")} - Updated Balance: {_balance:C}");
+
+            _transactions.Add(TDetails);
         }
         
 
-        public abstract void Deposit(decimal amount);
+        public void Deposit(decimal amount)
+        {
+            // NEED UI Implementation of Validation for performing a deposit with a try, catch and message box.
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Deposit amount must be greater than 0");
+            }
 
+            Balance += amount;
+
+            AddTransaction("Deposit", amount, true);
+
+            // Update Balance Event handler? HERE?
+            
+        }
 
         public abstract void Withdraw(decimal amount);
       
