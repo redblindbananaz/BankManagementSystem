@@ -16,6 +16,8 @@ namespace BankSystem.Controllers
 {
     public partial class AccountCardController : UserControl
     {
+        //Event to handle when the card is clicked
+        public event EventHandler<AccountCardClickedEventArgs> AccountCardClicked;
 
         public AccountCardController()
         {
@@ -35,7 +37,7 @@ namespace BankSystem.Controllers
             get => accountNameLabel.Text;
             set => accountNameLabel.Text = value;   
         }
-        public string AccountId { get; set; }
+        public int AccountId { get; set; }
 
         public decimal Balance
         {
@@ -48,22 +50,17 @@ namespace BankSystem.Controllers
             set => accountButton.Image = value;
         }
 
-        //Event to handle when the card is clicked
-        public event EventHandler<AccountCardClickedEventArgs> AccountCardClicked;
-        public class AccountCardClickedEventArgs: EventArgs
-        { 
-            public string? AccountName { get; set; }
-            public decimal Balance { get; set; }
-            public string? AccountId { get; set; }
-
-        }
-
         private void AccountCardController_Click(object sender, EventArgs e)
         {
-            AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs { AccountName = this.AccountName, Balance =this.Balance, AccountId= this.AccountId });
+            AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs 
+            { 
+                AccountName = this.AccountName, 
+                Balance =this.Balance, 
+                AccountId= this.AccountId 
+            });
             
         }
-
+       
 
         public void SetSelectedStyle(bool isSelected)
         {
@@ -86,5 +83,13 @@ namespace BankSystem.Controllers
       
         }
     }
-   
+    public class AccountCardClickedEventArgs : EventArgs
+    {
+        public string? AccountName { get; set; }
+        public decimal Balance { get; set; }
+        public int? AccountId { get; set; }
+
+    }
+
+
 }

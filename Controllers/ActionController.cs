@@ -16,19 +16,30 @@ namespace BankSystem.Controllers
         Deposit,
         Withdraw,
     }
-
-    
-
     public partial class ActionController : UserControl
     {
         private readonly ActionType currentAction;
-       
-        public AccountsController AccountsController2 { get; private set; } // Account cards object instance for Action
+
+        public AccountsController accountsController2; // Account cards object instance for Action
+
+        private Label selectedMessageLabel;
 
         public event EventHandler CancelClicked;
         public ActionController(ActionType actionType)
         {
             InitializeComponent();
+            selectedMessageLabel = new Label();
+            // 
+            // selectedMessageLabel
+            // 
+            selectedMessageLabel.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            selectedMessageLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            selectedMessageLabel.Location = new Point(39, 489);
+            selectedMessageLabel.Name = "selectedMessageLabel";
+            selectedMessageLabel.Size = new Size(574, 23);
+            selectedMessageLabel.TabIndex = 6;
+            selectedMessageLabel.Text = "label2";
+            selectedMessageLabel.TextAlign = ContentAlignment.MiddleLeft;
             InitializeAccountsController();
             currentAction = actionType;
             SetupUI();
@@ -50,24 +61,24 @@ namespace BankSystem.Controllers
 
         private void InitializeAccountsController()
         {
-            AccountsController2 = new AccountsController();
+            accountsController2 = new AccountsController();
 
             // 
             // accountsController2 Properties
             // 
-            AccountsController2.Location = new Point(25, 170);
-            AccountsController2.Name = "accountsController2";
-            AccountsController2.Size = new Size(600, 266);
-            AccountsController2.TabIndex = 0;
+            accountsController2.Location = new Point(25, 170);
+            accountsController2.Name = "accountsController2";
+            accountsController2.Size = new Size(600, 266);
+            accountsController2.TabIndex = 0;
             
 
-            Controls.Add(AccountsController2);
-            AccountsController2.BringToFront();
+            Controls.Add(accountsController2);
+            accountsController2.BringToFront();
         }
 
-        public string SelectedAccountName { get; private set; }
-        public int SelectedAccountId { get; private set; }
-        public void SetSelectedAcount(string accountName, int accountId)
+        public string SelectedAccountName { get;  set; }
+        public int SelectedAccountId { get;  set; }
+        public void SetSelectedAccount(string accountName, int accountId)
         {
             SelectedAccountName = accountName;
             SelectedAccountId = accountId;
@@ -88,6 +99,7 @@ namespace BankSystem.Controllers
 
         private void cancelLabel_Click(object sender, EventArgs e)
         {
+            
             CancelClicked?.Invoke(this, EventArgs.Empty);
 
         }

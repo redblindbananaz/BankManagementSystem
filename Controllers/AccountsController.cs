@@ -15,7 +15,7 @@ namespace BankSystem.Controllers
 {
     public partial class AccountsController : UserControl
     {
-        public ActionController DepositController { get; set; }
+        public ActionController  DepositController { get; set; }
         public ActionController WithdrawController { get; set; }
 
 
@@ -24,18 +24,6 @@ namespace BankSystem.Controllers
             InitializeComponent();
            
         }
-
-        public void SetDepositController(ActionController depositController)
-        {
-            DepositController = depositController;
-        }
-
-        public void SetWithdrawController(ActionController withdrawController)
-        {
-            WithdrawController = withdrawController;
-        }
-
-
 
         public AccountCardController accountCard1 => accountCardController1;
         public AccountCardController accountCard2 => accountCardController2;
@@ -67,7 +55,7 @@ namespace BankSystem.Controllers
 
             accountcard.AccountName = account.AccountName;
             accountcard.Balance = account.Balance;
-            accountcard.AccountId = account.AccountID.ToString();
+            accountcard.AccountId = account.AccountID;
             accountcard.AccountImage = GetAccountImage(account.AccountName);
 
             //Subscribe to the AccountCardClicked event
@@ -103,12 +91,13 @@ namespace BankSystem.Controllers
         }
 
         private string? _selectedAccountName;
-        private string? _selectedAccountID;
+        private int? _selectedAccountID;
         private decimal _selectedAccountBalance;
 
        
-        private void AccountCard_Clicked(object sender, EventArgs e)
-        {    
+        private void AccountCard_Clicked(object sender, EventArgs  e)
+        {
+            
             var card = sender as AccountCardController;
             if (card != null )
             {
@@ -117,6 +106,8 @@ namespace BankSystem.Controllers
                 _selectedAccountBalance = card.Balance;
 
                 HighlightSelection(card);
+               
+
 
                 MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
 

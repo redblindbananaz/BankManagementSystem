@@ -91,7 +91,8 @@ namespace BankSystem
         {
             depositController = new ActionController(ActionType.Deposit);
             LoadUserControl(depositController);
-            depositController.AccountsController2.LoadAccountCards();
+           
+            depositController.accountsController2.LoadAccountCards();
             depositController.CancelClicked += ActionControl_CancelClicked;
 
         }
@@ -100,7 +101,7 @@ namespace BankSystem
         {
             withdrawController = new ActionController(ActionType.Withdraw);
             LoadUserControl(withdrawController);
-            withdrawController.AccountsController2.LoadAccountCards();
+            withdrawController.accountsController2.LoadAccountCards();
             withdrawController.CancelClicked += ActionControl_CancelClicked;
 
         }
