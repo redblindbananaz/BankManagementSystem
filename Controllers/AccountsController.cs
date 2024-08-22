@@ -116,8 +116,13 @@ namespace BankSystem.Controllers
 
         protected virtual void OnAccountClickedInController(object sender, AccountCardClickedEventArgs e)
         {
+            // This could be used to pass an event to another controller:
+            // someController.HandlingthisCLicked(e);
             
         }
+
+        // public void HandlingthisCLicked(AccountCardClickedEventArgs e){
+        //     MessageBox.Show($"Handled in another controller: Account {e.AccountName} ");}
 
         private void HighlightSelection(AccountCardController selectedCard)
         {

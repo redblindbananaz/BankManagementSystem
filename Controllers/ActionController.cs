@@ -28,18 +28,7 @@ namespace BankSystem.Controllers
         public ActionController(ActionType actionType)
         {
             InitializeComponent();
-            selectedMessageLabel = new Label();
-            // 
-            // selectedMessageLabel
-            // 
-            selectedMessageLabel.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            selectedMessageLabel.ForeColor = Color.FromArgb(215, 155, 0);
-            selectedMessageLabel.Location = new Point(39, 489);
-            selectedMessageLabel.Name = "selectedMessageLabel";
-            selectedMessageLabel.Size = new Size(574, 23);
-            selectedMessageLabel.TabIndex = 6;
-            selectedMessageLabel.Text = "label2";
-            selectedMessageLabel.TextAlign = ContentAlignment.MiddleLeft;
+            
             InitializeAccountsController();
             currentAction = actionType;
             SetupUI();
@@ -50,12 +39,12 @@ namespace BankSystem.Controllers
             if (currentAction == ActionType.Deposit)
             {
                 actionLabel.Text = "Deposit";
-                ShowconfirmationLabel();
+                
             }
             else if (currentAction == ActionType.Withdraw)
             {
                 actionLabel.Text = "Withdraw";
-                ShowconfirmationLabel();
+                
             }
         }
 
@@ -73,6 +62,7 @@ namespace BankSystem.Controllers
             
 
             Controls.Add(accountsController2);
+           
             accountsController2.BringToFront();
 
             accountsController2.accountCard1.AccountCardClicked += OnAccountClicked;
@@ -91,21 +81,30 @@ namespace BankSystem.Controllers
         public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
         {
             //var accountCard = (AccountCardController)sender;
-            SetSelectedAccount(e.AccountName, e.AccountId);
+            //SetSelectedAccount(e.AccountName, e.AccountId);
             MessageBox.Show($"Account {e.AccountName} selected in ACTION");
-            ShowconfirmationLabel();
+            ShowconfirmationLabel(e.AccountName, e.AccountId);
         }
-        private void ShowconfirmationLabel()
+        private void ShowconfirmationLabel( string Name, int ID)
         {
-            if (!string.IsNullOrEmpty(SelectedAccountName))
-            {
-                selectedMessageLabel.Text = $"You have selected {SelectedAccountName}";
+            selectedMessageLabel = new Label();
+            // 
+            // selectedMessageLabel
+            // 
+            selectedMessageLabel.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            selectedMessageLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            selectedMessageLabel.Location = new Point(39, 489);
+            selectedMessageLabel.Name = "selectedMessageLabel";
+            selectedMessageLabel.Size = new Size(574, 23);
+            selectedMessageLabel.TabIndex = 6;
+            selectedMessageLabel.Text = $"You have selected {Name} - ID {ID} for Transaction";
+            selectedMessageLabel.TextAlign = ContentAlignment.MiddleLeft;
 
-            }
-            else
+            if (Name != null)
             {
-                selectedMessageLabel.Text = "Please select an account";
+                Controls.Add(selectedMessageLabel);
             }
+
         }
 
         private void cancelLabel_Click(object sender, EventArgs e)
