@@ -74,6 +74,10 @@ namespace BankSystem.Controllers
 
             Controls.Add(accountsController2);
             accountsController2.BringToFront();
+
+            accountsController2.accountCard1.AccountCardClicked += OnAccountClicked;
+            accountsController2.accountCard2.AccountCardClicked += OnAccountClicked;
+            accountsController2.accountCard3.AccountCardClicked += OnAccountClicked;
         }
 
         public string SelectedAccountName { get;  set; }
@@ -82,14 +86,13 @@ namespace BankSystem.Controllers
         {
             SelectedAccountName = accountName;
             SelectedAccountId = accountId;
-
         }
 
         public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
         {
-            var accountCard = (AccountCardController)sender;
-            SetSelectedAccount(accountCard.AccountName, accountCard.AccountId);
-            MessageBox.Show($"Account {accountCard.AccountName} selected in ACTION");
+            //var accountCard = (AccountCardController)sender;
+            SetSelectedAccount(e.AccountName, e.AccountId);
+            MessageBox.Show($"Account {e.AccountName} selected in ACTION");
             ShowconfirmationLabel();
         }
         private void ShowconfirmationLabel()

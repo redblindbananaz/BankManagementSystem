@@ -51,7 +51,7 @@ namespace BankSystem.Controllers
         private void SetupAccountCard(AccountCardController accountcard, Account account)
         {
             //Unsubscribe to the AccountCardClicked event to solve multiple time click on ok messagebox tests:
-            accountcard.AccountCardClicked -= OnAccountCard_Clicked;
+            accountcard.AccountCardClicked -= AccountCard_Clicked;
 
             accountcard.AccountName = account.AccountName;
             accountcard.Balance = account.Balance;
@@ -59,7 +59,7 @@ namespace BankSystem.Controllers
             accountcard.AccountImage = GetAccountImage(account.AccountName);
 
             //Subscribe to the AccountCardClicked event
-            accountcard.AccountCardClicked += OnAccountCard_Clicked;
+            accountcard.AccountCardClicked += AccountCard_Clicked;
         }
 
         private Image GetAccountImage(string accountName)
@@ -95,7 +95,7 @@ namespace BankSystem.Controllers
         private decimal _selectedAccountBalance;
 
        
-        private void OnAccountCard_Clicked(object sender, AccountCardClickedEventArgs  e)
+        private void AccountCard_Clicked(object sender, AccountCardClickedEventArgs  e)
         {
             
             var card = sender as AccountCardController;
@@ -107,11 +107,16 @@ namespace BankSystem.Controllers
 
                 HighlightSelection(card);
                
-   
+                OnAccountClickedInController(sender, e);
 
                 MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
 
             }
+        }
+
+        protected virtual void OnAccountClickedInController(object sender, AccountCardClickedEventArgs e)
+        {
+            
         }
 
         private void HighlightSelection(AccountCardController selectedCard)
