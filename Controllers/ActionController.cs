@@ -84,6 +84,14 @@ namespace BankSystem.Controllers
             SelectedAccountId = accountId;
 
         }
+
+        public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
+        {
+            var accountCard = (AccountCardController)sender;
+            SetSelectedAccount(accountCard.AccountName, accountCard.AccountId);
+            MessageBox.Show($"Account {accountCard.AccountName} selected in ACTION");
+            ShowconfirmationLabel();
+        }
         private void ShowconfirmationLabel()
         {
             if (!string.IsNullOrEmpty(SelectedAccountName))

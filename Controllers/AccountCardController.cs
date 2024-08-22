@@ -53,11 +53,7 @@ namespace BankSystem.Controllers
         private void AccountCardController_Click(object sender, EventArgs e)
         {
             AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs 
-            { 
-                AccountName = this.AccountName, 
-                Balance =this.Balance, 
-                AccountId= this.AccountId 
-            });
+            (AccountName, Balance, AccountId));
             
         }
        
@@ -83,13 +79,7 @@ namespace BankSystem.Controllers
       
         }
     }
-    public class AccountCardClickedEventArgs : EventArgs
-    {
-        public string? AccountName { get; set; }
-        public decimal Balance { get; set; }
-        public int? AccountId { get; set; }
-
-    }
+   
 
 
 }
