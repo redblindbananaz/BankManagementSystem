@@ -21,15 +21,12 @@ namespace BankSystem.Controllers
             InitializeComponent();
             //accountButton.BringToFront();
             accountButton.Click += AccountCardController_Click;
-
-
         }
 
         public  string AccountName
         {
             get => accountNameLabel.Text;
-            set => accountNameLabel.Text = value;
-            
+            set => accountNameLabel.Text = value;   
         }
 
         public decimal Balance
@@ -37,14 +34,14 @@ namespace BankSystem.Controllers
             get => decimal.Parse(balanceLabel.Text.Trim('$'));
             set => balanceLabel.Text = $"${value:F2}";
         }
-        public Image AccountImage
+        public Image? AccountImage
         {
             get => accountButton.Image;
             set => accountButton.Image = value;
         }
         
         //Event to handle when the card is clicked
-        public event EventHandler AccountCardClicked;
+        public event EventHandler? AccountCardClicked;
 
         private void AccountCardController_Click(object sender, EventArgs e)
         {

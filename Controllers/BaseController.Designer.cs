@@ -32,10 +32,7 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             customPanel = new CustomPanel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            accountCardController1 = new AccountCardController();
-            accountCardController2 = new AccountCardController();
-            accountCardController3 = new AccountCardController();
+            accountsController1 = new AccountsController();
             label3 = new Label();
             panel1 = new Panel();
             label2 = new Label();
@@ -43,7 +40,6 @@ namespace BankSystem.Controllers
             userNameLabel = new Label();
             label1 = new Label();
             customPanel.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // customPanel
@@ -53,7 +49,7 @@ namespace BankSystem.Controllers
             customPanel.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel.BorderRadius = 24;
             customPanel.BorderSize = 8;
-            customPanel.Controls.Add(flowLayoutPanel1);
+            customPanel.Controls.Add(accountsController1);
             customPanel.Controls.Add(label3);
             customPanel.Controls.Add(panel1);
             customPanel.Controls.Add(label2);
@@ -67,43 +63,10 @@ namespace BankSystem.Controllers
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(accountCardController1);
-            flowLayoutPanel1.Controls.Add(accountCardController2);
-            flowLayoutPanel1.Controls.Add(accountCardController3);
-            flowLayoutPanel1.Location = new Point(25, 170);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(600, 266);
-            flowLayoutPanel1.TabIndex = 6;
-            // 
-            // accountCardController1
-            // 
-            accountCardController1.AccountImage = null;
-            accountCardController1.AccountName = "label1";
-            accountCardController1.BackColor = Color.FromArgb(169, 196, 235);
-            accountCardController1.Location = new Point(3, 3);
-            accountCardController1.Name = "accountCardController1";
-            accountCardController1.Size = new Size(192, 263);
-            accountCardController1.TabIndex = 0;
-            // 
-            // accountCardController2
-            // 
-            accountCardController2.AccountImage = null;
-            accountCardController2.AccountName = "label1";
-            accountCardController2.BackColor = Color.FromArgb(169, 196, 235);
-            accountCardController2.Location = new Point(201, 3);
-            accountCardController2.Name = "accountCardController2";
-            accountCardController2.Size = new Size(193, 263);
-            accountCardController2.TabIndex = 1;
-            // 
-            // accountCardController3
-            // 
-            accountCardController3.AccountImage = null;
-            accountCardController3.AccountName = "label1";
-            accountCardController3.BackColor = Color.FromArgb(169, 196, 235);
-            accountCardController3.Location = new Point(400, 3);
-            accountCardController3.Name = "accountCardController3";
-            accountCardController3.Size = new Size(191, 263);
-            accountCardController3.TabIndex = 2;
+
+            accountsController1.Location = new Point(25, 170);
+            accountsController1.Size = new Size(600, 266);
+           
             // 
             // label3
             // 
@@ -169,6 +132,7 @@ namespace BankSystem.Controllers
             // 
             BackColor = Color.FromArgb(0, 51, 102);
             Controls.Add(customPanel);
+            
             DoubleBuffered = true;
             MaximumSize = new Size(648, 637);
             MinimumSize = new Size(648, 637);
@@ -176,7 +140,7 @@ namespace BankSystem.Controllers
             Size = new Size(648, 637);
             customPanel.ResumeLayout(false);
             customPanel.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
+            
             ResumeLayout(false);
         }
 
@@ -189,9 +153,7 @@ namespace BankSystem.Controllers
         private Label label2;
         private Label label3;
         private Panel panel1;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private AccountCardController accountCardController1;
-        private AccountCardController accountCardController2;
-        private AccountCardController accountCardController3;
+       
+        private AccountsController accountsController1;
     }
 }

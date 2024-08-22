@@ -8,17 +8,31 @@ namespace BankSystem
         private UserControl currentControl;
 
         BaseController homeController = new BaseController();
+        
         ActionController depositController = new ActionController(ActionType.Deposit);
         ActionController withdrawController = new ActionController(ActionType.Withdraw);
 
         public Form1()
         {
             InitializeComponent();
-            Customer.SetCurrentUser("JD12345", "John Doe");// All accounts with inital balance are instanciated here.
+            SetupUser();
             UpdateTotalBalance();
             showHome();
         }
-       
+
+        private void SetupUser()
+        {
+            // This method should set the current user of the system
+            User user1 = User.CreateUser("JD12345", "John Dee", true);
+
+            user1.CreateAccount(new Everyday(510));
+            user1.CreateAccount(new Omni(340));
+            user1.CreateAccount(new Invest(320));
+
+            User.SetCurrentUser(user1);
+
+        }
+
         private void LoadUserControl(UserControl control)
         {
             panel1.Controls.Clear();
@@ -33,7 +47,7 @@ namespace BankSystem
         public decimal CalculateTotalBalance()
         {
             decimal total = 0;
-            foreach (var account in Customer.CurrentUser.Accounts)
+            foreach (var account in User.CurrentUser.Accounts)
             {
                 total += account.Balance;
             }
@@ -50,11 +64,11 @@ namespace BankSystem
             LoadUserControl(homeController);
 
 
-            if (Customer.CurrentUser != null)
+            if (User.CurrentUser != null)
             {
-                homeController.userNameLabel.Text = ($"{Customer.CurrentUser.UserName}");
-                homeController.LoadAccountCards();
+                homeController.userNameLabel.Text = ($"{User.CurrentUser.UserName}");
                 
+
 
             }
             else

@@ -7,49 +7,61 @@ using System.Threading.Tasks;
 
 namespace BankSystem.Models
 {
-    public abstract class User
+    public class User
     {
-        private string userID;
-        private string userName;
-        private string contactDetails;
-        private List<Account> accounts;
+        private string _userID;
+        private string _userName;
+        private string _contactDetails;
+        private bool _isEmployee;
+        private List<Account> _accounts;
 
         public string UserID
         {
-            get => userID;
-            set => userID = value;
+            get => _userID;
+            private set => _userID = value;
         }
 
         public string UserName
         {
-            get => userName;
-            set => userName = value;
+            get => _userName;
+            set => _userName = value;
         }
 
         public string ContactDetails
         {
-            get => contactDetails;
-            set => contactDetails = value;
+            get => _contactDetails;
+            set => _contactDetails = value;
+        }
+
+        public bool IsEmployee
+        {
+            get => _isEmployee;
+            private set => _isEmployee = value;
         }
 
         public List<Account> Accounts
-        { get => accounts;
-            protected set => accounts = value;
+        {   get => _accounts;
+            private set => _accounts = value;
 
         }
 
-        protected User(string userID, string userName)
+        public static User? CurrentUser { get; private set; }
+
+        protected User(string userID, string userName, bool isEmployee)
         {
-            UserID = userID;
-            UserName = userName;
-            accounts = new List<Account>();
+            _userID = userID;
+            _userName = userName;
+            _isEmployee = isEmployee;
+            _contactDetails = string.Empty;
+            _accounts = new List<Account>();
         }
-        protected User(string userID, string userName, string contactDetails)
+        protected User(string userID, string userName,bool isEmployee, string contactDetails)
         {
-            UserID = userID;
-            UserName = userName;
-            ContactDetails = contactDetails;
-            accounts = new List<Account>();
+            _userID = userID;
+            _userName = userName;
+            _isEmployee = isEmployee;
+            _contactDetails = contactDetails;
+            _accounts = new List<Account>();
         }
 
 
@@ -57,43 +69,20 @@ namespace BankSystem.Models
 
         public void CreateAccount(Account account)
         {
-            accounts.Add(account);
+            _accounts.Add(account);
+        }
+
+        public static User CreateUser(string userID, string userName, bool isEmployee)
+        {
+            return new User(userID, userName, isEmployee);
+        }
+
+        public static void SetCurrentUser(User user)
+        {
+            CurrentUser = user;
         }
 
         
 
-    }
-
-
-    public class Employee : User
-    {
-        private int employeeID;
-        private static double discountRate;
-
-        public int EmployeeID
-        {
-            get => employeeID;
-            set => employeeID = value;
-        }
-
-        public static double DiscountRate
-        {
-            get => discountRate;
-            set => discountRate = 0.5;
-        }
-        public Employee(string userID, string userName, string contactDetails, int employeeID) : base(userID, userName, contactDetails)
-        {
-
-            UserID = userID;
-            UserName = userName;
-            ContactDetails = contactDetails;
-      
-            EmployeeID = employeeID;
-        }
-
-        public void CalculateDiscountedFee()
-        {
-            DiscountRate = 0.5; // Should add the fees that occurs fron the accounts and make calculation
-        }
     }
 }

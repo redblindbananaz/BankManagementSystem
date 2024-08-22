@@ -29,6 +29,11 @@ namespace BankSystem.Models
            
         }
 
+        private decimal CalculateFailingFee()
+        {
+            return FailingFee;
+        }
+
         public void AddInvestTransaction(string type, decimal amount, bool isSuccessful)
         {
             base.AddTransaction(type, amount, isSuccessful);

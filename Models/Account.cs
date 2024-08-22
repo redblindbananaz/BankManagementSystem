@@ -43,6 +43,7 @@ namespace BankSystem.Models
             _accountID = _nextID++;
             _accountName = accountName;
             _balance = balance;
+            _transactions = new List<String>();
             
         }
 
