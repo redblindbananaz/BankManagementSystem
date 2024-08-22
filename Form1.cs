@@ -6,17 +6,23 @@ namespace BankSystem
     public partial class Form1 : Form
     {
         private UserControl currentControl;
+        public AccountsController AccountsController1;// Account cards object instance for Home
+
 
         BaseController homeController = new BaseController();
         
-        ActionController depositController = new ActionController(ActionType.Deposit);
-        ActionController withdrawController = new ActionController(ActionType.Withdraw);
+
+        public ActionController depositController { get; private set; }
+        public ActionController withdrawController { get; private set; }
+        
 
         public Form1()
         {
             InitializeComponent();
             SetupUser();
             UpdateTotalBalance();
+            
+            
             showHome();
         }
 
@@ -62,18 +68,15 @@ namespace BankSystem
         private void showHome()
         {
             LoadUserControl(homeController);
-
+            homeController.AccountsController1.LoadAccountCards();
 
             if (User.CurrentUser != null)
             {
                 homeController.userNameLabel.Text = ($"{User.CurrentUser.UserName}");
-                
-
-
             }
             else
             {
-                homeController.userNameLabel.Text = "Guest";
+                throw new ArgumentException("There is no Current User");
             }
         }
 
@@ -86,14 +89,18 @@ namespace BankSystem
 
         private void depositButton_Click(object sender, EventArgs e)
         {
+            depositController = new ActionController(ActionType.Deposit);
             LoadUserControl(depositController);
+            depositController.AccountsController2.LoadAccountCards();
             depositController.CancelClicked += ActionControl_CancelClicked;
 
         }
 
         private void withdrawButton_Click(object sender, EventArgs e)
         {
+            withdrawController = new ActionController(ActionType.Withdraw);
             LoadUserControl(withdrawController);
+            withdrawController.AccountsController2.LoadAccountCards();
             withdrawController.CancelClicked += ActionControl_CancelClicked;
 
         }

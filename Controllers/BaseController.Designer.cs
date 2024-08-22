@@ -1,5 +1,7 @@
 ﻿using BankSystem.Components;
 using BankSystem.Models;
+using System.Drawing.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BankSystem.Controllers
 {
@@ -31,8 +33,9 @@ namespace BankSystem.Controllers
         /// </summary>
         private void InitializeComponent()
         {
+            
             customPanel = new CustomPanel();
-            accountsController1 = new AccountsController();
+            accountsController1 = new AccountsController( );
             label3 = new Label();
             panel1 = new Panel();
             label2 = new Label();

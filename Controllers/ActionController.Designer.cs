@@ -31,15 +31,18 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             actionPanel = new CustomPanel();
+            selectedMessageLabel = new Label();
             cancelLabel = new Label();
             selectButton = new CustomButton();
             customPanel1 = new CustomPanel();
             StepLevelLabel = new Label();
             presentationPanel = new Panel();
+            
             label1 = new Label();
             actionLabel = new Label();
             actionPanel.SuspendLayout();
             customPanel1.SuspendLayout();
+            presentationPanel.SuspendLayout();
             SuspendLayout();
             // 
             // actionPanel
@@ -48,6 +51,7 @@ namespace BankSystem.Controllers
             actionPanel.BorderColor = Color.FromArgb(215, 155, 0);
             actionPanel.BorderRadius = 24;
             actionPanel.BorderSize = 8;
+            actionPanel.Controls.Add(selectedMessageLabel);
             actionPanel.Controls.Add(cancelLabel);
             actionPanel.Controls.Add(selectButton);
             actionPanel.Controls.Add(customPanel1);
@@ -58,6 +62,17 @@ namespace BankSystem.Controllers
             actionPanel.Name = "actionPanel";
             actionPanel.Size = new Size(649, 637);
             actionPanel.TabIndex = 0;
+            // 
+            // selectedMessageLabel
+            // 
+            selectedMessageLabel.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            selectedMessageLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            selectedMessageLabel.Location = new Point(39, 489);
+            selectedMessageLabel.Name = "selectedMessageLabel";
+            selectedMessageLabel.Size = new Size(574, 23);
+            selectedMessageLabel.TabIndex = 6;
+            selectedMessageLabel.Text = "label2";
+            selectedMessageLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cancelLabel
             // 
@@ -88,6 +103,7 @@ namespace BankSystem.Controllers
             selectButton.TabIndex = 4;
             selectButton.Text = "Select";
             selectButton.UseVisualStyleBackColor = false;
+            selectButton.Click += selectButton_Click;
             // 
             // customPanel1
             // 
@@ -116,10 +132,12 @@ namespace BankSystem.Controllers
             // presentationPanel
             // 
             presentationPanel.BackColor = Color.FromArgb(169, 196, 235);
+            
             presentationPanel.Location = new Point(12, 140);
             presentationPanel.Name = "presentationPanel";
             presentationPanel.Size = new Size(626, 338);
             presentationPanel.TabIndex = 2;
+            
             // 
             // label1
             // 
@@ -156,6 +174,7 @@ namespace BankSystem.Controllers
             actionPanel.PerformLayout();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
+            presentationPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -168,5 +187,6 @@ namespace BankSystem.Controllers
         private Label StepLevelLabel;
         private CustomButton selectButton;
         private Label cancelLabel;
+        private Label selectedMessageLabel;
     }
 }

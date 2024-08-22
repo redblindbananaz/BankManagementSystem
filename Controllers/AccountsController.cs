@@ -1,10 +1,12 @@
-﻿using BankSystem.Models;
+﻿using BankSystem.Components;
+using BankSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,16 +15,36 @@ namespace BankSystem.Controllers
 {
     public partial class AccountsController : UserControl
     {
+        public ActionController DepositController { get; set; }
+        public ActionController WithdrawController { get; set; }
+
+
         public AccountsController()
         {
             InitializeComponent();
+           
         }
+
+        public void SetDepositController(ActionController depositController)
+        {
+            DepositController = depositController;
+        }
+
+        public void SetWithdrawController(ActionController withdrawController)
+        {
+            WithdrawController = withdrawController;
+        }
+
+
 
         public AccountCardController accountCard1 => accountCardController1;
         public AccountCardController accountCard2 => accountCardController2;
         public AccountCardController accountCard3 => accountCardController3;
 
-         
+        
+
+
+
 
         public void LoadAccountCards()
         {
@@ -40,9 +62,15 @@ namespace BankSystem.Controllers
 
         private void SetupAccountCard(AccountCardController accountcard, Account account)
         {
+            //Unsubscribe to the AccountCardClicked event to solve multiple time click on ok messagebox tests:
+            accountcard.AccountCardClicked -= AccountCard_Clicked;
+
             accountcard.AccountName = account.AccountName;
             accountcard.Balance = account.Balance;
+            accountcard.AccountId = account.AccountID.ToString();
             accountcard.AccountImage = GetAccountImage(account.AccountName);
+
+            //Subscribe to the AccountCardClicked event
             accountcard.AccountCardClicked += AccountCard_Clicked;
         }
 
@@ -74,13 +102,39 @@ namespace BankSystem.Controllers
             return resizedImage;
         }
 
+        private string? _selectedAccountName;
+        private string? _selectedAccountID;
+        private decimal _selectedAccountBalance;
+
+       
         private void AccountCard_Clicked(object sender, EventArgs e)
-        {
+        {    
             var card = sender as AccountCardController;
-            if (card != null)
+            if (card != null )
             {
-                MessageBox.Show($"Account {card.AccountName} clicked");
+                _selectedAccountName = card.AccountName;
+                _selectedAccountID = card.AccountId;
+                _selectedAccountBalance = card.Balance;
+
+                HighlightSelection(card);
+
+                MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
+
             }
+        }
+
+        private void HighlightSelection(AccountCardController selectedCard)
+        {
+            ResetAllHighlight();
+
+            selectedCard.SetSelectedStyle(true);
+        }
+
+        private void ResetAllHighlight()
+        {
+            accountCard1.SetSelectedStyle(false);
+            accountCard2.SetSelectedStyle(false);
+            accountCard3.SetSelectedStyle(false);
         }
     } 
 }

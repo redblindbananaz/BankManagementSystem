@@ -1,4 +1,5 @@
-﻿using BankSystem.Models;
+﻿using BankSystem.Components;
+using BankSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,11 +24,18 @@ namespace BankSystem.Controllers
             accountButton.Click += AccountCardController_Click;
         }
 
-        public  string AccountName
+        // Properties to access the button and label outisde the class
+        public Button AccountButton => accountButton;
+        public Label AccountNameLabel => accountNameLabel;
+        public Label BalanceLabel => balanceLabel;
+
+
+        public string AccountName
         {
             get => accountNameLabel.Text;
             set => accountNameLabel.Text = value;   
         }
+        public string AccountId { get; set; }
 
         public decimal Balance
         {
@@ -39,13 +47,44 @@ namespace BankSystem.Controllers
             get => accountButton.Image;
             set => accountButton.Image = value;
         }
-        
+
         //Event to handle when the card is clicked
-        public event EventHandler? AccountCardClicked;
+        public event EventHandler<AccountCardClickedEventArgs> AccountCardClicked;
+        public class AccountCardClickedEventArgs: EventArgs
+        { 
+            public string? AccountName { get; set; }
+            public decimal Balance { get; set; }
+            public string? AccountId { get; set; }
+
+        }
 
         private void AccountCardController_Click(object sender, EventArgs e)
         {
-            AccountCardClicked?.Invoke(this, EventArgs.Empty);
+            AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs { AccountName = this.AccountName, Balance =this.Balance, AccountId= this.AccountId });
+            
+        }
+
+
+        public void SetSelectedStyle(bool isSelected)
+        {
+            if (isSelected) 
+            {
+                //Change style when selected
+                accountButton.BorderColor = CustomColors.Orange;
+                accountButton.BorderSize = 8;
+                accountNameLabel.ForeColor = CustomColors.Orange;
+                balanceLabel.ForeColor = CustomColors.Orange;
+            } 
+            else 
+            {
+                //Reset to default style
+                accountButton.BorderColor = CustomColors.DeepBLue;
+                accountButton.BorderSize = 6;
+                accountNameLabel.ForeColor = CustomColors.DeepBLue;
+                balanceLabel.ForeColor = CustomColors.DeepBLue;
+            }
+      
         }
     }
+   
 }

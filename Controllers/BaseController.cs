@@ -17,13 +17,11 @@ namespace BankSystem.Controllers
 
     public partial class BaseController : UserControl
     {
-        AccountsController accountsController = new AccountsController();
-
+        public AccountsController AccountsController1 => accountsController1;
         public BaseController()
         {
             InitializeComponent();
-            accountsController.LoadAccountCards();
+            
         }
-
     }
 }
