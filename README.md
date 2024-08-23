@@ -9,7 +9,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Key Design Patterns](#key-desing-patterns)
+- [Key Design Patterns](#key-design-patterns)
 - [License](#license)
 
 ## Introduction
