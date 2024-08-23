@@ -26,7 +26,7 @@ This project demonstrates a basic banking application with functionality for dif
 - **Custom UI Components**: Implementation of custom panels and buttons with border radius and border width.
 - **Validation**: Includes basic validation for deposits and withdrawals.
 
-  ![Application Screenshot](Images/C# Bank Design App.png)
+![Application Screenshot](/Images/C# Bank Design App.png)
 
 ## Installation
 
