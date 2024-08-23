@@ -55,5 +55,24 @@ This project demonstrates a basic banking application with functionality for dif
 
 ## Usage
 
+- **Main Page Overview**: Provides a glance at all accounts, displaying account names and balances. Users can view detailed information by clicking on an account. The page also shows basic user information and a summary of recent transactions.
+- **Transactions**: Use specific buttons to perform deposits and withdrawals. Transactions can be initiated from the main page or detailed account views.
+- **Transaction History**: View recent transactions in both the Home view and detailed account views.
+
+
+## Project Structure
+
+- **Model**: Contains business logic classes (`User`, `Account`, `Everyday`, `Omni`, `Invest`).
+- **Controllers**: Manages interactions between the UI and the business logic.
+- **Components**: Contains custom panels, buttons. Lots of UI elements are defined in the designer Files.
+
+
+### Key Design Patterns
+
+- **Abstract Classes**: Used for defining base behaviors in the `Account` class, with specific behaviors overridden in derived classes.
+- **Observer Pattern**: Applied for UI updates, ensuring that changes in the model are reflected in the views.
+- **Custom UI Elements**: Custom panels and buttons were created to achieve specific visual designs, such as rounded corners and custom borders. This was necessary because standard UI controls did not meet the design requirements. Custom drawing and manual adjustments were required to achieve the desired look and feel, demonstrating the application of creative problem-solving in UI design.
+
+
 
 
