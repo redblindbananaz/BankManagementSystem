@@ -9,7 +9,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Development](#development)
+- [Key Design Patterns](#key-desing-patterns)
 - [License](#license)
 
 ## Introduction
@@ -25,6 +25,8 @@ This project demonstrates a basic banking application with functionality for dif
 - **Transaction Handling**: Deposit, withdraw, and transaction history management.
 - **Custom UI Components**: Implementation of custom panels and buttons with border radius and border width.
 - **Validation**: Includes basic validation for deposits and withdrawals.
+
+- 
 
 ![C# Bank Design App](https://github.com/user-attachments/assets/e6b475b7-08aa-4ad6-84fc-8fcd9627e721)
 
@@ -67,11 +69,18 @@ This project demonstrates a basic banking application with functionality for dif
 - **Components**: Contains custom panels, buttons. Lots of UI elements are defined in the designer Files.
 
 
-### Key Design Patterns
+## Key Design Patterns
 
 - **Abstract Classes**: Used for defining base behaviors in the `Account` class, with specific behaviors overridden in derived classes.
 - **Observer Pattern**: Applied for UI updates, ensuring that changes in the model are reflected in the views.
 - **Custom UI Elements**: Custom panels and buttons were created to achieve specific visual designs, such as rounded corners and custom borders. This was necessary because standard UI controls did not meet the design requirements. Custom drawing and manual adjustments were required to achieve the desired look and feel, demonstrating the application of creative problem-solving in UI design.
+  
+## License
+
+This project is licensed under the MIT License. 
+
+
+
 
 
 
