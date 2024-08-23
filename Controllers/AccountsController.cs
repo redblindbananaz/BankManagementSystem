@@ -109,7 +109,7 @@ namespace BankSystem.Controllers
                
                 OnAccountClickedInController(sender, e);
 
-                MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
+                //MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
 
             }
         }

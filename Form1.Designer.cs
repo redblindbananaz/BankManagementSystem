@@ -94,6 +94,7 @@ namespace BankSystem
             historyButton.TabIndex = 3;
             historyButton.Text = "History";
             historyButton.UseVisualStyleBackColor = false;
+            historyButton.Click += historyButton_Click;
             // 
             // outButton
             // 

@@ -1,4 +1,5 @@
 ﻿using BankSystem.Components;
+using BankSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +28,7 @@ namespace BankSystem.Controllers
 
         public event EventHandler CancelClicked;
 
-        private decimal selectedAmount;
+        private decimal selectedAmount = 0;
         public string selectedAccountName;
         public int selectedAccountId;
         public decimal selectedBalance;
@@ -93,13 +94,10 @@ namespace BankSystem.Controllers
             selectedMessageLabel.Text = $"Selected Account: {e.AccountName} - {e.AccountId} --> Press 'Select' to Continue";
         }
 
-        private void cancelLabel_Click(object sender, EventArgs e)
+        private void CancelLabel_Click(object sender, EventArgs e)
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);
         }
-
-        private void InitialiZeNewAction()
-        { }
 
         private void selectButton_Click(object sender, EventArgs e)
         {
@@ -125,11 +123,11 @@ namespace BankSystem.Controllers
 
                 if (currentAction == ActionType.Deposit)
                 {
-                    MessageBox.Show($"Deposit action for {selectedAccountName}");
+                    //MessageBox.Show($"Deposit action for {selectedAccountName}");
                 }
                 else if (currentAction == ActionType.Withdraw)
                 {
-                    MessageBox.Show($"Withdraw action for {selectedAccountName}");
+                   // MessageBox.Show($"Withdraw action for {selectedAccountName}");
                 }
                 else
                 {
@@ -139,11 +137,8 @@ namespace BankSystem.Controllers
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
+        // ++++++++++++ SECOND ACTION FROM ACTION CONTROLLER ++++++++++++++++++++++++++++++++
 
         private void QuickCashButton_Click(object sender, EventArgs e)
         {
@@ -151,13 +146,15 @@ namespace BankSystem.Controllers
 
             if (clickedButton != null) 
             {
+                textBox1.Text = string.Empty;
+                ValidationErrorLabel.Visible = false;
                 ResetQuickCashButton();
 
                 clickedButton.BorderColor = CustomColors.Orange;
 
                 selectedAmount = Convert.ToDecimal(clickedButton.Tag);
                 confirmationMessageActionLabel.Visible = true;
-                confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+                confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - Quick -{selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
             }
         }
 
@@ -170,44 +167,99 @@ namespace BankSystem.Controllers
 
             confirmationMessageActionLabel.Visible = false;
         }
-        private void cash50Btn_Click(object sender, EventArgs e)
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            SelectAmount(50);
+            ResetQuickCashButton();
+            textBox1.ForeColor = CustomColors.DeepBLue;
+            ValidationErrorLabel.Visible = false;
 
         }
-
-        private void cash100Btn_Click(object sender, EventArgs e)
-        {
-            SelectAmount(100);
-
-        }
-
-        private void cash200Btn_Click(object sender, EventArgs e)
-        {
-            SelectAmount(200);
-
-        }
-
-        private void cash500Btn_Click(object sender, EventArgs e)
-        {
-            SelectAmount(500);
-        }
-
-        private void SelectAmount(decimal amount)
-        {
-            selectedAmount = amount;
-            MessageBox.Show($"{currentAction} - Selected Amount: {selectedAmount} - account: {selectedAccountName}");
-        }
-
 
         private void EnterAmountBtn_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (decimal.TryParse(textBox1.Text, out decimal amount) && amount > 0)
+            {
+                ResetQuickCashButton();
+                ValidationErrorLabel.Visible = false;
+                
+                if (amount <= 0)
+                {
+                    ValidationErrorLabel.Visible = true;
+                    ValidationErrorLabel.Text = "Please Enter Amount Greater than 0";
+                    textBox1.ForeColor = Color.Red;
+                    return;
+                }
+                if (amount < 5) 
+                { 
+                    ValidationErrorLabel.Visible = true;
+                    ValidationErrorLabel.Text = "The Minimum Amount is $5";
+                    textBox1.ForeColor = Color.Red;
+                    return;
+                }
+                if (amount % 5 != 0) 
+                { 
+                    ValidationErrorLabel.Visible = true;
+                    ValidationErrorLabel.Text = "The  Amount Must Be a Multiple of 5 ";
+                    textBox1.ForeColor = Color.Red;
+                    return;
+                }
+                if (amount > 1000)
+                {
+                    ValidationErrorLabel.Visible = true;
+                    ValidationErrorLabel.Text = $"Sorry, Maximum Amount for {currentAction} is $1000";
+                    textBox1.ForeColor = Color.Red;
+                    return;
+                }
+
+
+                selectedAmount = amount;
+                confirmationMessageActionLabel.Visible = true;
+                confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - Custom -{selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+                
+            }
+            else
+            {
+                confirmationMessageActionLabel.Visible = true;
+                confirmationMessageActionLabel.Text = "Please Enter a Valid Amount";
+            }
         }
+
+        
 
         private void ConfirmBtn_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            ResetQuickCashButton();
+            textBox1.Text = string.Empty;
+
+            // Need to implement deposit as all same for all accounts.
+            //MessageBox.Show($"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}");
+
+            var account = User.CurrentUser.Accounts.FirstOrDefault(a=> a.AccountID == selectedAccountId);
+            if (account == null)
+            {
+                MessageBox.Show("Account not found");
+                return;
+            }
+            if (currentAction == ActionType.Deposit)
+            {
+                account.Deposit(selectedAmount);
+                // This below is to return Home, Not Cancel
+                CancelClicked?.Invoke(this, EventArgs.Empty);
+
+            }
+            else if (currentAction == ActionType.Withdraw)
+            {
+                account.Withdraw(selectedAmount);
+                // This below is to return Home, Not Cancel
+                CancelClicked?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                MessageBox.Show("Sorry Error System...");
+                return;
+            }
         }
     }
 }

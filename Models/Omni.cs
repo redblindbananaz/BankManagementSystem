@@ -18,7 +18,7 @@ namespace BankSystem.Models
     {
 
         private const decimal InterestRate = 0.04m; // 4% Interest Rate
-        private const decimal Overdraft = -100m; // Overdraft of $100
+        private const decimal Overdraft = 100m; // Overdraft of $100
         private const decimal FailingFee = 5m; // Fee for Failed Transactions
 
         public Omni (decimal balance) : base("Omni", balance)
@@ -33,7 +33,7 @@ namespace BankSystem.Models
 
         public override void Withdraw(decimal amount)
         {
-            if (Balance - amount >= Overdraft)
+            if (Balance - amount >= -Overdraft)
             {
                 Balance -= amount;
                 AddTransaction("Withdraw", amount, true);

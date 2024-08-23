@@ -53,10 +53,10 @@ namespace BankSystem.Models
             {
                 throw new ArgumentException("Withdraw amount must be greater than 0");
             }
-            if (amount > Balance)
+            if (Balance - amount < 0)
             {
-                Balance -= FailingFee;
                 AddInvestTransaction("Withdraw", amount, false);
+                return;
             }
             Balance -= amount;
             AddInvestTransaction("Withdraw", amount, true);

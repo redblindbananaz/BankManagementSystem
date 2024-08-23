@@ -40,6 +40,7 @@ namespace BankSystem.Controllers
             customPanel1 = new CustomPanel();
             StepLevelLabel = new Label();
             presentationPanel = new Panel();
+            ValidationErrorLabel = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
             EnterAmountBtn = new CustomButton();
@@ -120,6 +121,7 @@ namespace BankSystem.Controllers
             ConfirmBtn.BorderColor = Color.FromArgb(255, 242, 204);
             ConfirmBtn.BorderRadius = 24;
             ConfirmBtn.BorderSize = 8;
+            ConfirmBtn.Cursor = Cursors.Hand;
             ConfirmBtn.FlatStyle = FlatStyle.Flat;
             ConfirmBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ConfirmBtn.ForeColor = Color.FromArgb(0, 51, 102);
@@ -144,7 +146,7 @@ namespace BankSystem.Controllers
             cancelLabel.Size = new Size(93, 29);
             cancelLabel.TabIndex = 5;
             cancelLabel.Text = "Cancel";
-            cancelLabel.Click += cancelLabel_Click;
+            cancelLabel.Click += CancelLabel_Click;
             // 
             // selectButton
             // 
@@ -161,6 +163,7 @@ namespace BankSystem.Controllers
             selectButton.TabIndex = 4;
             selectButton.Text = "Select";
             selectButton.UseVisualStyleBackColor = false;
+            selectButton.Cursor = Cursors.Hand;
             selectButton.Click += selectButton_Click;
             // 
             // customPanel1
@@ -190,6 +193,7 @@ namespace BankSystem.Controllers
             // presentationPanel
             // 
             presentationPanel.BackColor = Color.FromArgb(169, 196, 235);
+            presentationPanel.Controls.Add(ValidationErrorLabel);
             presentationPanel.Controls.Add(label2);
             presentationPanel.Controls.Add(textBox1);
             presentationPanel.Controls.Add(EnterAmountBtn);
@@ -205,6 +209,18 @@ namespace BankSystem.Controllers
             presentationPanel.Size = new Size(626, 338);
             presentationPanel.TabIndex = 2;
             // 
+            // ValidationErrorLabel
+            // 
+            ValidationErrorLabel.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            ValidationErrorLabel.ForeColor = Color.FromArgb(192, 64, 0);
+            ValidationErrorLabel.Location = new Point(358, 267);
+            ValidationErrorLabel.Name = "ValidationErrorLabel";
+            ValidationErrorLabel.Size = new Size(240, 71);
+            ValidationErrorLabel.TabIndex = 10;
+            ValidationErrorLabel.Text = "Error Message Display Here";
+            ValidationErrorLabel.TextAlign = ContentAlignment.TopCenter;
+            ValidationErrorLabel.Visible = false;
+            // 
             // label2
             // 
             label2.Font = new Font("Verdana", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -218,11 +234,14 @@ namespace BankSystem.Controllers
             // textBox1
             // 
             textBox1.BackColor = Color.FromArgb(255, 242, 204);
+            textBox1.Cursor = Cursors.IBeam;
             textBox1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = Color.FromArgb(0, 51, 102);
             textBox1.Location = new Point(415, 114);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(121, 33);
             textBox1.TabIndex = 8;
+            textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // EnterAmountBtn
@@ -231,6 +250,7 @@ namespace BankSystem.Controllers
             EnterAmountBtn.BorderColor = Color.FromArgb(215, 155, 0);
             EnterAmountBtn.BorderRadius = 24;
             EnterAmountBtn.BorderSize = 8;
+            EnterAmountBtn.Cursor = Cursors.Hand;
             EnterAmountBtn.FlatAppearance.BorderSize = 0;
             EnterAmountBtn.FlatStyle = FlatStyle.Flat;
             EnterAmountBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -249,6 +269,7 @@ namespace BankSystem.Controllers
             cash500Btn.BorderColor = Color.FromArgb(0, 51, 102);
             cash500Btn.BorderRadius = 30;
             cash500Btn.BorderSize = 6;
+            cash500Btn.Cursor = Cursors.Hand;
             cash500Btn.FlatAppearance.BorderSize = 0;
             cash500Btn.FlatStyle = FlatStyle.Flat;
             cash500Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -257,10 +278,10 @@ namespace BankSystem.Controllers
             cash500Btn.Name = "cash500Btn";
             cash500Btn.Size = new Size(120, 60);
             cash500Btn.TabIndex = 6;
+            cash500Btn.Tag = 500;
             cash500Btn.Text = "500";
             cash500Btn.UseVisualStyleBackColor = false;
             cash500Btn.Click += QuickCashButton_Click;
-            cash500Btn.Tag = 500;
             // 
             // cash200Btn
             // 
@@ -268,6 +289,7 @@ namespace BankSystem.Controllers
             cash200Btn.BorderColor = Color.FromArgb(0, 51, 102);
             cash200Btn.BorderRadius = 30;
             cash200Btn.BorderSize = 6;
+            cash200Btn.Cursor = Cursors.Hand;
             cash200Btn.FlatAppearance.BorderSize = 0;
             cash200Btn.FlatStyle = FlatStyle.Flat;
             cash200Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -276,10 +298,10 @@ namespace BankSystem.Controllers
             cash200Btn.Name = "cash200Btn";
             cash200Btn.Size = new Size(120, 60);
             cash200Btn.TabIndex = 5;
+            cash200Btn.Tag = 200;
             cash200Btn.Text = "200";
             cash200Btn.UseVisualStyleBackColor = false;
             cash200Btn.Click += QuickCashButton_Click;
-            cash200Btn.Tag = 200;
             // 
             // cash100Btn
             // 
@@ -287,6 +309,7 @@ namespace BankSystem.Controllers
             cash100Btn.BorderColor = Color.FromArgb(0, 51, 102);
             cash100Btn.BorderRadius = 30;
             cash100Btn.BorderSize = 6;
+            cash100Btn.Cursor = Cursors.Hand;
             cash100Btn.FlatAppearance.BorderSize = 0;
             cash100Btn.FlatStyle = FlatStyle.Flat;
             cash100Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -295,10 +318,10 @@ namespace BankSystem.Controllers
             cash100Btn.Name = "cash100Btn";
             cash100Btn.Size = new Size(120, 60);
             cash100Btn.TabIndex = 4;
+            cash100Btn.Tag = 100;
             cash100Btn.Text = "100";
             cash100Btn.UseVisualStyleBackColor = false;
             cash100Btn.Click += QuickCashButton_Click;
-            cash100Btn.Tag = 100;
             // 
             // cash50Btn
             // 
@@ -306,6 +329,7 @@ namespace BankSystem.Controllers
             cash50Btn.BorderColor = Color.FromArgb(0, 51, 102);
             cash50Btn.BorderRadius = 30;
             cash50Btn.BorderSize = 6;
+            cash50Btn.Cursor = Cursors.Hand;
             cash50Btn.FlatAppearance.BorderSize = 0;
             cash50Btn.FlatStyle = FlatStyle.Flat;
             cash50Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -314,10 +338,10 @@ namespace BankSystem.Controllers
             cash50Btn.Name = "cash50Btn";
             cash50Btn.Size = new Size(120, 60);
             cash50Btn.TabIndex = 3;
+            cash50Btn.Tag = 50;
             cash50Btn.Text = "50";
             cash50Btn.UseVisualStyleBackColor = false;
             cash50Btn.Click += QuickCashButton_Click;
-            cash50Btn.Tag = 50;
             // 
             // Linevertical
             // 
@@ -411,5 +435,6 @@ namespace BankSystem.Controllers
         private Label CurrentBalanceLabel;
         private Label accountNameLabel;
         private Label confirmationMessageActionLabel;
+        private Label ValidationErrorLabel;
     }
 }

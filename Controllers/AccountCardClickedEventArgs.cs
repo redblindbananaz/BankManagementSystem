@@ -8,7 +8,7 @@ namespace BankSystem.Controllers
 {
     public class AccountCardClickedEventArgs :EventArgs
     {
-        public string? AccountName { get; set; }
+        public string AccountName { get; set; }
         public decimal Balance { get; set; }
         public int AccountId { get; set; }
 

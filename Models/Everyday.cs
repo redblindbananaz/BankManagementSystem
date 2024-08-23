@@ -37,7 +37,8 @@ namespace BankSystem.Models
         {
             if (amount <= 0 || amount > Balance)
             {
-                throw new ArgumentException("Withdraw amount must be greater than 0 and smaller than the current Balance");
+                MessageBox.Show("Withdraw amount must be greater than 0 and smaller than the current Balance");
+                return;
             }
             Balance -= amount;
             AddTransaction("Withdraw", amount, true);

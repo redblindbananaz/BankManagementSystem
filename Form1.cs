@@ -1,3 +1,4 @@
+using BankSystem.Components;
 using BankSystem.Controllers;
 using BankSystem.Models;
 
@@ -10,19 +11,19 @@ namespace BankSystem
 
 
         BaseController homeController = new BaseController();
-        
+
 
         public ActionController depositController { get; private set; }
         public ActionController withdrawController { get; private set; }
-        
+
 
         public Form1()
         {
             InitializeComponent();
             SetupUser();
             UpdateTotalBalance();
-            
-            
+
+
             showHome();
         }
 
@@ -67,8 +68,12 @@ namespace BankSystem
 
         private void showHome()
         {
+            UpdateTotalBalance();
             LoadUserControl(homeController);
             homeController.AccountsController1.LoadAccountCards();
+            depositButton.BorderColor = Color.FromArgb(255, 242, 204);
+            withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
+            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
 
             if (User.CurrentUser != null)
             {
@@ -76,7 +81,7 @@ namespace BankSystem
             }
             else
             {
-                throw new ArgumentException("There is no Current User");
+                MessageBox.Show("There is no Current User");
             }
         }
 
@@ -89,33 +94,50 @@ namespace BankSystem
 
         private void depositButton_Click(object sender, EventArgs e)
         {
+            UpdateTotalBalance();
             depositController = new ActionController(ActionType.Deposit);
             LoadUserControl(depositController);
-           
+
             depositController.accountsController2.LoadAccountCards();
             depositController.CancelClicked += ActionControl_CancelClicked;
+            depositButton.BorderColor = CustomColors.Orange;
+            withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
+            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
+
 
         }
 
         private void withdrawButton_Click(object sender, EventArgs e)
         {
+            UpdateTotalBalance();
             withdrawController = new ActionController(ActionType.Withdraw);
             LoadUserControl(withdrawController);
             withdrawController.accountsController2.LoadAccountCards();
             withdrawController.CancelClicked += ActionControl_CancelClicked;
+            withdrawButton.BorderColor = CustomColors.Orange;
+            depositButton.BorderColor = Color.FromArgb(255, 242, 204);
+            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
 
         }
 
         private void outButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
-            
+
         }
 
         // EVENT HANDLERS:
         private void ActionControl_CancelClicked(object sender, EventArgs e)
         {
             showHome();
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            depositButton.BorderColor = Color.FromArgb(255, 242, 204);
+            withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
+            historyButton.BorderColor = CustomColors.Orange;
+
         }
     }
 }
