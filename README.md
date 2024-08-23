@@ -23,8 +23,10 @@ This project demonstrates a basic banking application with functionality for dif
 - **User Management**: Creation of user accounts.
 - **Account Types**: Support for Everyday, Omni, and Invest accounts with unique behaviors.
 - **Transaction Handling**: Deposit, withdraw, and transaction history management.
-- **Custom UI Components**: Implementation of custom panels and buttons to enhance user experience.
+- **Custom UI Components**: Implementation of custom panels and buttons with border radius and border width.
 - **Validation**: Includes basic validation for deposits and withdrawals.
+
+  ![Application Screenshot](Images/C# Bank Design App.png)
 
 ## Installation
 
