@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankSystem.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,44 +26,32 @@ namespace BankSystem.Controllers
         private Label selectedMessageLabel;
 
         public event EventHandler CancelClicked;
+
+        private decimal selectedAmount;
+        public string selectedAccountName;
+        public int selectedAccountId;
+        public decimal selectedBalance;
+
+
         public ActionController(ActionType actionType)
         {
             InitializeComponent();
-            
             InitializeAccountsController();
+            InitializeConfirmationLabel();
             currentAction = actionType;
-            SetupUI();
-        }
+            actionLabel.Text = actionType == ActionType.Deposit ? "Choose Account for Deposit" : "Choose Account for Withdraw";
 
-        private void SetupUI()
-        {
-            if (currentAction == ActionType.Deposit)
-            {
-                actionLabel.Text = "Deposit";
-                
-            }
-            else if (currentAction == ActionType.Withdraw)
-            {
-                actionLabel.Text = "Withdraw";
-                
-            }
         }
 
         private void InitializeAccountsController()
         {
             accountsController2 = new AccountsController();
 
-            // 
-            // accountsController2 Properties
-            // 
             accountsController2.Location = new Point(25, 170);
             accountsController2.Name = "accountsController2";
             accountsController2.Size = new Size(600, 266);
             accountsController2.TabIndex = 0;
-            
-
             Controls.Add(accountsController2);
-           
             accountsController2.BringToFront();
 
             accountsController2.accountCard1.AccountCardClicked += OnAccountClicked;
@@ -70,22 +59,7 @@ namespace BankSystem.Controllers
             accountsController2.accountCard3.AccountCardClicked += OnAccountClicked;
         }
 
-        public string SelectedAccountName { get;  set; }
-        public int SelectedAccountId { get;  set; }
-        public void SetSelectedAccount(string accountName, int accountId)
-        {
-            SelectedAccountName = accountName;
-            SelectedAccountId = accountId;
-        }
-
-        public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
-        {
-            //var accountCard = (AccountCardController)sender;
-            //SetSelectedAccount(e.AccountName, e.AccountId);
-            MessageBox.Show($"Account {e.AccountName} selected in ACTION");
-            ShowconfirmationLabel(e.AccountName, e.AccountId);
-        }
-        private void ShowconfirmationLabel( string Name, int ID)
+        private void InitializeConfirmationLabel()
         {
             selectedMessageLabel = new Label();
             // 
@@ -97,26 +71,143 @@ namespace BankSystem.Controllers
             selectedMessageLabel.Name = "selectedMessageLabel";
             selectedMessageLabel.Size = new Size(574, 23);
             selectedMessageLabel.TabIndex = 6;
-            selectedMessageLabel.Text = $"You have selected {Name} - ID {ID} for Transaction";
+            selectedMessageLabel.Text = "Please Select an Account for Transaction";
             selectedMessageLabel.TextAlign = ContentAlignment.MiddleLeft;
 
-            if (Name != null)
-            {
-                Controls.Add(selectedMessageLabel);
-            }
+            Controls.Add(selectedMessageLabel);
+            selectedMessageLabel.BringToFront();
+        }
+       
 
+        public void SetSelectedAccount(string accountName, int accountId, decimal balance)
+        {
+            selectedAccountName = accountName;
+            selectedAccountId = accountId;
+            selectedBalance = balance;
+        }
+
+        public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
+        {
+            SetSelectedAccount(e.AccountName, e.AccountId, e.Balance);
+
+            selectedMessageLabel.Text = $"Selected Account: {e.AccountName} - {e.AccountId} --> Press 'Select' to Continue";
         }
 
         private void cancelLabel_Click(object sender, EventArgs e)
         {
-            
             CancelClicked?.Invoke(this, EventArgs.Empty);
-
         }
+
+        private void InitialiZeNewAction()
+        { }
 
         private void selectButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(selectedAccountName))
+            {
+                MessageBox.Show("Please select an account to continue");
 
+            }
+            else
+            {
+                accountsController2.Visible = false;
+                selectedMessageLabel.Visible = false;
+                selectButton.Visible = false;
+                ConfirmBtn.Visible = true;
+                StepLevelLabel.Text = "Step 2";
+                actionLabel.Text = currentAction == ActionType.Deposit ? "Enter Amount for Deposit" : "Enter Amount for Withdraw";
+                presentationPanel2.Visible = true;
+                accountNameLabel.Visible = true;
+                CurrentBalanceLabel.Visible = true;
+                accountNameLabel.Text = $"{selectedAccountName} Account";
+                CurrentBalanceLabel.Text = $"Current Available Balance: $ {selectedBalance}";
+
+
+                if (currentAction == ActionType.Deposit)
+                {
+                    MessageBox.Show($"Deposit action for {selectedAccountName}");
+                }
+                else if (currentAction == ActionType.Withdraw)
+                {
+                    MessageBox.Show($"Withdraw action for {selectedAccountName}");
+                }
+                else
+                {
+                    throw new NotImplementedException("Error in the system");
+
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void QuickCashButton_Click(object sender, EventArgs e)
+        {
+            CustomButton? clickedButton = sender as CustomButton;
+
+            if (clickedButton != null) 
+            {
+                ResetQuickCashButton();
+
+                clickedButton.BorderColor = CustomColors.Orange;
+
+                selectedAmount = Convert.ToDecimal(clickedButton.Tag);
+                confirmationMessageActionLabel.Visible = true;
+                confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+            }
+        }
+
+        private void ResetQuickCashButton()
+        {
+            cash50Btn.BorderColor = CustomColors.DeepBLue;
+            cash100Btn.BorderColor = CustomColors.DeepBLue;
+            cash200Btn.BorderColor = CustomColors.DeepBLue;
+            cash500Btn.BorderColor = CustomColors.DeepBLue;
+
+            confirmationMessageActionLabel.Visible = false;
+        }
+        private void cash50Btn_Click(object sender, EventArgs e)
+        {
+            SelectAmount(50);
+
+        }
+
+        private void cash100Btn_Click(object sender, EventArgs e)
+        {
+            SelectAmount(100);
+
+        }
+
+        private void cash200Btn_Click(object sender, EventArgs e)
+        {
+            SelectAmount(200);
+
+        }
+
+        private void cash500Btn_Click(object sender, EventArgs e)
+        {
+            SelectAmount(500);
+        }
+
+        private void SelectAmount(decimal amount)
+        {
+            selectedAmount = amount;
+            MessageBox.Show($"{currentAction} - Selected Amount: {selectedAmount} - account: {selectedAccountName}");
+        }
+
+
+        private void EnterAmountBtn_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ConfirmBtn_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

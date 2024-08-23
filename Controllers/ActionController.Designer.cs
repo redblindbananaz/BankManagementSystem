@@ -31,13 +31,26 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             actionPanel = new CustomPanel();
+            confirmationMessageActionLabel = new Label();
+            CurrentBalanceLabel = new Label();
+            accountNameLabel = new Label();
+            ConfirmBtn = new CustomButton();
             cancelLabel = new Label();
             selectButton = new CustomButton();
             customPanel1 = new CustomPanel();
             StepLevelLabel = new Label();
             presentationPanel = new Panel();
-            
-            label1 = new Label();
+            label2 = new Label();
+            textBox1 = new TextBox();
+            EnterAmountBtn = new CustomButton();
+            cash500Btn = new CustomButton();
+            cash200Btn = new CustomButton();
+            cash100Btn = new CustomButton();
+            cash50Btn = new CustomButton();
+            Linevertical = new Panel();
+            customAmountLabel = new Label();
+            quickCashLabel = new Label();
+            presentationPanel2 = new Panel();
             actionLabel = new Label();
             actionPanel.SuspendLayout();
             customPanel1.SuspendLayout();
@@ -50,18 +63,74 @@ namespace BankSystem.Controllers
             actionPanel.BorderColor = Color.FromArgb(215, 155, 0);
             actionPanel.BorderRadius = 24;
             actionPanel.BorderSize = 8;
-            actionPanel.Controls.Add(selectedMessageLabel);
+            actionPanel.Controls.Add(confirmationMessageActionLabel);
+            actionPanel.Controls.Add(CurrentBalanceLabel);
+            actionPanel.Controls.Add(accountNameLabel);
+            actionPanel.Controls.Add(ConfirmBtn);
             actionPanel.Controls.Add(cancelLabel);
             actionPanel.Controls.Add(selectButton);
             actionPanel.Controls.Add(customPanel1);
             actionPanel.Controls.Add(presentationPanel);
-            actionPanel.Controls.Add(label1);
+            actionPanel.Controls.Add(presentationPanel2);
             actionPanel.Controls.Add(actionLabel);
             actionPanel.Location = new Point(0, 0);
             actionPanel.Name = "actionPanel";
             actionPanel.Size = new Size(649, 637);
             actionPanel.TabIndex = 0;
-            
+            // 
+            // confirmationMessageActionLabel
+            // 
+            confirmationMessageActionLabel.Font = new Font("Verdana", 12.75F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            confirmationMessageActionLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            confirmationMessageActionLabel.Location = new Point(12, 481);
+            confirmationMessageActionLabel.Name = "confirmationMessageActionLabel";
+            confirmationMessageActionLabel.Size = new Size(626, 37);
+            confirmationMessageActionLabel.TabIndex = 8;
+            confirmationMessageActionLabel.Text = "Press Confirm to continue Deposit - $300 - Everday ID 12";
+            confirmationMessageActionLabel.TextAlign = ContentAlignment.MiddleCenter;
+            confirmationMessageActionLabel.Visible = false;
+            // 
+            // CurrentBalanceLabel
+            // 
+            CurrentBalanceLabel.Font = new Font("Verdana", 9.75F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            CurrentBalanceLabel.ForeColor = Color.FromArgb(255, 242, 204);
+            CurrentBalanceLabel.Location = new Point(185, 114);
+            CurrentBalanceLabel.Name = "CurrentBalanceLabel";
+            CurrentBalanceLabel.Size = new Size(363, 15);
+            CurrentBalanceLabel.TabIndex = 7;
+            CurrentBalanceLabel.Text = "Current Available Balance: $ amount";
+            CurrentBalanceLabel.TextAlign = ContentAlignment.MiddleCenter;
+            CurrentBalanceLabel.Visible = false;
+            // 
+            // accountNameLabel
+            // 
+            accountNameLabel.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            accountNameLabel.ForeColor = Color.FromArgb(215, 155, 0);
+            accountNameLabel.Location = new Point(185, 78);
+            accountNameLabel.Name = "accountNameLabel";
+            accountNameLabel.Size = new Size(363, 28);
+            accountNameLabel.TabIndex = 6;
+            accountNameLabel.Text = "Name of the Account";
+            accountNameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            accountNameLabel.Visible = false;
+            // 
+            // ConfirmBtn
+            // 
+            ConfirmBtn.BackColor = Color.FromArgb(169, 196, 235);
+            ConfirmBtn.BorderColor = Color.FromArgb(255, 242, 204);
+            ConfirmBtn.BorderRadius = 24;
+            ConfirmBtn.BorderSize = 8;
+            ConfirmBtn.FlatStyle = FlatStyle.Flat;
+            ConfirmBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ConfirmBtn.ForeColor = Color.FromArgb(0, 51, 102);
+            ConfirmBtn.Location = new Point(373, 523);
+            ConfirmBtn.Name = "ConfirmBtn";
+            ConfirmBtn.Size = new Size(240, 60);
+            ConfirmBtn.TabIndex = 4;
+            ConfirmBtn.Text = "Confirm";
+            ConfirmBtn.UseVisualStyleBackColor = false;
+            ConfirmBtn.Visible = false;
+            ConfirmBtn.Click += ConfirmBtn_Click;
             // 
             // cancelLabel
             // 
@@ -121,34 +190,184 @@ namespace BankSystem.Controllers
             // presentationPanel
             // 
             presentationPanel.BackColor = Color.FromArgb(169, 196, 235);
-            
+            presentationPanel.Controls.Add(label2);
+            presentationPanel.Controls.Add(textBox1);
+            presentationPanel.Controls.Add(EnterAmountBtn);
+            presentationPanel.Controls.Add(cash500Btn);
+            presentationPanel.Controls.Add(cash200Btn);
+            presentationPanel.Controls.Add(cash100Btn);
+            presentationPanel.Controls.Add(cash50Btn);
+            presentationPanel.Controls.Add(Linevertical);
+            presentationPanel.Controls.Add(customAmountLabel);
+            presentationPanel.Controls.Add(quickCashLabel);
             presentationPanel.Location = new Point(12, 140);
             presentationPanel.Name = "presentationPanel";
             presentationPanel.Size = new Size(626, 338);
             presentationPanel.TabIndex = 2;
-            
             // 
-            // label1
+            // label2
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Verdana", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(255, 242, 204);
-            label1.Location = new Point(185, 49);
-            label1.Name = "label1";
-            label1.Size = new Size(279, 29);
-            label1.TabIndex = 1;
-            label1.Text = "Choose Account for ";
+            label2.Font = new Font("Verdana", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(0, 51, 102);
+            label2.Location = new Point(379, 114);
+            label2.Name = "label2";
+            label2.Size = new Size(30, 33);
+            label2.TabIndex = 9;
+            label2.Text = "$";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(255, 242, 204);
+            textBox1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(415, 114);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(121, 33);
+            textBox1.TabIndex = 8;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // EnterAmountBtn
+            // 
+            EnterAmountBtn.BackColor = Color.FromArgb(255, 242, 204);
+            EnterAmountBtn.BorderColor = Color.FromArgb(215, 155, 0);
+            EnterAmountBtn.BorderRadius = 24;
+            EnterAmountBtn.BorderSize = 8;
+            EnterAmountBtn.FlatAppearance.BorderSize = 0;
+            EnterAmountBtn.FlatStyle = FlatStyle.Flat;
+            EnterAmountBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            EnterAmountBtn.ForeColor = Color.FromArgb(215, 155, 0);
+            EnterAmountBtn.Location = new Point(358, 193);
+            EnterAmountBtn.Name = "EnterAmountBtn";
+            EnterAmountBtn.Size = new Size(240, 60);
+            EnterAmountBtn.TabIndex = 7;
+            EnterAmountBtn.Text = "Enter";
+            EnterAmountBtn.UseVisualStyleBackColor = false;
+            EnterAmountBtn.Click += EnterAmountBtn_Click;
+            // 
+            // cash500Btn
+            // 
+            cash500Btn.BackColor = Color.FromArgb(255, 242, 204);
+            cash500Btn.BorderColor = Color.FromArgb(0, 51, 102);
+            cash500Btn.BorderRadius = 30;
+            cash500Btn.BorderSize = 6;
+            cash500Btn.FlatAppearance.BorderSize = 0;
+            cash500Btn.FlatStyle = FlatStyle.Flat;
+            cash500Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cash500Btn.ForeColor = Color.FromArgb(0, 51, 102);
+            cash500Btn.Location = new Point(167, 193);
+            cash500Btn.Name = "cash500Btn";
+            cash500Btn.Size = new Size(120, 60);
+            cash500Btn.TabIndex = 6;
+            cash500Btn.Text = "500";
+            cash500Btn.UseVisualStyleBackColor = false;
+            cash500Btn.Click += QuickCashButton_Click;
+            cash500Btn.Tag = 500;
+            // 
+            // cash200Btn
+            // 
+            cash200Btn.BackColor = Color.FromArgb(255, 242, 204);
+            cash200Btn.BorderColor = Color.FromArgb(0, 51, 102);
+            cash200Btn.BorderRadius = 30;
+            cash200Btn.BorderSize = 6;
+            cash200Btn.FlatAppearance.BorderSize = 0;
+            cash200Btn.FlatStyle = FlatStyle.Flat;
+            cash200Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cash200Btn.ForeColor = Color.FromArgb(0, 51, 102);
+            cash200Btn.Location = new Point(19, 193);
+            cash200Btn.Name = "cash200Btn";
+            cash200Btn.Size = new Size(120, 60);
+            cash200Btn.TabIndex = 5;
+            cash200Btn.Text = "200";
+            cash200Btn.UseVisualStyleBackColor = false;
+            cash200Btn.Click += QuickCashButton_Click;
+            cash200Btn.Tag = 200;
+            // 
+            // cash100Btn
+            // 
+            cash100Btn.BackColor = Color.FromArgb(255, 242, 204);
+            cash100Btn.BorderColor = Color.FromArgb(0, 51, 102);
+            cash100Btn.BorderRadius = 30;
+            cash100Btn.BorderSize = 6;
+            cash100Btn.FlatAppearance.BorderSize = 0;
+            cash100Btn.FlatStyle = FlatStyle.Flat;
+            cash100Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cash100Btn.ForeColor = Color.FromArgb(0, 51, 102);
+            cash100Btn.Location = new Point(167, 99);
+            cash100Btn.Name = "cash100Btn";
+            cash100Btn.Size = new Size(120, 60);
+            cash100Btn.TabIndex = 4;
+            cash100Btn.Text = "100";
+            cash100Btn.UseVisualStyleBackColor = false;
+            cash100Btn.Click += QuickCashButton_Click;
+            cash100Btn.Tag = 100;
+            // 
+            // cash50Btn
+            // 
+            cash50Btn.BackColor = Color.FromArgb(255, 242, 204);
+            cash50Btn.BorderColor = Color.FromArgb(0, 51, 102);
+            cash50Btn.BorderRadius = 30;
+            cash50Btn.BorderSize = 6;
+            cash50Btn.FlatAppearance.BorderSize = 0;
+            cash50Btn.FlatStyle = FlatStyle.Flat;
+            cash50Btn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cash50Btn.ForeColor = Color.FromArgb(0, 51, 102);
+            cash50Btn.Location = new Point(19, 99);
+            cash50Btn.Name = "cash50Btn";
+            cash50Btn.Size = new Size(120, 60);
+            cash50Btn.TabIndex = 3;
+            cash50Btn.Text = "50";
+            cash50Btn.UseVisualStyleBackColor = false;
+            cash50Btn.Click += QuickCashButton_Click;
+            cash50Btn.Tag = 50;
+            // 
+            // Linevertical
+            // 
+            Linevertical.BackColor = Color.FromArgb(255, 242, 204);
+            Linevertical.Location = new Point(310, 74);
+            Linevertical.Name = "Linevertical";
+            Linevertical.Size = new Size(6, 211);
+            Linevertical.TabIndex = 2;
+            // 
+            // customAmountLabel
+            // 
+            customAmountLabel.Font = new Font("Verdana", 15.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            customAmountLabel.ForeColor = Color.FromArgb(0, 51, 102);
+            customAmountLabel.Location = new Point(311, 38);
+            customAmountLabel.Name = "customAmountLabel";
+            customAmountLabel.Size = new Size(312, 23);
+            customAmountLabel.TabIndex = 1;
+            customAmountLabel.Text = "Custom Amount:";
+            customAmountLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // quickCashLabel
+            // 
+            quickCashLabel.Font = new Font("Verdana", 15.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            quickCashLabel.ForeColor = Color.FromArgb(0, 51, 102);
+            quickCashLabel.Location = new Point(3, 38);
+            quickCashLabel.Name = "quickCashLabel";
+            quickCashLabel.Size = new Size(312, 23);
+            quickCashLabel.TabIndex = 0;
+            quickCashLabel.Text = "Quick Cash:";
+            quickCashLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // presentationPanel2
+            // 
+            presentationPanel2.BackColor = Color.FromArgb(169, 196, 235);
+            presentationPanel2.Location = new Point(12, 140);
+            presentationPanel2.Name = "presentationPanel2";
+            presentationPanel2.Size = new Size(626, 338);
+            presentationPanel2.TabIndex = 2;
+            presentationPanel2.Visible = false;
             // 
             // actionLabel
             // 
-            actionLabel.AutoSize = true;
             actionLabel.Font = new Font("Verdana", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             actionLabel.ForeColor = Color.FromArgb(255, 242, 204);
-            actionLabel.Location = new Point(461, 49);
+            actionLabel.Location = new Point(185, 49);
             actionLabel.Name = "actionLabel";
-            actionLabel.Size = new Size(98, 29);
+            actionLabel.Size = new Size(428, 29);
             actionLabel.TabIndex = 0;
             actionLabel.Text = "Action";
+            actionLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // ActionController
             // 
@@ -164,18 +383,33 @@ namespace BankSystem.Controllers
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
             presentationPanel.ResumeLayout(false);
+            presentationPanel.PerformLayout();
             ResumeLayout(false);
         }
+
 
         #endregion
         private CustomPanel actionPanel;
         private Label actionLabel;
-        private Label label1;
         private Panel presentationPanel;
         private CustomPanel customPanel1;
         private Label StepLevelLabel;
         private CustomButton selectButton;
         private Label cancelLabel;
-        
+        private Panel presentationPanel2;
+        private Label quickCashLabel;
+        private Label customAmountLabel;
+        private Panel Linevertical;
+        private CustomButton cash50Btn;
+        private CustomButton cash500Btn;
+        private CustomButton cash200Btn;
+        private CustomButton cash100Btn;
+        private CustomButton ConfirmBtn;
+        private CustomButton EnterAmountBtn;
+        private TextBox textBox1;
+        private Label label2;
+        private Label CurrentBalanceLabel;
+        private Label accountNameLabel;
+        private Label confirmationMessageActionLabel;
     }
 }
