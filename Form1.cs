@@ -6,29 +6,24 @@ namespace BankSystem
 {
     public partial class Form1 : Form
     {
-        private UserControl currentControl;
+        private UserControl _currentControl;
         public AccountsController AccountsController1;// Account cards object instance for Home
-
-
-        BaseController homeController = new BaseController();
-        BaseController historyController = new BaseController();
-
-
-        public ActionController depositController { get; private set; }
-        public ActionController withdrawController { get; private set; }
+        private BaseController _homeController = new BaseController();
+        private BaseController _historyController = new BaseController();
+        public ActionController DepositController { get; private set; }
+        public ActionController WithdrawController { get; private set; }
 
 
         public Form1()
         {
             InitializeComponent();
-            SetupUser();
+            InitializeUser();
+            
             UpdateTotalBalance();
-
-
             showHome();
         }
 
-        private void SetupUser()
+        private void InitializeUser()
         {
             // This method should set the current user of the system
             User user1 = User.CreateUser("JD12345", "John Dee", true);
@@ -45,21 +40,15 @@ namespace BankSystem
         {
             panel1.Controls.Clear();
             //set the new control as the current control:
-            currentControl = control;
+            _currentControl = control;
             control.Dock = DockStyle.Fill;
             control.BringToFront();
-
             panel1.Controls.Add(control);
         }
 
         public decimal CalculateTotalBalance()
-        {
-            decimal total = 0;
-            foreach (var account in User.CurrentUser.Accounts)
-            {
-                total += account.Balance;
-            }
-            return total;
+        {     
+            return User.CurrentUser.Accounts.Sum(account =>account.Balance);
         }
 
         private void UpdateTotalBalance()
@@ -67,23 +56,23 @@ namespace BankSystem
             totalBalanceLabel.Text = $"{CalculateTotalBalance():C}";
         }
 
-        private void showHome()
+        private void ResetButtonColors()
         {
-            UpdateTotalBalance();
-            LoadUserControl(homeController);
-            homeController.AccountsController1.LoadAccountCards();
             depositButton.BorderColor = Color.FromArgb(255, 242, 204);
             withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
             historyButton.BorderColor = Color.FromArgb(255, 242, 204);
 
-            if (User.CurrentUser != null)
-            {
-                homeController.userNameLabel.Text = ($"{User.CurrentUser.UserName}");
-            }
-            else
-            {
-                MessageBox.Show("There is no Current User");
-            }
+        }
+
+        private void showHome()
+        {
+            UpdateTotalBalance();
+            LoadUserControl(_homeController);
+            _homeController.AccountsController1.LoadAccountCards();
+            
+            ResetButtonColors();    
+            _homeController.userNameLabel.Text = User.CurrentUser?.UserName ?? "Guest";
+
         }
 
         // BASIC BUTTONS FUNCTIONALITY:
@@ -96,29 +85,24 @@ namespace BankSystem
         private void depositButton_Click(object sender, EventArgs e)
         {
             UpdateTotalBalance();
-            depositController = new ActionController(ActionType.Deposit);
-            LoadUserControl(depositController);
-
-            depositController.accountsController2.LoadAccountCards();
-            depositController.CancelClicked += ActionControl_CancelClicked;
+            DepositController = new ActionController(ActionType.Deposit);
+            LoadUserControl(DepositController);
+            DepositController.accountsController2.LoadAccountCards();
+            DepositController.CancelClicked += ActionControl_CancelClicked;
+            ResetButtonColors();
             depositButton.BorderColor = CustomColors.Orange;
-            withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
-            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
-
-
         }
 
         private void withdrawButton_Click(object sender, EventArgs e)
         {
             UpdateTotalBalance();
-            withdrawController = new ActionController(ActionType.Withdraw);
-            LoadUserControl(withdrawController);
-            withdrawController.accountsController2.LoadAccountCards();
-            withdrawController.CancelClicked += ActionControl_CancelClicked;
+            WithdrawController = new ActionController(ActionType.Withdraw);
+            LoadUserControl(WithdrawController);
+            WithdrawController.accountsController2.LoadAccountCards();
+            WithdrawController.CancelClicked += ActionControl_CancelClicked;
+            ResetButtonColors();
             withdrawButton.BorderColor = CustomColors.Orange;
-            depositButton.BorderColor = Color.FromArgb(255, 242, 204);
-            historyButton.BorderColor = Color.FromArgb(255, 242, 204);
-
+           
         }
 
         private void outButton_Click(object sender, EventArgs e)
@@ -126,8 +110,6 @@ namespace BankSystem
             Application.Exit();
 
         }
-
-        // EVENT HANDLERS:
         private void ActionControl_CancelClicked(object sender, EventArgs e)
         {
             showHome();
@@ -136,13 +118,11 @@ namespace BankSystem
         private void historyButton_Click(object sender, EventArgs e)
         {
             UpdateTotalBalance();
-            LoadUserControl(historyController);
-            historyController.InitializeHistoryLayout();
+            LoadUserControl(_historyController);
+            _historyController.InitializeHistoryLayout();
             depositButton.BorderColor = Color.FromArgb(255, 242, 204);
             withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
             historyButton.BorderColor = CustomColors.Orange;
-            
-
         }
     }
 }

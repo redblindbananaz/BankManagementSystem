@@ -1,15 +1,4 @@
 ﻿using BankSystem.Components;
-using BankSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 namespace BankSystem.Controllers
@@ -35,7 +24,7 @@ namespace BankSystem.Controllers
         public string AccountName
         {
             get => accountNameLabel.Text;
-            set => accountNameLabel.Text = value;   
+            set => accountNameLabel.Text = value;
         }
         public int AccountId { get; set; }
 
@@ -44,6 +33,7 @@ namespace BankSystem.Controllers
             get => decimal.Parse(balanceLabel.Text.Trim('$'));
             set => balanceLabel.Text = $"${value:F2}";
         }
+
         public Image? AccountImage
         {
             get => accountButton.Image;
@@ -52,23 +42,24 @@ namespace BankSystem.Controllers
 
         private void AccountCardController_Click(object sender, EventArgs e)
         {
-            AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs 
+
+            AccountCardClicked?.Invoke(this, new AccountCardClickedEventArgs
             (AccountName, Balance, AccountId));
-            
+
         }
-       
+
 
         public void SetSelectedStyle(bool isSelected)
         {
-            if (isSelected) 
+            if (isSelected)
             {
                 //Change style when selected
                 accountButton.BorderColor = CustomColors.Orange;
                 accountButton.BorderSize = 8;
                 accountNameLabel.ForeColor = CustomColors.Orange;
                 balanceLabel.ForeColor = CustomColors.Orange;
-            } 
-            else 
+            }
+            else
             {
                 //Reset to default style
                 accountButton.BorderColor = CustomColors.DeepBLue;
@@ -76,10 +67,11 @@ namespace BankSystem.Controllers
                 accountNameLabel.ForeColor = CustomColors.DeepBLue;
                 balanceLabel.ForeColor = CustomColors.DeepBLue;
             }
-      
+
         }
+
     }
-   
+
 
 
 }

@@ -86,9 +86,10 @@ namespace BankSystem.Controllers
             selectedAccountId = accountId;
             selectedBalance = balance;
         }
-
+        
         public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
         {
+            
             SetSelectedAccount(e.AccountName, e.AccountId, e.Balance);
 
             selectedMessageLabel.Text = $"Selected Account: {e.AccountName} - {e.AccountId} --> Press 'Select' to Continue";

@@ -33,6 +33,8 @@ namespace BankSystem.Controllers
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            
             customPanel = new CustomPanel();
             dataGridView1 = new DataGridView();
             accountsController1 = new AccountsController();
@@ -73,16 +75,27 @@ namespace BankSystem.Controllers
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.FromArgb(169, 196, 235);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.GridColor = Color.FromArgb(255, 242, 204);
-            dataGridView1.Location = new Point(30, 139);
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = CustomColors.DeepBLue;
+            dataGridViewCellStyle1.Font = new Font("Verdana", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = CustomColors.Orange;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            
+            dataGridView1.GridColor = CustomColors.LightBlue;
+            dataGridView1.Location = new Point(14, 139);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(595, 404);
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.Size = new Size(624, 379);
             dataGridView1.TabIndex = 6;
             dataGridView1.Visible = false;
-            dataGridView1.RowHeadersVisible = false;
             // 
             // accountsController1
             // 

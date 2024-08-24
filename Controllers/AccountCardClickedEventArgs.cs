@@ -12,11 +12,14 @@ namespace BankSystem.Controllers
         public decimal Balance { get; set; }
         public int AccountId { get; set; }
 
+       
+
         public AccountCardClickedEventArgs(string accountName, decimal balance, int accountId)
         {
             AccountName = accountName;
             Balance = balance;
             AccountId = accountId;
+
         }
     }
 }

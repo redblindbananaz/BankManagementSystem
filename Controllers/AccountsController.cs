@@ -15,14 +15,15 @@ namespace BankSystem.Controllers
 {
     public partial class AccountsController : UserControl
     {
+       
         public ActionController  DepositController { get; set; }
         public ActionController WithdrawController { get; set; }
 
-
         public AccountsController()
         {
+
             InitializeComponent();
-           
+        
         }
 
         public AccountCardController accountCard1 => accountCardController1;
@@ -105,11 +106,10 @@ namespace BankSystem.Controllers
                 _selectedAccountID = card.AccountId;
                 _selectedAccountBalance = card.Balance;
 
+
                 HighlightSelection(card);
                
-                OnAccountClickedInController(sender, e);
-
-                //MessageBox.Show($"Account {card.AccountName}- {card.Balance} - {card.AccountId} clicked");
+                //OnAccountClickedInController(sender, e);
 
             }
         }
