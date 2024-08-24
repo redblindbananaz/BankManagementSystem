@@ -11,6 +11,7 @@ namespace BankSystem
 
 
         BaseController homeController = new BaseController();
+        BaseController historyController = new BaseController();
 
 
         public ActionController depositController { get; private set; }
@@ -134,9 +135,13 @@ namespace BankSystem
 
         private void historyButton_Click(object sender, EventArgs e)
         {
+            UpdateTotalBalance();
+            LoadUserControl(historyController);
+            historyController.InitializeHistoryLayout();
             depositButton.BorderColor = Color.FromArgb(255, 242, 204);
             withdrawButton.BorderColor = Color.FromArgb(255, 242, 204);
             historyButton.BorderColor = CustomColors.Orange;
+            
 
         }
     }

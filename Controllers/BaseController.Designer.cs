@@ -33,9 +33,9 @@ namespace BankSystem.Controllers
         /// </summary>
         private void InitializeComponent()
         {
-            
             customPanel = new CustomPanel();
-            accountsController1 = new AccountsController( );
+            dataGridView1 = new DataGridView();
+            accountsController1 = new AccountsController();
             label3 = new Label();
             panel1 = new Panel();
             label2 = new Label();
@@ -43,6 +43,7 @@ namespace BankSystem.Controllers
             userNameLabel = new Label();
             label1 = new Label();
             customPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // customPanel
@@ -52,6 +53,7 @@ namespace BankSystem.Controllers
             customPanel.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel.BorderRadius = 24;
             customPanel.BorderSize = 8;
+            customPanel.Controls.Add(dataGridView1);
             customPanel.Controls.Add(accountsController1);
             customPanel.Controls.Add(label3);
             customPanel.Controls.Add(panel1);
@@ -64,12 +66,32 @@ namespace BankSystem.Controllers
             customPanel.Size = new Size(649, 637);
             customPanel.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // dataGridView1
             // 
-
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = true;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.BackgroundColor = Color.FromArgb(169, 196, 235);
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.GridColor = Color.FromArgb(255, 242, 204);
+            dataGridView1.Location = new Point(30, 139);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(595, 404);
+            dataGridView1.TabIndex = 6;
+            dataGridView1.Visible = false;
+            dataGridView1.RowHeadersVisible = false;
+            // 
+            // accountsController1
+            // 
+            accountsController1.DepositController = null;
             accountsController1.Location = new Point(25, 170);
+            accountsController1.Name = "accountsController1";
             accountsController1.Size = new Size(600, 266);
-           
+            accountsController1.TabIndex = 0;
+            accountsController1.WithdrawController = null;
             // 
             // label3
             // 
@@ -135,7 +157,6 @@ namespace BankSystem.Controllers
             // 
             BackColor = Color.FromArgb(0, 51, 102);
             Controls.Add(customPanel);
-            
             DoubleBuffered = true;
             MaximumSize = new Size(648, 637);
             MinimumSize = new Size(648, 637);
@@ -143,7 +164,7 @@ namespace BankSystem.Controllers
             Size = new Size(648, 637);
             customPanel.ResumeLayout(false);
             customPanel.PerformLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -158,5 +179,6 @@ namespace BankSystem.Controllers
         private Panel panel1;
        
         private AccountsController accountsController1;
+        private DataGridView dataGridView1;
     }
 }

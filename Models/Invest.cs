@@ -34,13 +34,25 @@ namespace BankSystem.Models
             return FailingFee;
         }
 
+        protected override string FormatTransaction(string type, decimal amount, bool isSuccessful)
+        {
+            string baseDetails = base.FormatTransaction(type, amount, isSuccessful);
+            if (!isSuccessful)
+            {
+                baseDetails += $" - {FailingFee}";
+            }
+            return baseDetails;
+        }
+
+
         public void AddInvestTransaction(string type, decimal amount, bool isSuccessful)
         {
-            base.AddTransaction(type, amount, isSuccessful);
+            string transactionDetails = FormatTransaction("Withdraw", amount, isSuccessful);
+            Transactions.Add(transactionDetails);
             if (!isSuccessful) 
             {
                 Balance -= FailingFee;
-                Transactions.Add($"- Fee: {FailingFee}");
+                
             }
         }
 
@@ -67,7 +79,7 @@ namespace BankSystem.Models
             decimal interest = Balance * InterestRate;
             Balance += interest;
             AddInvestTransaction("Interest Added", interest, true);
-            Transactions.Add($"- Interest: {interest}");
+            Transactions.Add($"- {interest}");
         }
     }
 }

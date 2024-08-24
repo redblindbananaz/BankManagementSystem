@@ -30,20 +30,31 @@ namespace BankSystem.Models
         }
 
         // Deposit method is Done in Base class.
+        protected override string FormatTransaction(string type, decimal amount, bool isSuccessful)
+        {
+            string baseDetails = base.FormatTransaction(type, amount, isSuccessful);
+            if (!isSuccessful)
+            {
+                baseDetails += $" - {FailingFee}";
+            }
+            return baseDetails;
+        }
 
         public override void Withdraw(decimal amount)
         {
-            if (Balance - amount >= -Overdraft)
+            bool isSuccessful = Balance - amount >= -Overdraft;
+            if (isSuccessful)
             {
                 Balance -= amount;
-                AddTransaction("Withdraw", amount, true);
+                
             }
             else
             {
                 Balance -= FailingFee;
-                AddTransaction("Withdraw", amount, false);
-                Transactions.Add($"- Fee: {FailingFee}");
+                
             }
+            string transactionDetails = FormatTransaction("Withdraw", amount, isSuccessful);
+            Transactions.Add(transactionDetails);
         }
 
         public void AddInterest()
@@ -53,7 +64,7 @@ namespace BankSystem.Models
                 decimal interest = Balance * InterestRate;
                 Balance += interest;
                 AddTransaction("Interest Added", interest, true);
-                Transactions.Add($"- Interest: {interest}");
+                Transactions.Add($"- {interest}");
             }
             // Failed interest as error OR balance is below 1000... Check if needed custom add transaction.
         }

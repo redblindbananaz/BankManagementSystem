@@ -11,7 +11,8 @@ namespace BankSystem.Models
     {
         // Static field to generate the unique account ID
         private static int _nextID = 12;
-        DateTime localDate = DateTime.Now;
+        string localDate = DateTime.Now.ToString("MM/dd/yy");
+        
 
         // Private Fields:
         private readonly int _accountID;
@@ -47,9 +48,15 @@ namespace BankSystem.Models
             
         }
 
+        protected virtual string FormatTransaction(string type, decimal amount, bool isSuccessful)
+        {
+            return $"{localDate}  - {_accountName} - {_accountID} - {type} - {amount} - {(isSuccessful ? "Approved" : "Declined")} - {_balance:C}";
+        }
+
         protected void AddTransaction(string type, decimal amount, bool isSuccessful)
         {
-            string TDetails = ($"{localDate}  - Account: {_accountName} - ID: {_accountID} - Operation: {type} - ${amount} - Status: {(isSuccessful ? "Approved": "Declined")} - Updated Balance: {_balance:C}");
+            
+            string TDetails = FormatTransaction(type, amount, isSuccessful);
 
             _transactions.Add(TDetails);
         }
