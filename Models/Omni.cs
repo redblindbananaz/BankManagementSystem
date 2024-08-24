@@ -57,14 +57,31 @@ namespace BankSystem.Models
             Transactions.Add(transactionDetails);
         }
 
-        public void AddInterest()
+        public decimal CalculateInterest(decimal balance, decimal interestRate)
         {
-            if (Balance > 1000)
+            if (balance > 1000)
             {
-                decimal interest = Balance * InterestRate;
+                return balance * interestRate;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public void AddInterest(decimal interest)
+        {
+            
+            if (interest > 0)
+            {
+                
                 Balance += interest;
                 AddTransaction("Interest Added", interest, true);
                 Transactions.Add($"- {interest}");
+            }
+            else
+            {
+                MessageBox.Show("Balance Must Be Over $1000 In Order To Earn Interest");
             }
             // Failed interest as error OR balance is below 1000... Check if needed custom add transaction.
         }

@@ -30,11 +30,6 @@ namespace BankSystem.Controllers
         public AccountCardController accountCard2 => accountCardController2;
         public AccountCardController accountCard3 => accountCardController3;
 
-        
-
-
-
-
         public void LoadAccountCards()
         {
             var currentUser = User.CurrentUser;
@@ -114,10 +109,11 @@ namespace BankSystem.Controllers
             }
         }
 
-        protected virtual void OnAccountClickedInController(object sender, AccountCardClickedEventArgs e)
+        protected virtual void OnHomeClickedInController(object sender, AccountCardClickedEventArgs e)
         {
             // This could be used to pass an event to another controller:
             // someController.HandlingthisCLicked(e);
+            
             
         }
 

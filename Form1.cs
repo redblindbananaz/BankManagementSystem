@@ -10,6 +10,7 @@ namespace BankSystem
         public AccountsController AccountsController1;// Account cards object instance for Home
         private BaseController _homeController = new BaseController();
         private BaseController _historyController = new BaseController();
+        private DetailAccountController _detailController = new DetailAccountController();
         public ActionController DepositController { get; private set; }
         public ActionController WithdrawController { get; private set; }
 
@@ -69,9 +70,22 @@ namespace BankSystem
             UpdateTotalBalance();
             LoadUserControl(_homeController);
             _homeController.AccountsController1.LoadAccountCards();
-            
+            _homeController.AccountsController1.accountCard1.AccountCardClicked += OnHomeAccountCard_Clicked;
+            _homeController.AccountsController1.accountCard2.AccountCardClicked += OnHomeAccountCard_Clicked;
+            _homeController.AccountsController1.accountCard3.AccountCardClicked += OnHomeAccountCard_Clicked;
+
             ResetButtonColors();    
             _homeController.userNameLabel.Text = User.CurrentUser?.UserName ?? "Guest";
+
+        }
+
+        private void OnHomeAccountCard_Clicked(object sender, AccountCardClickedEventArgs e)
+        {
+            UpdateTotalBalance();
+            LoadUserControl(_detailController);
+
+            _detailController.InitializeDetailAccountLayout(e.AccountName, e.Balance, e.AccountId);
+            _detailController.CancelClicked += ActionControl_CancelClicked;
 
         }
 

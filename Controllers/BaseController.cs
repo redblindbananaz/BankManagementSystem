@@ -22,7 +22,8 @@ namespace BankSystem.Controllers
         public BaseController()
         {
             InitializeComponent();
-            
+
+
         }
 
         public void InitializeHistoryLayout()

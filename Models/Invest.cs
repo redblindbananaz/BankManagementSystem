@@ -74,9 +74,15 @@ namespace BankSystem.Models
             AddInvestTransaction("Withdraw", amount, true);
         }
 
-        public void AddInterest()
+        public decimal CalculateInterest(decimal balance, decimal interestRate)
         {
-            decimal interest = Balance * InterestRate;
+            return balance* interestRate;
+
+        }
+
+        public void AddInterest(decimal interest)
+        {
+            
             Balance += interest;
             AddInvestTransaction("Interest Added", interest, true);
             Transactions.Add($"- {interest}");
