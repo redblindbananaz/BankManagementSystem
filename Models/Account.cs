@@ -62,23 +62,26 @@ namespace BankSystem.Models
         }
         
 
-        public void Deposit(decimal amount)
+        public bool Deposit(decimal amount)
         {
             // NEED UI Implementation of Validation for performing a deposit with a try, catch and message box.
+            bool success = true;
             if (amount <= 0)
             {
-                throw new ArgumentException("Deposit amount must be greater than 0");
+                MessageBox.Show("Amount must be greater than 0");
+                return false;
             }
 
             Balance += amount;
 
             AddTransaction("Deposit", amount, true);
+            return success;
 
             // Update Balance Event handler? HERE?
             
         }
 
-        public abstract void Withdraw(decimal amount);
+        public abstract bool Withdraw(decimal amount);
       
     }
 }

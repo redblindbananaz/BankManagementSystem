@@ -78,7 +78,7 @@ namespace BankSystem.Controllers
             Controls.Add(selectedMessageLabel);
             selectedMessageLabel.BringToFront();
         }
-       
+
 
         public void SetSelectedAccount(string accountName, int accountId, decimal balance)
         {
@@ -86,10 +86,10 @@ namespace BankSystem.Controllers
             selectedAccountId = accountId;
             selectedBalance = balance;
         }
-        
+
         public void OnAccountClicked(object sender, AccountCardClickedEventArgs e)
         {
-            
+
             SetSelectedAccount(e.AccountName, e.AccountId, e.Balance);
 
             selectedMessageLabel.Text = $"Selected Account: {e.AccountName} - {e.AccountId} --> Press 'Select' to Continue";
@@ -128,7 +128,7 @@ namespace BankSystem.Controllers
                 }
                 else if (currentAction == ActionType.Withdraw)
                 {
-                   // MessageBox.Show($"Withdraw action for {selectedAccountName}");
+                    // MessageBox.Show($"Withdraw action for {selectedAccountName}");
                 }
                 else
                 {
@@ -145,7 +145,7 @@ namespace BankSystem.Controllers
         {
             CustomButton? clickedButton = sender as CustomButton;
 
-            if (clickedButton != null) 
+            if (clickedButton != null)
             {
                 textBox1.Text = string.Empty;
                 ValidationErrorLabel.Visible = false;
@@ -189,7 +189,7 @@ namespace BankSystem.Controllers
             {
                 ResetQuickCashButton();
                 ValidationErrorLabel.Visible = false;
-                
+
                 if (amount <= 0)
                 {
                     ValidationErrorLabel.Visible = true;
@@ -197,15 +197,15 @@ namespace BankSystem.Controllers
                     textBox1.ForeColor = Color.Red;
                     return;
                 }
-                if (amount < 5) 
-                { 
+                if (amount < 5)
+                {
                     ValidationErrorLabel.Visible = true;
                     ValidationErrorLabel.Text = "The Minimum Amount is $5";
                     textBox1.ForeColor = Color.Red;
                     return;
                 }
-                if (amount % 5 != 0) 
-                { 
+                if (amount % 5 != 0)
+                {
                     ValidationErrorLabel.Visible = true;
                     ValidationErrorLabel.Text = "The  Amount Must Be a Multiple of 5 ";
                     textBox1.ForeColor = Color.Red;
@@ -225,49 +225,100 @@ namespace BankSystem.Controllers
                 confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - Custom -{selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
                 ConfirmBtn.BorderColor = CustomColors.Orange;
 
-                
+
             }
             else
             {
+                textBox1.ForeColor = Color.Red;
                 confirmationMessageActionLabel.Visible = true;
                 confirmationMessageActionLabel.Text = "Please Enter a Valid Amount";
             }
         }
 
-        
+
 
         private void ConfirmBtn_Click(object sender, EventArgs e)
         {
             ResetQuickCashButton();
             textBox1.Text = string.Empty;
+            FreezeButton();
 
-            // Need to implement deposit as all same for all accounts.
-            //MessageBox.Show($"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}");
+            var account = User.CurrentUser.Accounts.FirstOrDefault(a => a.AccountID == selectedAccountId);
+            if (selectedAmount > 0)
+            {
+                if (account == null)
+                {
+                    MessageBox.Show("Account not found");
+                    return;
+                }
+                if (currentAction == ActionType.Deposit)
+                {
 
-            var account = User.CurrentUser.Accounts.FirstOrDefault(a=> a.AccountID == selectedAccountId);
-            if (account == null)
-            {
-                MessageBox.Show("Account not found");
-                return;
-            }
-            if (currentAction == ActionType.Deposit)
-            {
-                account.Deposit(selectedAmount);
-                // This below is to return Home, Not Cancel
-                CancelClicked?.Invoke(this, EventArgs.Empty);
+                    bool success = account.Deposit(selectedAmount);
+                    if (success)
+                    {
+                        confirmationMessageActionLabel.Visible = true;
+                        confirmationMessageActionLabel.Text = $"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+                        ConfirmBtn.Visible = false;
+                        SuccessBtn.Visible = true;
+                        cancelLabel.Text = "Return Home";
+                        
+                    }
+                    else
+                    {
+                        DeclinedSet();
 
-            }
-            else if (currentAction == ActionType.Withdraw)
-            {
-                account.Withdraw(selectedAmount);
-                // This below is to return Home, Not Cancel
-                CancelClicked?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+                else if (currentAction == ActionType.Withdraw)
+                {
+                    bool success = account.Withdraw(selectedAmount);
+                    if (success)
+                    {
+                        confirmationMessageActionLabel.Visible = true;
+                        confirmationMessageActionLabel.Text = $"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+                        confirmationMessageActionLabel.ForeColor = CustomColors.Creamn;
+                        ConfirmBtn.Visible = false;
+                        SuccessBtn.Visible = true;
+                        cancelLabel.Text = "Return Home";
+             
+                    }
+                    else
+                    {
+                        DeclinedSet();
+                    }
+
+                }
+                
             }
             else
             {
-                MessageBox.Show("Sorry Error System...");
-                return;
+                confirmationMessageActionLabel.Text = "Please Enter a Valid Amount";
             }
+        }
+
+        private void FreezeButton()
+        {
+            cash50Btn.Cursor = Cursors.No;
+            cash100Btn.Cursor = Cursors.No;
+            cash200Btn.Cursor = Cursors.No;
+            cash500Btn.Cursor = Cursors.No;
+            EnterAmountBtn.Cursor = Cursors.No;
+            textBox1.Cursor = Cursors.No;
+
+        }
+
+
+        private void DeclinedSet()
+        {
+           
+            confirmationMessageActionLabel.Visible = true;
+            confirmationMessageActionLabel.Text = $"Transaction Failed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+            confirmationMessageActionLabel.ForeColor = CustomColors.Redish;
+            ConfirmBtn.Visible = false;
+            DeclinedBtn.Visible = true;
+            cancelLabel.Text = "Return Home";
+
         }
     }
 }

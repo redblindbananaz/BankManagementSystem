@@ -40,21 +40,29 @@ namespace BankSystem.Models
             return baseDetails;
         }
 
-        public override void Withdraw(decimal amount)
+        public override bool Withdraw(decimal amount)
         {
+            bool success;
             bool isSuccessful = Balance - amount >= -Overdraft;
             if (isSuccessful)
             {
                 Balance -= amount;
+                success = true;
+               
                 
             }
             else
             {
                 Balance -= FailingFee;
+                success = false;
+               
+                
                 
             }
             string transactionDetails = FormatTransaction("Withdraw", amount, isSuccessful);
             Transactions.Add(transactionDetails);
+            return success;
+           
         }
 
         public static decimal CalculateInterest(decimal balance)
@@ -69,8 +77,9 @@ namespace BankSystem.Models
             }
         }
 
-        public void AddInterest(decimal interest)
+        public bool AddInterest(decimal interest)
         {
+            bool success = true;
             
             if (interest > 0)
             {
@@ -78,10 +87,12 @@ namespace BankSystem.Models
                 Balance += interest;
                 AddTransaction("Interest Added", interest, true);
                 Transactions.Add($"- {interest}");
+                return success;
             }
             else
             {
                 MessageBox.Show("Balance Must Be Over $1000 In Order To Earn Interest");
+                return false;
             }
             // Failed interest as error OR balance is below 1000... Check if needed custom add transaction.
         }

@@ -46,6 +46,7 @@ namespace BankSystem.Controllers
 
         private void SetupAccountCard(AccountCardController accountcard, Account account)
         {
+            ResetAllHighlight();
             //Unsubscribe to the AccountCardClicked event to solve multiple time click on ok messagebox tests:
             accountcard.AccountCardClicked -= AccountCard_Clicked;
 
@@ -107,6 +108,7 @@ namespace BankSystem.Controllers
                 //OnAccountClickedInController(sender, e);
 
             }
+            
         }
 
         protected virtual void OnHomeClickedInController(object sender, AccountCardClickedEventArgs e)

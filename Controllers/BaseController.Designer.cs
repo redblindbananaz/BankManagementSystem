@@ -34,7 +34,6 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            
             customPanel = new CustomPanel();
             dataGridView1 = new DataGridView();
             accountsController1 = new AccountsController();
@@ -88,12 +87,11 @@ namespace BankSystem.Controllers
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            
-            dataGridView1.GridColor = CustomColors.LightBlue;
-            dataGridView1.Location = new Point(14, 139);
+            dataGridView1.GridColor = Color.FromArgb(169, 196, 235);
+            dataGridView1.Location = new Point(14, 130);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(624, 379);
+            dataGridView1.Size = new Size(624, 388);
             dataGridView1.TabIndex = 6;
             dataGridView1.Visible = false;
             // 
@@ -111,38 +109,39 @@ namespace BankSystem.Controllers
             label3.AutoSize = true;
             label3.BackColor = Color.FromArgb(169, 196, 235);
             label3.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(255, 242, 204);
-            label3.Location = new Point(34, 439);
+            label3.ForeColor = Color.FromArgb(0, 51, 102);
+            label3.Location = new Point(34, 480);
             label3.Name = "label3";
-            label3.Size = new Size(155, 18);
+            label3.Size = new Size(329, 18);
             label3.TabIndex = 5;
-            label3.Text = "Last Transactions";
+            label3.Text = "* Click On A Card For More Information";
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(255, 242, 204);
+            panel1.BackColor = Color.FromArgb(0, 51, 102);
             panel1.Location = new Point(34, 460);
             panel1.Name = "panel1";
             panel1.Size = new Size(580, 4);
             panel1.TabIndex = 4;
+            panel1.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Verdana", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(255, 242, 204);
-            label2.Location = new Point(34, 139);
+            label2.Font = new Font("Verdana", 14F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(0, 51, 102);
+            label2.Location = new Point(34, 130);
             label2.Name = "label2";
-            label2.Size = new Size(83, 18);
+            label2.Size = new Size(382, 23);
             label2.TabIndex = 3;
-            label2.Text = "Accounts";
+            label2.Text = "Account Detail And Interest Calculation";
             // 
             // seperationLine
             // 
-            seperationLine.BackColor = Color.FromArgb(255, 242, 204);
+            seperationLine.BackColor = Color.FromArgb(0, 51, 102);
             seperationLine.Location = new Point(34, 160);
             seperationLine.Name = "seperationLine";
-            seperationLine.Size = new Size(580, 4);
+            seperationLine.Size = new Size(580, 8);
             seperationLine.TabIndex = 2;
             // 
             // userNameLabel

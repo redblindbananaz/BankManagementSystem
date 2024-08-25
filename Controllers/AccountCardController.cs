@@ -51,6 +51,8 @@ namespace BankSystem.Controllers
 
         public void SetSelectedStyle(bool isSelected)
         {
+            ResetSelectedStyle();
+
             if (isSelected)
             {
                 //Change style when selected
@@ -61,12 +63,18 @@ namespace BankSystem.Controllers
             }
             else
             {
-                //Reset to default style
-                accountButton.BorderColor = CustomColors.DeepBLue;
-                accountButton.BorderSize = 6;
-                accountNameLabel.ForeColor = CustomColors.DeepBLue;
-                balanceLabel.ForeColor = CustomColors.DeepBLue;
+                ResetSelectedStyle();
             }
+
+        }
+
+        public void ResetSelectedStyle()
+        {
+            //Reset to default style
+            accountButton.BorderColor = CustomColors.DeepBLue;
+            accountButton.BorderSize = 6;
+            accountNameLabel.ForeColor = CustomColors.DeepBLue;
+            balanceLabel.ForeColor = CustomColors.DeepBLue;
 
         }
 

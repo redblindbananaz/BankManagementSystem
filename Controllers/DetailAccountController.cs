@@ -69,6 +69,8 @@ namespace BankSystem.Controllers
             YesBtn.Visible = false;
             interestquestionlabel.Visible = false;
             InterestLabel.Visible = false;
+            ConfirmBtn.Enabled = true;
+            ConfirmBtn.Cursor = Cursors.Hand;
         }
 
         private void ConfirmBtn_Click(object sender, EventArgs e)
@@ -112,6 +114,7 @@ namespace BankSystem.Controllers
             interestquestionlabel.Text = message;
             YesBtn.Visible = true;
             NoBtn.Visible = true;
+           
         }
 
         private void ShowError(string Errormessage)
@@ -121,47 +124,51 @@ namespace BankSystem.Controllers
             YesBtn.Visible = false;
             NoBtn.Visible = true;
             NoBtn.Text = "Error, Click Here To Return Home";
+          
         }
 
 
         private void YesBtn_Click(object sender, EventArgs e)
         {
-            if (YesBtn.Visible == true)
+            FreezeButtons();
+           
+            if (_currentAccount == "Invest")
             {
-                if (_currentAccount == "Invest")
+                Invest investAccount = User.CurrentUser.Accounts.OfType<Invest>().FirstOrDefault();
+                if (investAccount != null) 
                 {
-                    Invest investAccount = User.CurrentUser.Accounts.OfType<Invest>().FirstOrDefault();
-                    if (investAccount != null) 
-                    {
-                        decimal investInterest = Invest.CalculateInterest(_balance);
-                        investAccount.AddInterest(investInterest);
-                        ShowError("Interest Added Successfully");
-                        YesBtn.Visible = false;
-                        NoBtn.Text = "Return Home";
-                    }
+                    decimal investInterest = Invest.CalculateInterest(_balance);
+                    investAccount.AddInterest(investInterest);
+                    ShowError("Interest Added Successfully");
+                    YesBtn.Visible = false;
+                    NoBtn.Text = "Return Home";
+                        
+                }
                     
            
-                }
-                else if (_currentAccount == "Omni")
+            }
+            else if (_currentAccount == "Omni")
+            {
+                Omni omniAccount = User.CurrentUser.Accounts.OfType<Omni>().FirstOrDefault();
+                if (omniAccount != null)
                 {
-                    Omni omniAccount = User.CurrentUser.Accounts.OfType<Omni>().FirstOrDefault();
-                    if (omniAccount != null)
-                    {
-                        decimal OmniInterest = Omni.CalculateInterest(_balance);
-                        omniAccount.AddInterest(OmniInterest);
-                        ShowError("Interest Added Successfully");
-                        YesBtn.Visible = false;
-                        NoBtn.Text = "Return Home";
+                    decimal OmniInterest = Omni.CalculateInterest(_balance);
+                    omniAccount.AddInterest(OmniInterest);
+                    ShowError("Interest Added Successfully");
+                    YesBtn.Visible = false;
+                    NoBtn.Text = "Return Home";
 
-                    }
                 }
             }
+                
+        }
 
-            else
-            {
-                CancelClicked?.Invoke(this, EventArgs.Empty);
-            }   
-
+           
+        private void FreezeButtons()
+        {
+            ConfirmBtn.Cursor = Cursors.No;
+            ConfirmBtn.Enabled = false;
+            InterestLabel.Visible = false;
         }
 
         private void NoBtn_Click(object sender, EventArgs e)

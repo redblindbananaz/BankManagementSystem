@@ -33,15 +33,17 @@ namespace BankSystem.Models
         // Deposit method is Done in Base class.
 
         // Same UI Implementation as Account Base Class (Check Comments)
-        public override void Withdraw(decimal amount)
+        public override bool Withdraw(decimal amount)
         {
+            bool success = true;
             if (amount <= 0 || amount > Balance)
             {
                 MessageBox.Show("Withdraw amount must be greater than 0 and smaller than the current Balance");
-                return;
+                
             }
             Balance -= amount;
             AddTransaction("Withdraw", amount, true);
+            return success;
         }
     }
 }

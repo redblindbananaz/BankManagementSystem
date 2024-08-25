@@ -59,19 +59,22 @@ namespace BankSystem.Models
 
         // Deposit method is Done in Base class.
 
-        public override void Withdraw(decimal amount)
+        public override bool Withdraw(decimal amount)
         {
+            bool success = true;
             if (amount <= 0) // Just not penalities for withdrawing 0 :)
             {
                 throw new ArgumentException("Withdraw amount must be greater than 0");
+                return false;
             }
             if (Balance - amount < 0)
             {
                 AddInvestTransaction("Withdraw", amount, false);
-                return;
+                return false;
             }
             Balance -= amount;
             AddInvestTransaction("Withdraw", amount, true);
+            return success;
         }
 
         public static decimal CalculateInterest(decimal balance)
@@ -80,12 +83,13 @@ namespace BankSystem.Models
 
         }
 
-        public void AddInterest(decimal interest)
+        public bool AddInterest(decimal interest)
         {
-            
+            bool success = true;
             Balance += interest;
             AddInvestTransaction("Interest Added", interest, true);
             Transactions.Add($"- {interest}");
+            return success;
         }
     }
 }
