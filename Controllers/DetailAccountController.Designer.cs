@@ -111,6 +111,7 @@ namespace BankSystem.Controllers
             // 
             // NoBtn
             // 
+            NoBtn.Cursor = Cursors.Hand;
             NoBtn.Font = new Font("Verdana", 12F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
             NoBtn.ForeColor = Color.FromArgb(0, 51, 102);
             NoBtn.Location = new Point(358, 268);
@@ -208,9 +209,10 @@ namespace BankSystem.Controllers
             customPanel1.BorderRadius = 24;
             customPanel1.BorderSize = 4;
             customPanel1.Controls.Add(InterestLabel);
-            customPanel1.Location = new Point(75, 199);
+            customPanel1.Cursor = Cursors.No;
+            customPanel1.Location = new Point(37, 199);
             customPanel1.Name = "customPanel1";
-            customPanel1.Size = new Size(122, 59);
+            customPanel1.Size = new Size(208, 59);
             customPanel1.TabIndex = 11;
             // 
             // InterestLabel
@@ -219,7 +221,7 @@ namespace BankSystem.Controllers
             InterestLabel.ForeColor = Color.FromArgb(0, 51, 102);
             InterestLabel.Location = new Point(16, 17);
             InterestLabel.Name = "InterestLabel";
-            InterestLabel.Size = new Size(89, 23);
+            InterestLabel.Size = new Size(176, 23);
             InterestLabel.TabIndex = 10;
             InterestLabel.Text = "$ 15";
             InterestLabel.TextAlign = ContentAlignment.MiddleCenter;

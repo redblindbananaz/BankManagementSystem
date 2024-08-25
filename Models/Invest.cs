@@ -18,7 +18,7 @@ namespace BankSystem.Models
 
     public class Invest: Account
     {
-        private const decimal InterestRate = 0.05m;
+        public const decimal InterestRate = 0.05m;
         private const decimal FailingFee = 10m;
 
         public Invest(decimal balance) : base("Invest", balance)
@@ -74,9 +74,9 @@ namespace BankSystem.Models
             AddInvestTransaction("Withdraw", amount, true);
         }
 
-        public decimal CalculateInterest(decimal balance, decimal interestRate)
+        public static decimal CalculateInterest(decimal balance)
         {
-            return balance* interestRate;
+            return balance* InterestRate;
 
         }
 

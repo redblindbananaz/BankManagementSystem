@@ -17,7 +17,7 @@ namespace BankSystem.Models
     internal class Omni : Account
     {
 
-        private const decimal InterestRate = 0.04m; // 4% Interest Rate
+        public const decimal InterestRate = 0.04m; // 4% Interest Rate
         private const decimal Overdraft = 100m; // Overdraft of $100
         private const decimal FailingFee = 5m; // Fee for Failed Transactions
 
@@ -57,11 +57,11 @@ namespace BankSystem.Models
             Transactions.Add(transactionDetails);
         }
 
-        public decimal CalculateInterest(decimal balance, decimal interestRate)
+        public static decimal CalculateInterest(decimal balance)
         {
             if (balance > 1000)
             {
-                return balance * interestRate;
+                return balance * InterestRate;
             }
             else
             {

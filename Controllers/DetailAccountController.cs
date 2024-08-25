@@ -1,10 +1,12 @@
 ﻿using BankSystem.Components;
+using BankSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +16,10 @@ namespace BankSystem.Controllers
     public partial class DetailAccountController : UserControl
     {
         public event EventHandler CancelClicked;
+
+        private decimal _balance;
+        private string _currentAccount;
+        private int _id;
         public DetailAccountController()
         {
             InitializeComponent();
@@ -21,6 +27,10 @@ namespace BankSystem.Controllers
 
         public void InitializeDetailAccountLayout(string account, decimal balance, int id)
         {
+            _balance = balance;
+            _currentAccount = account;
+            _id = id;
+
             string Efeatures = "- No Interest Rates\n- No Overdraft\n- No Transaction Fees";
             string Ifeatures = "- Variable Interest Rates\n- No Overdraft\n- Failed Transaction Fees\n- Calculate And Add Interest";
             string Ofeatures = "- Interest Rates Over $1000 Balance\n- Overdraft Available\n- Failed Transaction Fees\n- Calculate And Add Interest";
@@ -38,6 +48,11 @@ namespace BankSystem.Controllers
                 AddingInterestLayout();
                 featuresLabel.Text = account == "Invest" ? Ifeatures : Ofeatures;
                 ImagePanel.BackgroundImage = account == "Invest" ? InvestImage : OmniImage;
+                label2.Text =$" Your Balance: $ {balance}";
+                InterestrateLabel.Text = account == "Invest" ? $"Your Rate:{Invest.InterestRate}" : $"Your Rate:{Omni.InterestRate}";
+
+
+
             }
             else
             {
@@ -78,10 +93,18 @@ namespace BankSystem.Controllers
             // Calculate the interest rates.
             NoBtn.Visible = true;
             YesBtn.Visible = true;
-            interestquestionlabel.Visible = true;
             InterestLabel.Visible = true;
+            if (_currentAccount == "Invest")
+            {
+                decimal investInterest = Invest.CalculateInterest(_balance);
+                InterestLabel.Text = $"${investInterest}";
 
-            MessageBox.Show("Interest has been added to your account");
+            }
+            else
+            {
+                decimal OmniInterest = Omni.CalculateInterest(_balance);
+                InterestLabel.Text = $"${OmniInterest}";
+            }
 
         }
 
