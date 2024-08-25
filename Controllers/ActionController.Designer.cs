@@ -31,6 +31,7 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             actionPanel = new CustomPanel();
+            SuccessBtn = new CustomButton();
             confirmationMessageActionLabel = new Label();
             CurrentBalanceLabel = new Label();
             accountNameLabel = new Label();
@@ -78,6 +79,24 @@ namespace BankSystem.Controllers
             actionPanel.Name = "actionPanel";
             actionPanel.Size = new Size(649, 637);
             actionPanel.TabIndex = 0;
+            // 
+            // SuccessBtn
+            // 
+            SuccessBtn.BackColor = Color.White;
+            SuccessBtn.BorderColor = Color.Black;
+            SuccessBtn.BorderRadius = 24;
+            SuccessBtn.BorderSize = 8;
+            SuccessBtn.Cursor = Cursors.Hand;
+            SuccessBtn.FlatStyle = FlatStyle.Flat;
+            SuccessBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SuccessBtn.ForeColor = Color.Blue;
+            SuccessBtn.Location = new Point(124, 259);
+            SuccessBtn.Name = "SuccessBtn";
+            SuccessBtn.Size = new Size(240, 60);
+            SuccessBtn.TabIndex = 9;
+            SuccessBtn.Text = "Success!";
+            SuccessBtn.UseVisualStyleBackColor = false;
+            SuccessBtn.Visible = false;
             // 
             // confirmationMessageActionLabel
             // 
@@ -154,6 +173,7 @@ namespace BankSystem.Controllers
             selectButton.BorderColor = Color.FromArgb(255, 242, 204);
             selectButton.BorderRadius = 24;
             selectButton.BorderSize = 8;
+            selectButton.Cursor = Cursors.Hand;
             selectButton.FlatStyle = FlatStyle.Flat;
             selectButton.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             selectButton.ForeColor = Color.FromArgb(0, 51, 102);
@@ -163,7 +183,6 @@ namespace BankSystem.Controllers
             selectButton.TabIndex = 4;
             selectButton.Text = "Select";
             selectButton.UseVisualStyleBackColor = false;
-            selectButton.Cursor = Cursors.Hand;
             selectButton.Click += selectButton_Click;
             // 
             // customPanel1
@@ -193,6 +212,7 @@ namespace BankSystem.Controllers
             // presentationPanel
             // 
             presentationPanel.BackColor = Color.FromArgb(169, 196, 235);
+            presentationPanel.Controls.Add(SuccessBtn);
             presentationPanel.Controls.Add(ValidationErrorLabel);
             presentationPanel.Controls.Add(label2);
             presentationPanel.Controls.Add(textBox1);
@@ -242,7 +262,7 @@ namespace BankSystem.Controllers
             textBox1.Size = new Size(121, 33);
             textBox1.TabIndex = 8;
             textBox1.TextAlign = HorizontalAlignment.Center;
-            textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.Enter += textBox1_Enter;
             // 
             // EnterAmountBtn
             // 
@@ -436,5 +456,6 @@ namespace BankSystem.Controllers
         private Label accountNameLabel;
         private Label confirmationMessageActionLabel;
         private Label ValidationErrorLabel;
+        private CustomButton SuccessBtn;
     }
 }

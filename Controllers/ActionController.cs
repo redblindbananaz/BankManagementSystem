@@ -152,6 +152,9 @@ namespace BankSystem.Controllers
                 ResetQuickCashButton();
 
                 clickedButton.BorderColor = CustomColors.Orange;
+                EnterAmountBtn.BorderColor = CustomColors.Creamn;
+                EnterAmountBtn.ForeColor = CustomColors.LightBlue;
+                ConfirmBtn.BorderColor = CustomColors.Orange;
 
                 selectedAmount = Convert.ToDecimal(clickedButton.Tag);
                 confirmationMessageActionLabel.Visible = true;
@@ -170,11 +173,13 @@ namespace BankSystem.Controllers
         }
 
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_Enter(object sender, EventArgs e)
         {
             ResetQuickCashButton();
             textBox1.ForeColor = CustomColors.DeepBLue;
             ValidationErrorLabel.Visible = false;
+            EnterAmountBtn.BorderColor = CustomColors.Orange;
+            EnterAmountBtn.ForeColor = CustomColors.Orange;
 
         }
 
@@ -218,6 +223,8 @@ namespace BankSystem.Controllers
                 selectedAmount = amount;
                 confirmationMessageActionLabel.Visible = true;
                 confirmationMessageActionLabel.Text = $"Press Confirm to continue {currentAction} - Custom -{selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+                ConfirmBtn.BorderColor = CustomColors.Orange;
+
                 
             }
             else

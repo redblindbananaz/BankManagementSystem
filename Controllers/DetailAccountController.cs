@@ -130,21 +130,30 @@ namespace BankSystem.Controllers
             {
                 if (_currentAccount == "Invest")
                 {
-                    decimal investInterest = Invest.CalculateInterest(_balance);
+                    Invest investAccount = User.CurrentUser.Accounts.OfType<Invest>().FirstOrDefault();
+                    if (investAccount != null) 
+                    {
+                        decimal investInterest = Invest.CalculateInterest(_balance);
+                        investAccount.AddInterest(investInterest);
+                        ShowError("Interest Added Successfully");
+                        YesBtn.Visible = false;
+                        NoBtn.Text = "Return Home";
+                    }
                     
-                   Invest.AddInterest(investInterest);
-                    ShowError("Interest Added Successfully");
-                    YesBtn.Visible = false;
-                    NoBtn.Text = "Return Home";
+           
                 }
                 else if (_currentAccount == "Omni")
                 {
-                    decimal OmniInterest = Omni.CalculateInterest(_balance);
-                    Omni omni = new Omni(_currentAccount, _balance);
-                    omni.AddInterest(OmniInterest);
-                    ShowError("Interest Added Successfully");
-                    YesBtn.Visible = false;
-                    NoBtn.Text = "Return Home";
+                    Omni omniAccount = User.CurrentUser.Accounts.OfType<Omni>().FirstOrDefault();
+                    if (omniAccount != null)
+                    {
+                        decimal OmniInterest = Omni.CalculateInterest(_balance);
+                        omniAccount.AddInterest(OmniInterest);
+                        ShowError("Interest Added Successfully");
+                        YesBtn.Visible = false;
+                        NoBtn.Text = "Return Home";
+
+                    }
                 }
             }
 
