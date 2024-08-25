@@ -1,15 +1,4 @@
-﻿using BankSystem.Components;
-using BankSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BankSystem.Models;
 
 namespace BankSystem.Controllers
 {
@@ -40,6 +29,8 @@ namespace BankSystem.Controllers
             var InvestImage = ResizeImage(Properties.Resources.Invest, 200, 200);
             var OmniImage = ResizeImage(Properties.Resources.Omni, 200, 200);
 
+            NoBtn.Text = " No, Thank You";
+
             AccountdetailNameLabel.Text = $"Your {account} Account";
 
 
@@ -48,11 +39,8 @@ namespace BankSystem.Controllers
                 AddingInterestLayout();
                 featuresLabel.Text = account == "Invest" ? Ifeatures : Ofeatures;
                 ImagePanel.BackgroundImage = account == "Invest" ? InvestImage : OmniImage;
-                label2.Text =$" Your Balance: $ {balance}";
+                label2.Text = $" Your Balance: $ {balance}";
                 InterestrateLabel.Text = account == "Invest" ? $"Your Rate:{Invest.InterestRate}" : $"Your Rate:{Omni.InterestRate}";
-
-
-
             }
             else
             {
@@ -61,8 +49,6 @@ namespace BankSystem.Controllers
                 homeBtn.Visible = true;
                 CompleteInterestPanel.Visible = false;
             }
-
-
 
         }
         public Image ResizeImage(Image image, int width, int height)
@@ -74,8 +60,6 @@ namespace BankSystem.Controllers
             }
             return resizedImage;
         }
-
-
 
         public void AddingInterestLayout()
         {
@@ -89,29 +73,85 @@ namespace BankSystem.Controllers
 
         private void ConfirmBtn_Click(object sender, EventArgs e)
         {
+            if (_balance <= 0)
+            {
+                ShowError("You Have No Balance To Calculate Interest");
+                return;
+            }
 
-            // Calculate the interest rates.
-            NoBtn.Visible = true;
-            YesBtn.Visible = true;
-            InterestLabel.Visible = true;
             if (_currentAccount == "Invest")
             {
                 decimal investInterest = Invest.CalculateInterest(_balance);
-                InterestLabel.Text = $"${investInterest}";
+                InterestLabel.Visible = true;
+                InterestLabel.Text = $"${investInterest:F2}";
+                ShowInterestOptions($"Would you like to add this interest of {investInterest:F2} to your account {_currentAccount}?");
 
             }
-            else
+            else if (_currentAccount == "Omni")
             {
-                decimal OmniInterest = Omni.CalculateInterest(_balance);
-                InterestLabel.Text = $"${OmniInterest}";
+                if (_balance < 1000)
+                {
+                    ShowError("You Need A Balance Of $1000 To Calculate Interest");
+
+                }
+                else
+                {
+                    decimal OmniInterest = Omni.CalculateInterest(_balance);
+                    InterestLabel.Visible = true;
+                    InterestLabel.Text = $"${OmniInterest:F2}";
+                    ShowInterestOptions($"Would you like to add this interest of {OmniInterest:F2} to your account {_currentAccount}?");
+                }
+
             }
 
+        }
+
+        private void ShowInterestOptions(string message)
+        {
+            interestquestionlabel.Visible = true;
+            interestquestionlabel.Text = message;
+            YesBtn.Visible = true;
+            NoBtn.Visible = true;
+        }
+
+        private void ShowError(string Errormessage)
+        {
+            interestquestionlabel.Visible = true;
+            interestquestionlabel.Text = Errormessage;
+            YesBtn.Visible = false;
+            NoBtn.Visible = true;
+            NoBtn.Text = "Error, Click Here To Return Home";
         }
 
 
         private void YesBtn_Click(object sender, EventArgs e)
         {
-            // ADd the interest to The Account:
+            if (YesBtn.Visible == true)
+            {
+                if (_currentAccount == "Invest")
+                {
+                    decimal investInterest = Invest.CalculateInterest(_balance);
+                    
+                   Invest.AddInterest(investInterest);
+                    ShowError("Interest Added Successfully");
+                    YesBtn.Visible = false;
+                    NoBtn.Text = "Return Home";
+                }
+                else if (_currentAccount == "Omni")
+                {
+                    decimal OmniInterest = Omni.CalculateInterest(_balance);
+                    Omni omni = new Omni(_currentAccount, _balance);
+                    omni.AddInterest(OmniInterest);
+                    ShowError("Interest Added Successfully");
+                    YesBtn.Visible = false;
+                    NoBtn.Text = "Return Home";
+                }
+            }
+
+            else
+            {
+                CancelClicked?.Invoke(this, EventArgs.Empty);
+            }   
 
         }
 
