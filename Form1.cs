@@ -19,9 +19,14 @@ namespace BankSystem
         {
             InitializeComponent();
             InitializeUser();
-            
+
             UpdateTotalBalance();
             showHome();
+        }
+        public void Form1_Resize(object sender, EventArgs e)
+        {
+            panel2.Left = (this.ClientSize.Width - panel2.Width) / 2;
+            panel2.Top = (this.ClientSize.Height - panel2.Height) / 2;
         }
 
         private void InitializeUser()
@@ -48,8 +53,8 @@ namespace BankSystem
         }
 
         public decimal CalculateTotalBalance()
-        {     
-            return User.CurrentUser.Accounts.Sum(account =>account.Balance);
+        {
+            return User.CurrentUser.Accounts.Sum(account => account.Balance);
         }
 
         private void UpdateTotalBalance()
@@ -74,7 +79,7 @@ namespace BankSystem
             _homeController.AccountsController1.accountCard2.AccountCardClicked += OnHomeAccountCard_Clicked;
             _homeController.AccountsController1.accountCard3.AccountCardClicked += OnHomeAccountCard_Clicked;
 
-            ResetButtonColors();    
+            ResetButtonColors();
             _homeController.userNameLabel.Text = User.CurrentUser?.UserName ?? "Guest";
 
         }
@@ -116,7 +121,7 @@ namespace BankSystem
             WithdrawController.CancelClicked += ActionControl_CancelClicked;
             ResetButtonColors();
             withdrawButton.BorderColor = CustomColors.Orange;
-           
+
         }
 
         private void outButton_Click(object sender, EventArgs e)
