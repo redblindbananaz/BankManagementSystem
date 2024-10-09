@@ -43,11 +43,11 @@ namespace BankSystem.Models
           
             if (amount <= 0)
             {
-                throw new EverydayWithdrawException("Withdraw amount must be greater than 0");
+                throw new EverydayWithdrawException("Everyday - Withdraw amount must be greater than 0");
             }
             if (amount > Balance)
             {
-                throw new EverydayWithdrawException("Withdraw amount must be smaller than the current Balance");
+                throw new EverydayWithdrawException("Everyday - Withdraw amount must be smaller than the current Balance");
             }
 
             Balance -= amount;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankSystem.Models.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,21 +44,22 @@ namespace BankSystem.Models
         public override bool Withdraw(decimal amount)
         {
             bool success;
+            if (amount <= 0)
+            {
+                throw new OmniWithdrawException("Omni - Withdraw amount must be greater than 0");
+            }
             bool isSuccessful = Balance - amount >= -Overdraft;
             if (isSuccessful)
             {
                 Balance -= amount;
                 success = true;
-               
-                
+
             }
             else
             {
                 Balance -= FailingFee;
-                success = false;
-               
-                
-                
+                throw new OmniWithdrawException($"Omni - Overdraft Limit Exceeded - {FailingFee}$ Fee Applied");
+ 
             }
             string transactionDetails = FormatTransaction("Withdraw", amount, isSuccessful);
             Transactions.Add(transactionDetails);

@@ -272,28 +272,28 @@ namespace BankSystem.Controllers
                 catch (InvestWithdrawException ex)
                 {
               
-                    HandleDeclinedTransactionResult($"Invest Account Error: {ex.Message}");
+                    HandleDeclinedTransactionResult(ex.Message);
                 }
                 catch (OmniWithdrawException ex)
                 {
          
-                    HandleDeclinedTransactionResult($"Omni Account Error: {ex.Message}");
+                    HandleDeclinedTransactionResult(ex.Message);
                 }
                 catch (EverydayWithdrawException ex)
                 {
        
-                    HandleDeclinedTransactionResult($"Everyday Account Error: {ex.Message}");
+                    HandleDeclinedTransactionResult(ex.Message);
                 }
                 catch (WithdrawException ex)
                 {
                 
-                    HandleDeclinedTransactionResult($"Account Error: {ex.Message}");
+                    HandleDeclinedTransactionResult($"Account {ex.Message}");
                 }
 
                 catch (Exception ex)
                 {
 
-                    HandleDeclinedTransactionResult($"An Unexpexted error occurred: {ex.Message}");
+                    HandleDeclinedTransactionResult($"Unexpexted {ex.Message}");
                 }
 
 
@@ -332,7 +332,7 @@ namespace BankSystem.Controllers
         {
            
             confirmationMessageActionLabel.Visible = true;
-            confirmationMessageActionLabel.Text = $"{Ex}";
+            confirmationMessageActionLabel.Text = $"Error: {Ex}";
             confirmationMessageActionLabel.ForeColor = CustomColors.Redish;
             ConfirmBtn.Visible = false;
             DeclinedBtn.Visible = true;
