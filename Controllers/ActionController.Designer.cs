@@ -31,6 +31,7 @@ namespace BankSystem.Controllers
         private void InitializeComponent()
         {
             actionPanel = new CustomPanel();
+            DeclinedBtn = new CustomButton();
             SuccessBtn = new CustomButton();
             confirmationMessageActionLabel = new Label();
             CurrentBalanceLabel = new Label();
@@ -54,7 +55,6 @@ namespace BankSystem.Controllers
             quickCashLabel = new Label();
             presentationPanel2 = new Panel();
             actionLabel = new Label();
-            DeclinedBtn = new CustomButton();
             actionPanel.SuspendLayout();
             customPanel1.SuspendLayout();
             presentationPanel.SuspendLayout();
@@ -83,6 +83,24 @@ namespace BankSystem.Controllers
             actionPanel.Size = new Size(649, 637);
             actionPanel.TabIndex = 0;
             // 
+            // DeclinedBtn
+            // 
+            DeclinedBtn.BackColor = Color.FromArgb(255, 242, 204);
+            DeclinedBtn.BorderColor = Color.FromArgb(166, 62, 55);
+            DeclinedBtn.BorderRadius = 24;
+            DeclinedBtn.BorderSize = 8;
+            DeclinedBtn.Cursor = Cursors.No;
+            DeclinedBtn.FlatStyle = FlatStyle.Flat;
+            DeclinedBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            DeclinedBtn.ForeColor = Color.FromArgb(166, 62, 55);
+            DeclinedBtn.Location = new Point(370, 521);
+            DeclinedBtn.Name = "DeclinedBtn";
+            DeclinedBtn.Size = new Size(240, 60);
+            DeclinedBtn.TabIndex = 10;
+            DeclinedBtn.Text = "Declined :(";
+            DeclinedBtn.UseVisualStyleBackColor = false;
+            DeclinedBtn.Visible = false;
+            // 
             // SuccessBtn
             // 
             SuccessBtn.BackColor = Color.FromArgb(255, 242, 204);
@@ -103,11 +121,12 @@ namespace BankSystem.Controllers
             // 
             // confirmationMessageActionLabel
             // 
-            confirmationMessageActionLabel.Font = new Font("Verdana", 12.75F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            confirmationMessageActionLabel.AutoSize = true;
+            confirmationMessageActionLabel.Font = new Font("Verdana", 10F, FontStyle.Italic | FontStyle.Underline);
             confirmationMessageActionLabel.ForeColor = Color.FromArgb(215, 155, 0);
             confirmationMessageActionLabel.Location = new Point(12, 481);
             confirmationMessageActionLabel.Name = "confirmationMessageActionLabel";
-            confirmationMessageActionLabel.Size = new Size(626, 37);
+            confirmationMessageActionLabel.Size = new Size(423, 17);
             confirmationMessageActionLabel.TabIndex = 8;
             confirmationMessageActionLabel.Text = "Press Confirm to continue Deposit - $300 - Everday ID 12";
             confirmationMessageActionLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -415,24 +434,6 @@ namespace BankSystem.Controllers
             actionLabel.Text = "Action";
             actionLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // DeclinedBtn
-            // 
-            DeclinedBtn.BackColor = Color.FromArgb(255, 242, 204);
-            DeclinedBtn.BorderColor = CustomColors.Redish;
-            DeclinedBtn.BorderRadius = 24;
-            DeclinedBtn.BorderSize = 8;
-            DeclinedBtn.Cursor = Cursors.No;
-            DeclinedBtn.FlatStyle = FlatStyle.Flat;
-            DeclinedBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            DeclinedBtn.ForeColor = CustomColors.Redish; 
-            DeclinedBtn.Location = new Point(370, 521);
-            DeclinedBtn.Name = "DeclinedBtn";
-            DeclinedBtn.Size = new Size(240, 60);
-            DeclinedBtn.TabIndex = 10;
-            DeclinedBtn.Text = "Declined :(";
-            DeclinedBtn.UseVisualStyleBackColor = false;
-            DeclinedBtn.Visible = false;
-            // 
             // ActionController
             // 
             BackColor = Color.FromArgb(0, 51, 102);
@@ -443,6 +444,7 @@ namespace BankSystem.Controllers
             Name = "ActionController";
             Size = new Size(648, 637);
             actionPanel.ResumeLayout(false);
+            actionPanel.PerformLayout();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
             presentationPanel.ResumeLayout(false);

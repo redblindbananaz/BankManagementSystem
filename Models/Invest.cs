@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankSystem.Models.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,13 +65,13 @@ namespace BankSystem.Models
             bool success = true;
             if (amount <= 0) // Just not penalities for withdrawing 0 :)
             {
-                throw new ArgumentException("Withdraw amount must be greater than 0");
-                return false;
+                throw new InvestWithdrawException("Invest - Withdraw amount must be greater than 0");
             }
             if (Balance - amount < 0)
             {
                 AddInvestTransaction("Withdraw", amount, false);
-                return false;
+                throw new InvestWithdrawException("Invest - " +
+                    "Withdraw amount must be smaller than the current Balance");
             }
             Balance -= amount;
             AddInvestTransaction("Withdraw", amount, true);

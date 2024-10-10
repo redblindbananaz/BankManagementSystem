@@ -1,5 +1,6 @@
 ﻿using BankSystem.Components;
 using BankSystem.Models;
+using BankSystem.Models.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -251,50 +252,68 @@ namespace BankSystem.Controllers
                     MessageBox.Show("Account not found");
                     return;
                 }
-                if (currentAction == ActionType.Deposit)
+                try
                 {
+                    bool success = false;
+                    if (currentAction == ActionType.Deposit)
+                    {
 
-                    bool success = account.Deposit(selectedAmount);
-                    if (success)
-                    {
-                        confirmationMessageActionLabel.Visible = true;
-                        confirmationMessageActionLabel.Text = $"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
-                        ConfirmBtn.Visible = false;
-                        SuccessBtn.Visible = true;
-                        cancelLabel.Text = "Return Home";
-                        
-                    }
-                    else
-                    {
-                        DeclinedSet();
+                        success = account.Deposit(selectedAmount);
 
                     }
+                    else if (currentAction == ActionType.Withdraw)
+                    {
+                        success = account.Withdraw(selectedAmount);
+
+                    }
+                    HandleSuccessfullTransactionResult();
                 }
-                else if (currentAction == ActionType.Withdraw)
+
+                catch (InvestWithdrawException ex)
                 {
-                    bool success = account.Withdraw(selectedAmount);
-                    if (success)
-                    {
-                        confirmationMessageActionLabel.Visible = true;
-                        confirmationMessageActionLabel.Text = $"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
-                        confirmationMessageActionLabel.ForeColor = CustomColors.Creamn;
-                        ConfirmBtn.Visible = false;
-                        SuccessBtn.Visible = true;
-                        cancelLabel.Text = "Return Home";
-             
-                    }
-                    else
-                    {
-                        DeclinedSet();
-                    }
-
+              
+                    HandleDeclinedTransactionResult(ex.Message);
                 }
+                catch (OmniWithdrawException ex)
+                {
+         
+                    HandleDeclinedTransactionResult(ex.Message);
+                }
+                catch (EverydayWithdrawException ex)
+                {
+       
+                    HandleDeclinedTransactionResult(ex.Message);
+                }
+                catch (WithdrawException ex)
+                {
                 
+                    HandleDeclinedTransactionResult($"Account {ex.Message}");
+                }
+
+                catch (Exception ex)
+                {
+
+                    HandleDeclinedTransactionResult($"Unexpexted {ex.Message}");
+                }
+
+
             }
             else
             {
                 confirmationMessageActionLabel.Text = "Please Enter a Valid Amount";
             }
+        }
+
+        private void HandleSuccessfullTransactionResult()
+        {
+            confirmationMessageActionLabel.Visible = true;
+            confirmationMessageActionLabel.Text = $"Transaction Completed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+            confirmationMessageActionLabel.ForeColor = CustomColors.Creamn;
+            ConfirmBtn.Visible = false;
+            SuccessBtn.Visible = true;
+            cancelLabel.Text = "Return Home";
+            
+            
         }
 
         private void FreezeButton()
@@ -308,12 +327,12 @@ namespace BankSystem.Controllers
 
         }
 
-
-        private void DeclinedSet()
+        // Needed to change the format of the message from assignment 1 to match the Exception messages:
+        private void HandleDeclinedTransactionResult(string Ex)
         {
            
             confirmationMessageActionLabel.Visible = true;
-            confirmationMessageActionLabel.Text = $"Transaction Failed: {currentAction} - {selectedAmount} - {selectedAccountName} ID {selectedAccountId}";
+            confirmationMessageActionLabel.Text = $"Error: {Ex}";
             confirmationMessageActionLabel.ForeColor = CustomColors.Redish;
             ConfirmBtn.Visible = false;
             DeclinedBtn.Visible = true;

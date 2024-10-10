@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BankSystem.Models.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 
 namespace BankSystem.Models
@@ -36,11 +38,18 @@ namespace BankSystem.Models
         public override bool Withdraw(decimal amount)
         {
             bool success = true;
-            if (amount <= 0 || amount > Balance)
+           
+            // New Exception Handling
+          
+            if (amount <= 0)
             {
-                MessageBox.Show("Withdraw amount must be greater than 0 and smaller than the current Balance");
-                
+                throw new EverydayWithdrawException("Everyday - Withdraw amount must be greater than 0");
             }
+            if (amount > Balance)
+            {
+                throw new EverydayWithdrawException("Everyday - Withdraw amount must be smaller than the current Balance");
+            }
+
             Balance -= amount;
             AddTransaction("Withdraw", amount, true);
             return success;
