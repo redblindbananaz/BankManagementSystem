@@ -39,7 +39,9 @@ namespace BankSystem
             label1 = new Label();
             totalBalanceLabel = new Label();
             panel1 = new Panel();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)LogoBox).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // depositButton
@@ -157,27 +159,45 @@ namespace BankSystem
             panel1.Size = new Size(649, 637);
             panel1.TabIndex = 8;
             // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.None;
+            panel2.AutoScroll = true;
+            panel2.BackColor = Color.FromArgb(0, 51, 102);
+            panel2.BackgroundImageLayout = ImageLayout.Center;
+            panel2.Controls.Add(totalBalanceLabel);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(LogoBox);
+            panel2.Controls.Add(depositButton);
+            panel2.Controls.Add(withdrawButton);
+            panel2.Controls.Add(historyButton);
+            panel2.Controls.Add(outButton);
+            panel2.Controls.Add(panel1);
+            panel2.Location = new Point(0, 0);
+            panel2.MinimumSize = new Size(934, 661);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(934, 661);
+            panel2.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(0, 51, 102);
             ClientSize = new Size(934, 661);
-            Controls.Add(totalBalanceLabel);
-            Controls.Add(label1);
-            Controls.Add(LogoBox);
-            Controls.Add(depositButton);
-            Controls.Add(withdrawButton);
-            Controls.Add(historyButton);
-            Controls.Add(outButton);
-            Controls.Add(panel1);
-            MaximumSize = new Size(950, 700);
+            Controls.Add(panel2);
             MinimumSize = new Size(950, 700);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "B-Bank";
+            AutoSizeChanged += Form1_Resize;
             ((System.ComponentModel.ISupportInitialize)LogoBox).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -193,5 +213,6 @@ namespace BankSystem
         private Label label1;
         private Label totalBalanceLabel;
         private Panel panel1;
+        private Panel panel2;
     }
 }
