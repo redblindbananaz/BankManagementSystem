@@ -70,7 +70,8 @@ namespace BankSystem.Models
             if (Balance - amount < 0)
             {
                 AddInvestTransaction("Withdraw", amount, false);
-                throw new InvestWithdrawException("Invest - Withdraw amount must be smaller than the current Balance");
+                throw new InvestWithdrawException("Invest - " +
+                    "Withdraw amount must be smaller than the current Balance");
             }
             Balance -= amount;
             AddInvestTransaction("Withdraw", amount, true);
