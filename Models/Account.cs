@@ -68,8 +68,8 @@ namespace BankSystem.Models
             bool success = true;
             if (amount <= 0)
             {
-                MessageBox.Show("Amount must be greater than 0");
-                return false;
+                throw new InvalidOperationException("Amount must be greater than 0");
+                
             }
 
             Balance += amount;
