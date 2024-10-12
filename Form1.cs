@@ -32,7 +32,7 @@ namespace BankSystem
         private void InitializeUser()
         {
             // This method should set the current user of the system
-            User user1 = User.CreateUser("JD12345", "John Dee", true);
+            User user1 = User.CreateUser("JD12345", "John Dee", true, "");
 
             user1.CreateAccount(new Everyday(510));
             user1.CreateAccount(new Omni(340));

@@ -1,4 +1,5 @@
-﻿using BankSystem.Models;
+﻿using BankSystem.Controllers;
+using BankSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,12 +26,28 @@ namespace BankSystem
 
         private void LoadUsersIntoGrid()
         {
+
+            
             var users = _userAdmin.GetUsers();
             foreach(User user in users)
             {
-                dataGridView1.Rows.Add(user.UserID, user.UserName, user.IsEmployee, user.ContactDetails);
+                string everydayBalance = GetAccountBalance(user, typeof(Everyday));
+                string omniBalance = GetAccountBalance(user, typeof(Omni));
+                string investBalance = GetAccountBalance(user, typeof(Invest));
+
+                string isEmployee = user.IsEmployee ? "Yes" : "No";
+
+                string ContactDetails = string.IsNullOrEmpty(user.ContactDetails) ? "N/A" : user.ContactDetails;
+
+                dataGridView1.Rows.Add(user.UserID, user.UserName, isEmployee, ContactDetails, everydayBalance, omniBalance, investBalance);
             }
 
+        }
+
+        private string GetAccountBalance(User user, Type accountType)
+        {
+            var account = user.Accounts.FirstOrDefault(account => account.GetType() == accountType);
+            return account != null ? $"${account.Balance}" : "N/A";
         }
     }
 }

@@ -72,9 +72,9 @@ namespace BankSystem.Models
             _accounts.Add(account);
         }
 
-        public static User CreateUser(string userID, string userName, bool isEmployee)
+        public static User CreateUser(string userID, string userName, bool isEmployee, string contactdetails)
         {
-            return new User(userID, userName, isEmployee);
+            return new User(userID, userName, isEmployee, contactdetails);
         }
 
         public static void SetCurrentUser(User user)

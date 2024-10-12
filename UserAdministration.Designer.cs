@@ -45,6 +45,7 @@ namespace BankSystem
             FirstName = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
             Employee = new DataGridViewTextBoxColumn();
+            Contact = new DataGridViewTextBoxColumn();
             Everyday = new DataGridViewTextBoxColumn();
             Omni = new DataGridViewTextBoxColumn();
             Invest = new DataGridViewTextBoxColumn();
@@ -130,7 +131,7 @@ namespace BankSystem
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { FirstName, LastName, Employee, Everyday, Omni, Invest });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { FirstName, LastName, Employee, Contact, Everyday, Omni, Invest });
             dataGridView1.Location = new Point(16, 66);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(879, 410);
@@ -220,7 +221,7 @@ namespace BankSystem
             // 
             FirstName.HeaderText = "User ID";
             FirstName.Name = "FirstName";
-            FirstName.Width = 106;
+            FirstName.Width = 86;
             // 
             // LastName
             // 
@@ -235,24 +236,27 @@ namespace BankSystem
             Employee.Name = "Employee";
             Employee.Width = 120;
             // 
+            // Contact
+            // 
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.Width = 110;
+            // 
             // Everyday
             // 
             Everyday.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Everyday.HeaderText = "Everyday";
             Everyday.Name = "Everyday";
-            Everyday.Width = 130;
             // 
             // Omni
             // 
             Omni.HeaderText = "Omni";
             Omni.Name = "Omni";
-            Omni.Width = 130;
             // 
             // Invest
             // 
             Invest.HeaderText = "Invest";
             Invest.Name = "Invest";
-            Invest.Width = 130;
             // 
             // UserAdministration
             // 
@@ -290,6 +294,7 @@ namespace BankSystem
         private DataGridViewTextBoxColumn FirstName;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Employee;
+        private DataGridViewTextBoxColumn Contact;
         private DataGridViewTextBoxColumn Everyday;
         private DataGridViewTextBoxColumn Omni;
         private DataGridViewTextBoxColumn Invest;
