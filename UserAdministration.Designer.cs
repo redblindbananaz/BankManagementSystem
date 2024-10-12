@@ -35,13 +35,10 @@ namespace BankSystem
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
+            ViewPanel = new Panel();
+            UserIdData = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
-            BottomPanel = new Panel();
-            ViewBtn = new CustomButton();
-            CreateBtn = new CustomButton();
-            DeleteBtn = new CustomButton();
-            EditBtn = new CustomButton();
             FirstName = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
             Employee = new DataGridViewTextBoxColumn();
@@ -49,8 +46,14 @@ namespace BankSystem
             Everyday = new DataGridViewTextBoxColumn();
             Omni = new DataGridViewTextBoxColumn();
             Invest = new DataGridViewTextBoxColumn();
+            BottomPanel = new Panel();
+            ViewBtn = new CustomButton();
+            CreateBtn = new CustomButton();
+            DeleteBtn = new CustomButton();
+            EditBtn = new CustomButton();
             TopPanel.SuspendLayout();
             customPanel1.SuspendLayout();
+            ViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             BottomPanel.SuspendLayout();
             SuspendLayout();
@@ -99,12 +102,31 @@ namespace BankSystem
             customPanel1.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel1.BorderRadius = 24;
             customPanel1.BorderSize = 8;
+            customPanel1.Controls.Add(ViewPanel);
             customPanel1.Controls.Add(label2);
             customPanel1.Controls.Add(dataGridView1);
             customPanel1.Location = new Point(12, 88);
             customPanel1.Name = "customPanel1";
             customPanel1.Size = new Size(910, 498);
             customPanel1.TabIndex = 1;
+            // 
+            // ViewPanel
+            // 
+            ViewPanel.Controls.Add(UserIdData);
+            ViewPanel.Location = new Point(16, 66);
+            ViewPanel.Name = "ViewPanel";
+            ViewPanel.Size = new Size(879, 410);
+            ViewPanel.TabIndex = 6;
+            ViewPanel.Visible = false;
+            // 
+            // UserIdData
+            // 
+            UserIdData.AutoSize = true;
+            UserIdData.Location = new Point(115, 103);
+            UserIdData.Name = "UserIdData";
+            UserIdData.Size = new Size(38, 15);
+            UserIdData.TabIndex = 0;
+            UserIdData.Text = "label3";
             // 
             // label2
             // 
@@ -137,6 +159,47 @@ namespace BankSystem
             dataGridView1.Size = new Size(879, 410);
             dataGridView1.TabIndex = 0;
             // 
+            // FirstName
+            // 
+            FirstName.HeaderText = "User ID";
+            FirstName.Name = "FirstName";
+            FirstName.Width = 86;
+            // 
+            // LastName
+            // 
+            LastName.HeaderText = "Full Name";
+            LastName.Name = "LastName";
+            LastName.Width = 220;
+            // 
+            // Employee
+            // 
+            Employee.FillWeight = 200F;
+            Employee.HeaderText = "IsEmployee";
+            Employee.Name = "Employee";
+            Employee.Width = 120;
+            // 
+            // Contact
+            // 
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.Width = 110;
+            // 
+            // Everyday
+            // 
+            Everyday.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Everyday.HeaderText = "Everyday";
+            Everyday.Name = "Everyday";
+            // 
+            // Omni
+            // 
+            Omni.HeaderText = "Omni";
+            Omni.Name = "Omni";
+            // 
+            // Invest
+            // 
+            Invest.HeaderText = "Invest";
+            Invest.Name = "Invest";
+            // 
             // BottomPanel
             // 
             BottomPanel.Anchor = AnchorStyles.Bottom;
@@ -165,6 +228,7 @@ namespace BankSystem
             ViewBtn.TabIndex = 3;
             ViewBtn.Text = "View";
             ViewBtn.UseVisualStyleBackColor = false;
+            ViewBtn.Click += ViewBtn_Click;
             // 
             // CreateBtn
             // 
@@ -217,47 +281,6 @@ namespace BankSystem
             EditBtn.Text = "Edit";
             EditBtn.UseVisualStyleBackColor = false;
             // 
-            // FirstName
-            // 
-            FirstName.HeaderText = "User ID";
-            FirstName.Name = "FirstName";
-            FirstName.Width = 86;
-            // 
-            // LastName
-            // 
-            LastName.HeaderText = "Full Name";
-            LastName.Name = "LastName";
-            LastName.Width = 220;
-            // 
-            // Employee
-            // 
-            Employee.FillWeight = 200F;
-            Employee.HeaderText = "IsEmployee";
-            Employee.Name = "Employee";
-            Employee.Width = 120;
-            // 
-            // Contact
-            // 
-            Contact.HeaderText = "Contact";
-            Contact.Name = "Contact";
-            Contact.Width = 110;
-            // 
-            // Everyday
-            // 
-            Everyday.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Everyday.HeaderText = "Everyday";
-            Everyday.Name = "Everyday";
-            // 
-            // Omni
-            // 
-            Omni.HeaderText = "Omni";
-            Omni.Name = "Omni";
-            // 
-            // Invest
-            // 
-            Invest.HeaderText = "Invest";
-            Invest.Name = "Invest";
-            // 
             // UserAdministration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -273,6 +296,8 @@ namespace BankSystem
             TopPanel.PerformLayout();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
+            ViewPanel.ResumeLayout(false);
+            ViewPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -298,5 +323,7 @@ namespace BankSystem
         private DataGridViewTextBoxColumn Everyday;
         private DataGridViewTextBoxColumn Omni;
         private DataGridViewTextBoxColumn Invest;
+        private Panel ViewPanel;
+        private Label UserIdData;
     }
 }

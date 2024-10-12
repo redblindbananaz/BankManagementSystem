@@ -72,6 +72,11 @@ namespace BankSystem.Models
             _accounts.Add(account);
         }
 
+        public void RemoveAccount(Account account)
+        {
+            _accounts.Remove(account);
+        }
+
         public static User CreateUser(string userID, string userName, bool isEmployee, string contactdetails)
         {
             return new User(userID, userName, isEmployee, contactdetails);

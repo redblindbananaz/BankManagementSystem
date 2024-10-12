@@ -49,6 +49,11 @@ namespace BankSystem.Controllers
             _users.Add(user3);
         }
 
+        public User? GetUserByID(string userID)
+        {
+            return _users.FirstOrDefault(user => user.UserID == userID);
+        }
+
         public List<User> GetUsers()
         {
             return _users;
