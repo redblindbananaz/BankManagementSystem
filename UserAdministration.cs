@@ -87,7 +87,11 @@ namespace BankSystem
                 if (selectedUser != null)
                 {
                     _selectedUserID = selectedUserID;
-                   UserIdData.Text = selectedUser.UserID;
+                    UserIdData.Text = selectedUser.UserID;
+                    NameData.Text = selectedUser.UserName;
+                    IsEmployeeData.Text = selectedUser.IsEmployee ? "Yes" : "No";
+                    ContactData.Text = selectedUser.ContactDetails;
+
                 }
 
             }

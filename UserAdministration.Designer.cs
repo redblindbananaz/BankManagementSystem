@@ -30,12 +30,16 @@ namespace BankSystem
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             TopPanel = new Panel();
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
             ViewPanel = new Panel();
+            labelUserID = new Label();
+            IsEmployeeData = new CheckedListBox();
+            ContactData = new Label();
+            NameData = new Label();
             UserIdData = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
@@ -51,6 +55,9 @@ namespace BankSystem
             CreateBtn = new CustomButton();
             DeleteBtn = new CustomButton();
             EditBtn = new CustomButton();
+            labelFullName = new Label();
+            labelIsEmployee = new Label();
+            labelUSerContact = new Label();
             TopPanel.SuspendLayout();
             customPanel1.SuspendLayout();
             ViewPanel.SuspendLayout();
@@ -112,6 +119,13 @@ namespace BankSystem
             // 
             // ViewPanel
             // 
+            ViewPanel.Controls.Add(labelUSerContact);
+            ViewPanel.Controls.Add(labelIsEmployee);
+            ViewPanel.Controls.Add(labelFullName);
+            ViewPanel.Controls.Add(labelUserID);
+            ViewPanel.Controls.Add(IsEmployeeData);
+            ViewPanel.Controls.Add(ContactData);
+            ViewPanel.Controls.Add(NameData);
             ViewPanel.Controls.Add(UserIdData);
             ViewPanel.Location = new Point(16, 66);
             ViewPanel.Name = "ViewPanel";
@@ -119,14 +133,63 @@ namespace BankSystem
             ViewPanel.TabIndex = 6;
             ViewPanel.Visible = false;
             // 
+            // labelUserID
+            // 
+            labelUserID.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelUserID.ForeColor = Color.FromArgb(215, 155, 0);
+            labelUserID.Location = new Point(49, 17);
+            labelUserID.Name = "labelUserID";
+            labelUserID.Size = new Size(372, 25);
+            labelUserID.TabIndex = 5;
+            labelUserID.Text = "User ID:";
+            // 
+            // IsEmployeeData
+            // 
+            IsEmployeeData.BackColor = Color.FromArgb(0, 51, 102);
+            IsEmployeeData.BorderStyle = BorderStyle.None;
+            IsEmployeeData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            IsEmployeeData.ForeColor = Color.White;
+            IsEmployeeData.FormattingEnabled = true;
+            IsEmployeeData.IntegralHeight = false;
+            IsEmployeeData.Items.AddRange(new object[] { "Yes", "No" });
+            IsEmployeeData.Location = new Point(49, 272);
+            IsEmployeeData.MultiColumn = true;
+            IsEmployeeData.Name = "IsEmployeeData";
+            IsEmployeeData.Size = new Size(372, 24);
+            IsEmployeeData.TabIndex = 4;
+            // 
+            // ContactData
+            // 
+            ContactData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ContactData.ForeColor = Color.White;
+            ContactData.Location = new Point(49, 373);
+            ContactData.Name = "ContactData";
+            ContactData.Size = new Size(372, 25);
+            ContactData.TabIndex = 2;
+            ContactData.Text = "Contact Number here";
+            ContactData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // NameData
+            // 
+            NameData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            NameData.ForeColor = Color.White;
+            NameData.Location = new Point(49, 170);
+            NameData.Name = "NameData";
+            NameData.Size = new Size(372, 25);
+            NameData.TabIndex = 1;
+            NameData.Text = "Full Name here";
+            NameData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // UserIdData
             // 
-            UserIdData.AutoSize = true;
-            UserIdData.Location = new Point(115, 103);
+            UserIdData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            UserIdData.ForeColor = Color.White;
+            UserIdData.Location = new Point(49, 68);
             UserIdData.Name = "UserIdData";
-            UserIdData.Size = new Size(38, 15);
+            UserIdData.Size = new Size(372, 25);
             UserIdData.TabIndex = 0;
-            UserIdData.Text = "label3";
+            UserIdData.Text = "User ID here";
+            UserIdData.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -144,14 +207,14 @@ namespace BankSystem
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.AliceBlue;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.Info;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.Info;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
             dataGridView1.Location = new Point(16, 66);
@@ -163,12 +226,13 @@ namespace BankSystem
             // UserId
             // 
             UserId.HeaderText = "User ID";
+            UserId.Name = "UserId";
             UserId.Width = 86;
             // 
             // LastName
             // 
             LastName.HeaderText = "Full Name";
-            LastName.Name = "FullName";
+            LastName.Name = "LastName";
             LastName.Width = 220;
             // 
             // Employee
@@ -281,6 +345,36 @@ namespace BankSystem
             EditBtn.Text = "Edit";
             EditBtn.UseVisualStyleBackColor = false;
             // 
+            // labelFullName
+            // 
+            labelFullName.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelFullName.ForeColor = Color.FromArgb(215, 155, 0);
+            labelFullName.Location = new Point(49, 119);
+            labelFullName.Name = "labelFullName";
+            labelFullName.Size = new Size(372, 25);
+            labelFullName.TabIndex = 6;
+            labelFullName.Text = "User Full Name:";
+            // 
+            // labelIsEmployee
+            // 
+            labelIsEmployee.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelIsEmployee.ForeColor = Color.FromArgb(215, 155, 0);
+            labelIsEmployee.Location = new Point(49, 221);
+            labelIsEmployee.Name = "labelIsEmployee";
+            labelIsEmployee.Size = new Size(372, 25);
+            labelIsEmployee.TabIndex = 7;
+            labelIsEmployee.Text = "User Is An Employee:";
+            // 
+            // labelUSerContact
+            // 
+            labelUSerContact.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelUSerContact.ForeColor = Color.FromArgb(215, 155, 0);
+            labelUSerContact.Location = new Point(49, 322);
+            labelUSerContact.Name = "labelUSerContact";
+            labelUSerContact.Size = new Size(372, 25);
+            labelUSerContact.TabIndex = 8;
+            labelUSerContact.Text = "User  Contact Details:";
+            // 
             // UserAdministration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -297,7 +391,6 @@ namespace BankSystem
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
             ViewPanel.ResumeLayout(false);
-            ViewPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -325,5 +418,12 @@ namespace BankSystem
         private DataGridViewTextBoxColumn Invest;
         private Panel ViewPanel;
         private Label UserIdData;
+        private Label NameData;
+        private Label ContactData;
+        private CheckedListBox IsEmployeeData;
+        private Label labelUserID;
+        private Label labelUSerContact;
+        private Label labelIsEmployee;
+        private Label labelFullName;
     }
 }
