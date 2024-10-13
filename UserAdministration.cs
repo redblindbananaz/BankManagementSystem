@@ -1,5 +1,6 @@
 ﻿using BankSystem.Controllers;
 using BankSystem.Models;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,11 +19,14 @@ namespace BankSystem
 
         private UserAdmin _userAdmin;
         private string? _selectedUserID;
+        private int selectedRowIndex = -1;
         public UserAdministration()
         {
             InitializeComponent();
             _userAdmin = new UserAdmin();
             LoadUsersIntoGrid();
+
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void LoadUsersIntoGrid()
@@ -48,7 +52,8 @@ namespace BankSystem
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                _selectedUserID = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                selectedRowIndex = dataGridView1.SelectedRows[0].Index;
+             
             }
  
         }
@@ -71,20 +76,20 @@ namespace BankSystem
         private void ViewBtn_Click(object sender, EventArgs e)
         {
             SwitchToViewPanel();
-            if (_selectedUserID !=null)
-            {
-                var user = _userAdmin.GetUserByID(_selectedUserID);
-                if (user != null)
-                {
-                    
-                    UserIdData.Text = user.UserID;
-                   
 
-                }
-            }
-            else
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count)
             {
-                UserIdData.Text = "N/A";
+                var users = _userAdmin.GetUsers();
+                var selectedRow = dataGridView1.SelectedRows[0];
+                string selectedUserID = selectedRow.Cells[0].Value.ToString();
+                var selectedUser = users.FirstOrDefault(user => user.UserID == selectedUserID);
+
+                if (selectedUser != null)
+                {
+                    _selectedUserID = selectedUserID;
+                   UserIdData.Text = selectedUser.UserID;
+                }
+
             }
         }
     }

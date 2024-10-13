@@ -39,7 +39,7 @@ namespace BankSystem
             UserIdData = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
-            FirstName = new DataGridViewTextBoxColumn();
+            UserId = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
             Employee = new DataGridViewTextBoxColumn();
             Contact = new DataGridViewTextBoxColumn();
@@ -153,22 +153,22 @@ namespace BankSystem
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { FirstName, LastName, Employee, Contact, Everyday, Omni, Invest });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
             dataGridView1.Location = new Point(16, 66);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(879, 410);
             dataGridView1.TabIndex = 0;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
-            // FirstName
+            // UserId
             // 
-            FirstName.HeaderText = "User ID";
-            FirstName.Name = "FirstName";
-            FirstName.Width = 86;
+            UserId.HeaderText = "User ID";
+            UserId.Width = 86;
             // 
             // LastName
             // 
             LastName.HeaderText = "Full Name";
-            LastName.Name = "LastName";
+            LastName.Name = "FullName";
             LastName.Width = 220;
             // 
             // Employee
@@ -316,7 +316,7 @@ namespace BankSystem
         private CustomButton CreateBtn;
         private CustomButton DeleteBtn;
         private CustomButton ViewBtn;
-        private DataGridViewTextBoxColumn FirstName;
+        private DataGridViewTextBoxColumn UserId;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Employee;
         private DataGridViewTextBoxColumn Contact;
