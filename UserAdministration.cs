@@ -89,8 +89,13 @@ namespace BankSystem
                     _selectedUserID = selectedUserID;
                     UserIdData.Text = selectedUser.UserID;
                     NameData.Text = selectedUser.UserName;
-                    IsEmployeeData.Text = selectedUser.IsEmployee ? "Yes" : "No";
-                    ContactData.Text = selectedUser.ContactDetails;
+                    rbtnYes.Checked = selectedUser.IsEmployee;
+                    rbtnNo.Checked = !selectedUser.IsEmployee;
+                    ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A": selectedUser.ContactDetails;
+
+                    EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
+                    OmniData.Text = GetAccountBalance(selectedUser, typeof(Omni));
+                    InvestData.Text = GetAccountBalance(selectedUser, typeof(Invest));
 
                 }
 

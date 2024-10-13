@@ -30,14 +30,22 @@ namespace BankSystem
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TopPanel = new Panel();
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
             ViewPanel = new Panel();
+            InvestData = new Label();
+            OmniData = new Label();
+            EverydayData = new Label();
+            labelInvest = new Label();
+            labelOmni = new Label();
+            labelEveryday = new Label();
+            labelUSerContact = new Label();
+            labelIsEmployee = new Label();
+            labelFullName = new Label();
             labelUserID = new Label();
-            IsEmployeeData = new CheckedListBox();
             ContactData = new Label();
             NameData = new Label();
             UserIdData = new Label();
@@ -55,9 +63,8 @@ namespace BankSystem
             CreateBtn = new CustomButton();
             DeleteBtn = new CustomButton();
             EditBtn = new CustomButton();
-            labelFullName = new Label();
-            labelIsEmployee = new Label();
-            labelUSerContact = new Label();
+            rbtnYes = new RadioButton();
+            rbtnNo = new RadioButton();
             TopPanel.SuspendLayout();
             customPanel1.SuspendLayout();
             ViewPanel.SuspendLayout();
@@ -119,11 +126,18 @@ namespace BankSystem
             // 
             // ViewPanel
             // 
+            ViewPanel.Controls.Add(rbtnNo);
+            ViewPanel.Controls.Add(rbtnYes);
+            ViewPanel.Controls.Add(InvestData);
+            ViewPanel.Controls.Add(OmniData);
+            ViewPanel.Controls.Add(EverydayData);
+            ViewPanel.Controls.Add(labelInvest);
+            ViewPanel.Controls.Add(labelOmni);
+            ViewPanel.Controls.Add(labelEveryday);
             ViewPanel.Controls.Add(labelUSerContact);
             ViewPanel.Controls.Add(labelIsEmployee);
             ViewPanel.Controls.Add(labelFullName);
             ViewPanel.Controls.Add(labelUserID);
-            ViewPanel.Controls.Add(IsEmployeeData);
             ViewPanel.Controls.Add(ContactData);
             ViewPanel.Controls.Add(NameData);
             ViewPanel.Controls.Add(UserIdData);
@@ -132,6 +146,99 @@ namespace BankSystem
             ViewPanel.Size = new Size(879, 410);
             ViewPanel.TabIndex = 6;
             ViewPanel.Visible = false;
+            // 
+            // InvestData
+            // 
+            InvestData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            InvestData.ForeColor = Color.White;
+            InvestData.Location = new Point(457, 252);
+            InvestData.Name = "InvestData";
+            InvestData.Size = new Size(372, 25);
+            InvestData.TabIndex = 14;
+            InvestData.Text = "Invest here";
+            InvestData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // OmniData
+            // 
+            OmniData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            OmniData.ForeColor = Color.White;
+            OmniData.Location = new Point(457, 150);
+            OmniData.Name = "OmniData";
+            OmniData.Size = new Size(372, 25);
+            OmniData.TabIndex = 13;
+            OmniData.Text = "Omni here";
+            OmniData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // EverydayData
+            // 
+            EverydayData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            EverydayData.ForeColor = Color.White;
+            EverydayData.Location = new Point(457, 48);
+            EverydayData.Name = "EverydayData";
+            EverydayData.Size = new Size(372, 25);
+            EverydayData.TabIndex = 12;
+            EverydayData.Text = "Everyday here";
+            EverydayData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // labelInvest
+            // 
+            labelInvest.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelInvest.ForeColor = Color.FromArgb(215, 155, 0);
+            labelInvest.Location = new Point(457, 221);
+            labelInvest.Name = "labelInvest";
+            labelInvest.Size = new Size(372, 25);
+            labelInvest.TabIndex = 11;
+            labelInvest.Text = "Invest Account:";
+            // 
+            // labelOmni
+            // 
+            labelOmni.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelOmni.ForeColor = Color.FromArgb(215, 155, 0);
+            labelOmni.Location = new Point(457, 119);
+            labelOmni.Name = "labelOmni";
+            labelOmni.Size = new Size(372, 25);
+            labelOmni.TabIndex = 10;
+            labelOmni.Text = "Omni Account:";
+            // 
+            // labelEveryday
+            // 
+            labelEveryday.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelEveryday.ForeColor = Color.FromArgb(215, 155, 0);
+            labelEveryday.Location = new Point(457, 17);
+            labelEveryday.Name = "labelEveryday";
+            labelEveryday.Size = new Size(372, 25);
+            labelEveryday.TabIndex = 9;
+            labelEveryday.Text = "Everyday Account:";
+            // 
+            // labelUSerContact
+            // 
+            labelUSerContact.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelUSerContact.ForeColor = Color.FromArgb(215, 155, 0);
+            labelUSerContact.Location = new Point(49, 322);
+            labelUSerContact.Name = "labelUSerContact";
+            labelUSerContact.Size = new Size(372, 25);
+            labelUSerContact.TabIndex = 8;
+            labelUSerContact.Text = "User  Contact Details:";
+            // 
+            // labelIsEmployee
+            // 
+            labelIsEmployee.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelIsEmployee.ForeColor = Color.FromArgb(215, 155, 0);
+            labelIsEmployee.Location = new Point(49, 221);
+            labelIsEmployee.Name = "labelIsEmployee";
+            labelIsEmployee.Size = new Size(372, 25);
+            labelIsEmployee.TabIndex = 7;
+            labelIsEmployee.Text = "User Is An Employee:";
+            // 
+            // labelFullName
+            // 
+            labelFullName.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelFullName.ForeColor = Color.FromArgb(215, 155, 0);
+            labelFullName.Location = new Point(49, 119);
+            labelFullName.Name = "labelFullName";
+            labelFullName.Size = new Size(372, 25);
+            labelFullName.TabIndex = 6;
+            labelFullName.Text = "User Full Name:";
             // 
             // labelUserID
             // 
@@ -143,26 +250,11 @@ namespace BankSystem
             labelUserID.TabIndex = 5;
             labelUserID.Text = "User ID:";
             // 
-            // IsEmployeeData
-            // 
-            IsEmployeeData.BackColor = Color.FromArgb(0, 51, 102);
-            IsEmployeeData.BorderStyle = BorderStyle.None;
-            IsEmployeeData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            IsEmployeeData.ForeColor = Color.White;
-            IsEmployeeData.FormattingEnabled = true;
-            IsEmployeeData.IntegralHeight = false;
-            IsEmployeeData.Items.AddRange(new object[] { "Yes", "No" });
-            IsEmployeeData.Location = new Point(49, 272);
-            IsEmployeeData.MultiColumn = true;
-            IsEmployeeData.Name = "IsEmployeeData";
-            IsEmployeeData.Size = new Size(372, 24);
-            IsEmployeeData.TabIndex = 4;
-            // 
             // ContactData
             // 
             ContactData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ContactData.ForeColor = Color.White;
-            ContactData.Location = new Point(49, 373);
+            ContactData.Location = new Point(49, 353);
             ContactData.Name = "ContactData";
             ContactData.Size = new Size(372, 25);
             ContactData.TabIndex = 2;
@@ -173,7 +265,7 @@ namespace BankSystem
             // 
             NameData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             NameData.ForeColor = Color.White;
-            NameData.Location = new Point(49, 170);
+            NameData.Location = new Point(49, 150);
             NameData.Name = "NameData";
             NameData.Size = new Size(372, 25);
             NameData.TabIndex = 1;
@@ -184,7 +276,7 @@ namespace BankSystem
             // 
             UserIdData.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             UserIdData.ForeColor = Color.White;
-            UserIdData.Location = new Point(49, 68);
+            UserIdData.Location = new Point(49, 48);
             UserIdData.Name = "UserIdData";
             UserIdData.Size = new Size(372, 25);
             UserIdData.TabIndex = 0;
@@ -194,11 +286,11 @@ namespace BankSystem
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Verdana", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Verdana", 15F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(255, 242, 204);
             label2.Location = new Point(65, 31);
             label2.Name = "label2";
-            label2.Size = new Size(166, 18);
+            label2.Size = new Size(203, 25);
             label2.TabIndex = 1;
             label2.Text = "List of Customers :";
             // 
@@ -207,14 +299,14 @@ namespace BankSystem
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.AliceBlue;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.Info;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Info;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
             dataGridView1.Location = new Point(16, 66);
@@ -345,35 +437,33 @@ namespace BankSystem
             EditBtn.Text = "Edit";
             EditBtn.UseVisualStyleBackColor = false;
             // 
-            // labelFullName
+            // rbtnYes
             // 
-            labelFullName.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            labelFullName.ForeColor = Color.FromArgb(215, 155, 0);
-            labelFullName.Location = new Point(49, 119);
-            labelFullName.Name = "labelFullName";
-            labelFullName.Size = new Size(372, 25);
-            labelFullName.TabIndex = 6;
-            labelFullName.Text = "User Full Name:";
+            rbtnYes.AutoSize = true;
+            rbtnYes.Enabled = false;
+            rbtnYes.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnYes.ForeColor = Color.White;
+            rbtnYes.Location = new Point(49, 255);
+            rbtnYes.Name = "rbtnYes";
+            rbtnYes.Size = new Size(55, 22);
+            rbtnYes.TabIndex = 15;
+            rbtnYes.TabStop = true;
+            rbtnYes.Text = "Yes";
+            rbtnYes.UseVisualStyleBackColor = true;
             // 
-            // labelIsEmployee
+            // rbtnNo
             // 
-            labelIsEmployee.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            labelIsEmployee.ForeColor = Color.FromArgb(215, 155, 0);
-            labelIsEmployee.Location = new Point(49, 221);
-            labelIsEmployee.Name = "labelIsEmployee";
-            labelIsEmployee.Size = new Size(372, 25);
-            labelIsEmployee.TabIndex = 7;
-            labelIsEmployee.Text = "User Is An Employee:";
-            // 
-            // labelUSerContact
-            // 
-            labelUSerContact.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            labelUSerContact.ForeColor = Color.FromArgb(215, 155, 0);
-            labelUSerContact.Location = new Point(49, 322);
-            labelUSerContact.Name = "labelUSerContact";
-            labelUSerContact.Size = new Size(372, 25);
-            labelUSerContact.TabIndex = 8;
-            labelUSerContact.Text = "User  Contact Details:";
+            rbtnNo.AutoSize = true;
+            rbtnNo.Enabled = false;
+            rbtnNo.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnNo.ForeColor = Color.White;
+            rbtnNo.Location = new Point(177, 255);
+            rbtnNo.Name = "rbtnNo";
+            rbtnNo.Size = new Size(48, 22);
+            rbtnNo.TabIndex = 16;
+            rbtnNo.TabStop = true;
+            rbtnNo.Text = "No";
+            rbtnNo.UseVisualStyleBackColor = true;
             // 
             // UserAdministration
             // 
@@ -391,6 +481,7 @@ namespace BankSystem
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
             ViewPanel.ResumeLayout(false);
+            ViewPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -420,10 +511,17 @@ namespace BankSystem
         private Label UserIdData;
         private Label NameData;
         private Label ContactData;
-        private CheckedListBox IsEmployeeData;
         private Label labelUserID;
         private Label labelUSerContact;
         private Label labelIsEmployee;
         private Label labelFullName;
+        private Label labelInvest;
+        private Label labelOmni;
+        private Label labelEveryday;
+        private Label InvestData;
+        private Label OmniData;
+        private Label EverydayData;
+        private RadioButton rbtnNo;
+        private RadioButton rbtnYes;
     }
 }
