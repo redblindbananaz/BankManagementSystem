@@ -33,7 +33,7 @@ namespace BankSystem
         {
             dataGridView1.Rows.Clear(); // Otherwise i have duplicates!!!
             var users = _userAdmin.GetUsers();
-            SetRadioButtonColor(rbtnYes.Checked ? rbtnYes : rbtnNo, rbtnYes.Checked ? rbtnNo : rbtnYes);
+            
 
             foreach (User user in users)
             {
@@ -50,11 +50,6 @@ namespace BankSystem
 
         }
 
-        private void SetRadioButtonColor(RadioButton checkedButton, RadioButton uncheckedButton)
-        {
-            checkedButton.ForeColor = Color.White;
-            uncheckedButton.ForeColor = Color.Gray;
-        }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -100,6 +95,7 @@ namespace BankSystem
                 var selectedRow = dataGridView1.SelectedRows[0];
                 string selectedUserID = selectedRow.Cells[0].Value.ToString();
                 var selectedUser = users.FirstOrDefault(user => user.UserID == selectedUserID);
+                
 
                 if (selectedUser != null)
                 {
@@ -108,6 +104,9 @@ namespace BankSystem
                     NameData.Text = selectedUser.UserName;
                     rbtnYes.Checked = selectedUser.IsEmployee;
                     rbtnNo.Checked = !selectedUser.IsEmployee;
+                    UpdateRadioBUttonColors(selectedUser.IsEmployee);
+
+
                     ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails;
 
                     EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
@@ -116,6 +115,21 @@ namespace BankSystem
 
                 }
 
+            }
+        }
+
+        private void UpdateRadioBUttonColors(bool isEmployee)
+        {
+            rbtnNo.Enabled = false;
+            rbtnYes.Enabled = false;
+
+            if (isEmployee)
+            {  
+                rbtnYes.Enabled = true;
+            }
+            else
+            {
+               rbtnNo.Enabled = true;
             }
         }
 
