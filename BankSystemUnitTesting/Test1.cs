@@ -1,4 +1,7 @@
-﻿namespace BankSystemUnitTesting
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BankSystem;
+
+namespace BankSystemUnitTesting
 {
     [TestClass]
     public sealed class Test1
