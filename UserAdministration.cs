@@ -31,7 +31,9 @@ namespace BankSystem
 
         private void LoadUsersIntoGrid()
         {
+            dataGridView1.Rows.Clear(); // Otherwise i have duplicates!!!
             var users = _userAdmin.GetUsers();
+            SetRadioButtonColor(rbtnYes.Checked ? rbtnYes : rbtnNo, rbtnYes.Checked ? rbtnNo : rbtnYes);
 
             foreach (User user in users)
             {
@@ -48,14 +50,20 @@ namespace BankSystem
 
         }
 
+        private void SetRadioButtonColor(RadioButton checkedButton, RadioButton uncheckedButton)
+        {
+            checkedButton.ForeColor = Color.White;
+            uncheckedButton.ForeColor = Color.Gray;
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-             
+
             }
- 
+
         }
 
         private string GetAccountBalance(User user, Type accountType)
@@ -69,9 +77,18 @@ namespace BankSystem
             label2.Text = "User Details:";
             dataGridView1.Visible = false;
             ViewPanel.Visible = true;
+            ViewBtn.Enabled = false;
         }
 
-        
+        private void ReturnToGridView()
+        {
+            ViewPanel.Visible = false;
+            dataGridView1.Visible = true;
+            LoadUsersIntoGrid();
+            ViewBtn.Enabled = true;
+        }
+
+
 
         private void ViewBtn_Click(object sender, EventArgs e)
         {
@@ -91,7 +108,7 @@ namespace BankSystem
                     NameData.Text = selectedUser.UserName;
                     rbtnYes.Checked = selectedUser.IsEmployee;
                     rbtnNo.Checked = !selectedUser.IsEmployee;
-                    ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A": selectedUser.ContactDetails;
+                    ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails;
 
                     EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
                     OmniData.Text = GetAccountBalance(selectedUser, typeof(Omni));
@@ -101,5 +118,11 @@ namespace BankSystem
 
             }
         }
+
+        private void returnBtn_Click(object sender, EventArgs e)
+        {
+            ReturnToGridView();
+        }
+
     }
 }

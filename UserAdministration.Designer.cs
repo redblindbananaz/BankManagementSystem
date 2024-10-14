@@ -36,6 +36,9 @@ namespace BankSystem
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
             ViewPanel = new Panel();
+            returnBtn = new CustomButton();
+            rbtnNo = new RadioButton();
+            rbtnYes = new RadioButton();
             InvestData = new Label();
             OmniData = new Label();
             EverydayData = new Label();
@@ -63,8 +66,6 @@ namespace BankSystem
             CreateBtn = new CustomButton();
             DeleteBtn = new CustomButton();
             EditBtn = new CustomButton();
-            rbtnYes = new RadioButton();
-            rbtnNo = new RadioButton();
             TopPanel.SuspendLayout();
             customPanel1.SuspendLayout();
             ViewPanel.SuspendLayout();
@@ -126,6 +127,7 @@ namespace BankSystem
             // 
             // ViewPanel
             // 
+            ViewPanel.Controls.Add(returnBtn);
             ViewPanel.Controls.Add(rbtnNo);
             ViewPanel.Controls.Add(rbtnYes);
             ViewPanel.Controls.Add(InvestData);
@@ -146,6 +148,53 @@ namespace BankSystem
             ViewPanel.Size = new Size(879, 410);
             ViewPanel.TabIndex = 6;
             ViewPanel.Visible = false;
+            // 
+            // returnBtn
+            // 
+            returnBtn.BackColor = Color.FromArgb(0, 51, 102);
+            returnBtn.BorderColor = Color.FromArgb(255, 242, 204);
+            returnBtn.BorderRadius = 24;
+            returnBtn.BorderSize = 3;
+            returnBtn.FlatAppearance.BorderSize = 0;
+            returnBtn.FlatStyle = FlatStyle.Flat;
+            returnBtn.Font = new Font("Verdana", 12F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            returnBtn.ForeColor = Color.FromArgb(255, 242, 204);
+            returnBtn.Location = new Point(457, 322);
+            returnBtn.Name = "returnBtn";
+            returnBtn.Size = new Size(372, 60);
+            returnBtn.TabIndex = 17;
+            returnBtn.Text = "<- Return Home";
+            returnBtn.UseVisualStyleBackColor = false;
+            returnBtn.Click += returnBtn_Click;
+            // 
+            // rbtnNo
+            // 
+            rbtnNo.AutoSize = true;
+            rbtnNo.Enabled = false;
+            rbtnNo.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnNo.ForeColor = Color.White;
+            rbtnNo.Location = new Point(177, 255);
+            rbtnNo.Name = "rbtnNo";
+            rbtnNo.Size = new Size(48, 22);
+            rbtnNo.TabIndex = 16;
+            rbtnNo.TabStop = true;
+            rbtnNo.Text = "No";
+            rbtnNo.UseVisualStyleBackColor = true;
+          
+            // 
+            // rbtnYes
+            // 
+            rbtnYes.AutoSize = true;
+            rbtnYes.Enabled = false;
+            rbtnYes.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnYes.ForeColor = Color.White;
+            rbtnYes.Location = new Point(49, 255);
+            rbtnYes.Name = "rbtnYes";
+            rbtnYes.Size = new Size(55, 22);
+            rbtnYes.TabIndex = 15;
+            rbtnYes.TabStop = true;
+            rbtnYes.Text = "Yes";
+            rbtnYes.UseVisualStyleBackColor = true;
             // 
             // InvestData
             // 
@@ -437,34 +486,6 @@ namespace BankSystem
             EditBtn.Text = "Edit";
             EditBtn.UseVisualStyleBackColor = false;
             // 
-            // rbtnYes
-            // 
-            rbtnYes.AutoSize = true;
-            rbtnYes.Enabled = false;
-            rbtnYes.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbtnYes.ForeColor = Color.White;
-            rbtnYes.Location = new Point(49, 255);
-            rbtnYes.Name = "rbtnYes";
-            rbtnYes.Size = new Size(55, 22);
-            rbtnYes.TabIndex = 15;
-            rbtnYes.TabStop = true;
-            rbtnYes.Text = "Yes";
-            rbtnYes.UseVisualStyleBackColor = true;
-            // 
-            // rbtnNo
-            // 
-            rbtnNo.AutoSize = true;
-            rbtnNo.Enabled = false;
-            rbtnNo.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbtnNo.ForeColor = Color.White;
-            rbtnNo.Location = new Point(177, 255);
-            rbtnNo.Name = "rbtnNo";
-            rbtnNo.Size = new Size(48, 22);
-            rbtnNo.TabIndex = 16;
-            rbtnNo.TabStop = true;
-            rbtnNo.Text = "No";
-            rbtnNo.UseVisualStyleBackColor = true;
-            // 
             // UserAdministration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -523,5 +544,6 @@ namespace BankSystem
         private Label EverydayData;
         private RadioButton rbtnNo;
         private RadioButton rbtnYes;
+        private CustomButton returnBtn;
     }
 }
