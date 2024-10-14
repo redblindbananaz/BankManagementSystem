@@ -72,7 +72,7 @@ namespace BankSystem
             label2.Text = "User Details:";
             dataGridView1.Visible = false;
             ViewPanel.Visible = true;
-            ViewBtn.Enabled = false;
+            ChangeOpacityOfViewButton();
         }
 
         private void ReturnToGridView()
@@ -80,7 +80,22 @@ namespace BankSystem
             ViewPanel.Visible = false;
             dataGridView1.Visible = true;
             LoadUsersIntoGrid();
+            ResetOpacityOfViewButton();
+        }
+        private void ChangeOpacityOfViewButton()
+        {
+            ViewBtn.Enabled = false;
+            ViewBtn.BackColor = Color.FromArgb(128,169,196,235);
+            ViewBtn.ForeColor = Color.FromArgb(128, 0, 51, 102);
+            ViewBtn.BorderColor = Color.FromArgb(128, 255, 242, 204);
+        }
+
+        private void ResetOpacityOfViewButton()
+        {
             ViewBtn.Enabled = true;
+            ViewBtn.BackColor = Color.FromArgb(169, 196, 235);
+            ViewBtn.ForeColor = Color.FromArgb(0, 51, 102);
+            ViewBtn.BorderColor = Color.FromArgb(255, 242, 204);
         }
 
 
