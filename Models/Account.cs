@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace BankSystem.Models
 {
-   
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "AccountType")]
+    [JsonDerivedType(typeof(Everyday), "Everyday")]
+    [JsonDerivedType(typeof(Invest), "Invest")]
+    [JsonDerivedType(typeof(Omni), "Omni")]
+
     public abstract class Account
     {
         // Static field to generate the unique account ID

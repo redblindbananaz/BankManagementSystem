@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace BankSystem.Models
 {
@@ -47,6 +48,8 @@ namespace BankSystem.Models
 
         public static User? CurrentUser { get; private set; }
 
+        [JsonConstructor]
+      
         protected User(string userID, string userName, bool isEmployee)
         {
             _userID = userID;
@@ -63,6 +66,9 @@ namespace BankSystem.Models
             _contactDetails = contactDetails;
             _accounts = new List<Account>();
         }
+
+
+
 
 
         //Methods:

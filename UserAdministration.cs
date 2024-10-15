@@ -56,9 +56,7 @@ namespace BankSystem
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-
             }
-
         }
 
         private string GetAccountBalance(User user, Type accountType)
