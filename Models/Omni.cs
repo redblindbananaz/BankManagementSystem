@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BankSystem.Models
@@ -15,6 +16,7 @@ namespace BankSystem.Models
      * Simple deposit method
      * Ability to calculate and add interest to the balance
      */
+    [Serializable]
     internal class Omni : Account
     {
 
@@ -25,7 +27,7 @@ namespace BankSystem.Models
         public Omni (decimal balance) : base("Omni", balance)
         {
         }
-        
+        [JsonConstructor]
         public Omni(string accountName, decimal balance ) : base ("Omni",  balance)
         {
         }

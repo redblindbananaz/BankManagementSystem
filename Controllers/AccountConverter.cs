@@ -14,29 +14,21 @@ namespace BankSystem.Controllers
         public override Account? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var jsonObject = JsonDocument.ParseValue(ref reader).RootElement;
-            var accountType = jsonObject.GetProperty("$AccountType").GetString();
-
+            var accountType = jsonObject.GetProperty("AccountType").GetString();
 
             return accountType switch
-                    {
-                        "Everyday" => JsonSerializer.Deserialize<Everyday>(jsonObject.GetRawText(), options),
-                        "Invest" => JsonSerializer.Deserialize<Invest>(jsonObject.GetRawText(), options),
-                        "Omni" => JsonSerializer.Deserialize<Omni>(jsonObject.GetRawText(), options),
-                        _ => throw new JsonException($"Unknown account type: {accountType}")
-                    };
-      
-        }
-        public override void Write(Utf8JsonWriter writer, Account value, JsonSerializerOptions options)
-        {
-            writer.WriteStartObject();
-            writer.WriteString("$AccountType", value.GetType().Name);
-            foreach (var property in value.GetType().GetProperties())
             {
-               var propertyValue = property.GetValue(value);
-                JsonSerializer.Serialize(writer, propertyValue, propertyValue?.GetType() ?? typeof(object), options);
-            }
-            writer.WriteEndObject();
+                "Everyday" => JsonSerializer.Deserialize<Everyday>(jsonObject.GetRawText(), options),
+                "Invest" => JsonSerializer.Deserialize<Invest>(jsonObject.GetRawText(), options),
+                "Omni" => JsonSerializer.Deserialize<Omni>(jsonObject.GetRawText(), options),
+                _ => throw new JsonException($"Unknown account type: {accountType}")
+            };
         }
 
+        public override void Write(Utf8JsonWriter writer, Account value, JsonSerializerOptions options)
+        {
+            JsonSerializer.Serialize(writer, (object)value, value.GetType(), options);
+        }
     }
+
 }

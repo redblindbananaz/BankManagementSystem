@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
+using System.Diagnostics;
 
 namespace BankSystem.Controllers
 {
@@ -15,14 +16,12 @@ namespace BankSystem.Controllers
     {
         private List<User> _users = null!;
 
-        public List<User> Users { get; private set; } = new();
-
-
         public UserAdmin()
         {
             _users = new List<User>();
-           InitializeUsers();
-           //LoadUsersFromJsonFile("users.json");
+            InitializeUsers();
+            //LoadUsersFromJsonFile("users.json");
+
         }
 
         private void InitializeUsers()
@@ -49,8 +48,8 @@ namespace BankSystem.Controllers
             user3.CreateAccount(new Invest(900));
 
             _users.Add(user3);
+        
 
-            SaveUsersToJsonFile("users.json");
         }
 
         public User? GetUserByID(string userID)
@@ -64,32 +63,43 @@ namespace BankSystem.Controllers
         }
 
         // Serialise the users list to a JSON file
-        public void SaveUsersToJsonFile(string filepath)
-        {   
-            var options = new JsonSerializerOptions {
+        public void SaveUsersToJsonFile(string fileName)
+        {
+            var options = new JsonSerializerOptions
+            {
                 WriteIndented = true,
-                Converters = {new AccountConverter() }
+                //Converters = { new AccountConverter() }
             };
 
-            string jsonString = JsonSerializer.Serialize(Users, options);
-            File.WriteAllText(filepath, jsonString);
+            string jsonString = JsonSerializer.Serialize(_users, options);
+            File.WriteAllText(GetFilePath(fileName), jsonString);
         }
 
         // Deserialise the users list from a JSON file
-        public void LoadUsersFromJsonFile(string filepath)
+        public void LoadUsersFromJsonFile(string fileName)
         {
-            if (!File.Exists(filepath)) return;
+            string filePath = GetFilePath(fileName);
+            if (!File.Exists(filePath)) return;
             var options = new JsonSerializerOptions
             {
-                Converters = { new AccountConverter() }
+                //Converters = { new AccountConverter() }
             };
-            Users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText(filepath), options) ?? new List<User>();
+            _users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText(filePath), options) ?? new List<User>();
         }
 
         public void AddUser(User user)
         {
             _users.Add(user);
             SaveUsersToJsonFile("users.json");
+        }
+        private string GetFilePath(string fileName)
+        {
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BankSystem");
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            return Path.Combine(folderPath, fileName);
         }
     }
 }
