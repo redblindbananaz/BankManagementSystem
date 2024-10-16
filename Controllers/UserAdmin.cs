@@ -17,6 +17,7 @@ namespace BankSystem.Controllers
     public class UserAdmin
     {
         private List<User> _users = null!;
+        private const string _filePath = "users.json";
 
         public UserAdmin()
         {
@@ -67,38 +68,15 @@ namespace BankSystem.Controllers
         // Serialise the users list to a JSON file
         public void SaveUsersToJsonFile()
         {
-            string directory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-            string resourcesPath = Path.Combine(directory, "Resources");
-            Directory.CreateDirectory(resourcesPath);
-
-            string filePath = Path.Combine(resourcesPath, "users.json");
+         
 
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 //Converters = { new AccountConverter() }
             };
-
-            try 
-            {
-                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                using (StreamWriter writer = new StreamWriter(fs))
-                {
-                    string jsonString = JsonSerializer.Serialize(_users, options);
-                    writer.Write(jsonString);
-                    Console.WriteLine(jsonString);
-
-
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            //File.WriteAllText(filePath, jsonString);
-          
-
+            string jsonString = JsonSerializer.Serialize(_users, options);
+            File.WriteAllText(_filePath, jsonString);
         }
 
         // Deserialise the users list from a JSON file
