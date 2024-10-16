@@ -8,6 +8,8 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using System.Diagnostics;
+using Microsoft.VisualBasic.ApplicationServices;
+using User = BankSystem.Models.User;
 
 namespace BankSystem.Controllers
 {
@@ -48,8 +50,8 @@ namespace BankSystem.Controllers
             user3.CreateAccount(new Invest(900));
 
             _users.Add(user3);
-        
 
+            SaveUsersToJsonFile("users.json");
         }
 
         public User? GetUserByID(string userID)
@@ -65,14 +67,22 @@ namespace BankSystem.Controllers
         // Serialise the users list to a JSON file
         public void SaveUsersToJsonFile(string fileName)
         {
+            string resourcesPath = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            if (!Directory.Exists(resourcesPath))
+            {
+                Directory.CreateDirectory(resourcesPath);
+            }
+             string filePath = Path.Combine(resourcesPath, fileName);
+
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 //Converters = { new AccountConverter() }
             };
-
+       
             string jsonString = JsonSerializer.Serialize(_users, options);
-            File.WriteAllText(GetFilePath(fileName), jsonString);
+            File.WriteAllText(filePath, jsonString);
+ 
         }
 
         // Deserialise the users list from a JSON file
@@ -86,7 +96,7 @@ namespace BankSystem.Controllers
             };
             _users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText(filePath), options) ?? new List<User>();
         }
-
+        
         public void AddUser(User user)
         {
             _users.Add(user);

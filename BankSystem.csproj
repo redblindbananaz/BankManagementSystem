@@ -11,6 +11,13 @@
   <ItemGroup>
     <None Remove="Images\Invest.png" />
     <None Remove="Images\omni.png" />
+    <None Remove="Resources\users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\users.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
