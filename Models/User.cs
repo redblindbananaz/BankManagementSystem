@@ -48,7 +48,7 @@ namespace BankSystem.Models
 
         public static User? CurrentUser { get; private set; }
 
-        [JsonConstructor]
+       
       
         protected User(string userID, string userName, bool isEmployee)
         {
@@ -58,6 +58,7 @@ namespace BankSystem.Models
             _contactDetails = string.Empty;
             _accounts = new List<Account>();
         }
+        [JsonConstructor]
         protected User(string userID, string userName,bool isEmployee, string contactDetails)
         {
             _userID = userID;
@@ -66,10 +67,6 @@ namespace BankSystem.Models
             _contactDetails = contactDetails;
             _accounts = new List<Account>();
         }
-
-
-
-
 
         //Methods:
 

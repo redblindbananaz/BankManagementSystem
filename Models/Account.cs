@@ -45,7 +45,8 @@ namespace BankSystem.Models
         public List<String> Transactions=> _transactions;
 
         [JsonConstructor]
-        protected Account(string accountName, decimal balance)
+        public Account() { }
+        public Account(string accountName, decimal balance)
         {
             _accountID = _nextID++;
             _accountName = accountName;

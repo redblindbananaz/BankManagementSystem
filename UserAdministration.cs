@@ -61,8 +61,14 @@ namespace BankSystem
 
         private string GetAccountBalance(User user, Type accountType)
         {
-            var account = user.Accounts.FirstOrDefault(account => account.GetType() == accountType);
-            return account != null ? $"${account.Balance}" : "N/A";
+            var account = user.Accounts.FirstOrDefault(account => account.AccountName == accountType.Name);
+            if (account == null)
+            {
+                Console.WriteLine($"No Account of type {accountType.Name}  found for user {user.UserName}");
+                return "N/A";
+            }
+            Console.WriteLine($"Account of type {accountType.Name} found for user {user.UserName} with Balance: {account.Balance}");
+            return $"{account.Balance:C}";
         }
 
         private void SwitchToViewPanel()

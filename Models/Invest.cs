@@ -22,11 +22,12 @@ namespace BankSystem.Models
     {
         public const decimal InterestRate = 0.05m;
         private const decimal FailingFee = 10m;
-
+        [JsonConstructor]
+        public Invest() { }
         public Invest(decimal balance) : base("Invest", balance)
         {
         }
-        [JsonConstructor]
+       
         public Invest(string accountName, decimal balance) : base("Invest", balance)
         { 
            

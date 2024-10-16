@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -18,6 +18,10 @@
     <EmbeddedResource Include="Images\Everyday.png" />
     <EmbeddedResource Include="Images\Invest.png" />
     <EmbeddedResource Include="Images\omni.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolyJson" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>

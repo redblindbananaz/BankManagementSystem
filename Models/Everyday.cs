@@ -19,12 +19,13 @@ namespace BankSystem.Models
     [Serializable]
     public class Everyday : Account
     {
-
+        [JsonConstructor]
+        public Everyday() { }
         public Everyday(decimal balance) : base("Everyday", balance)
         {
 
         }
-        [JsonConstructor]
+       
         public Everyday(string accountName, decimal balance ): base ("Everyday", balance)
         {
  

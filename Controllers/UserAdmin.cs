@@ -22,7 +22,7 @@ namespace BankSystem.Controllers
         {
             _users = new List<User>();
             InitializeUsers();
-            //LoadUsersFromJsonFile("users.json");
+            //LoadUsersFromJsonFile();
 
         }
 
@@ -51,7 +51,7 @@ namespace BankSystem.Controllers
 
             _users.Add(user3);
 
-            SaveUsersToJsonFile();
+            //SaveUsersToJsonFile();
         }
 
         public User? GetUserByID(string userID)
@@ -73,22 +73,47 @@ namespace BankSystem.Controllers
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
+                Converters = { new AccountConverter() }
+
 
             };
             string jsonString = JsonSerializer.Serialize(_users, options);
+            Console.WriteLine($"Serialised Users: {jsonString}");
             File.WriteAllText(_filePath, jsonString);
         }
 
         // Deserialise the users list from a JSON file
-        public void LoadUsersFromJsonFile(string fileName)
+        public void LoadUsersFromJsonFile()
         {
-            string filePath = GetFilePath(fileName);
-            if (!File.Exists(filePath)) return;
+           
+            string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string _filePath = Path.Combine(solutionDirectory, "Serialization", "users.json");
+
+            if (!File.Exists(_filePath))
+            {
+                Console.WriteLine("JSON File not Found, Initializing with an empty user list");
+                return;
+            }
             var options = new JsonSerializerOptions
             {
-                //Converters = { new AccountConverter() }
+                WriteIndented = true,
+                Converters = { new AccountConverter() }
             };
-            _users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText(filePath), options) ?? new List<User>();
+
+            try 
+            {
+                string jsonString = File.ReadAllText(_filePath);
+                _users = JsonSerializer.Deserialize<List<User>>(jsonString, options)?? new List<User>();
+                Console.WriteLine($"Deserialised Users: {_users}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error during desterialisation: {e.Message}");
+            }
+           
+
+            
+           
         }
         
         public void AddUser(User user)
