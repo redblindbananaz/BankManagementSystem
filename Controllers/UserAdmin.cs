@@ -51,7 +51,7 @@ namespace BankSystem.Controllers
 
             _users.Add(user3);
 
-            SaveUsersToJsonFile("users.json");
+            SaveUsersToJsonFile();
         }
 
         public User? GetUserByID(string userID)
@@ -65,24 +65,40 @@ namespace BankSystem.Controllers
         }
 
         // Serialise the users list to a JSON file
-        public void SaveUsersToJsonFile(string fileName)
+        public void SaveUsersToJsonFile()
         {
-            string resourcesPath = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "Resources");
-            if (!Directory.Exists(resourcesPath))
-            {
-                Directory.CreateDirectory(resourcesPath);
-            }
-             string filePath = Path.Combine(resourcesPath, fileName);
+            string directory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+            string resourcesPath = Path.Combine(directory, "Resources");
+            Directory.CreateDirectory(resourcesPath);
+
+            string filePath = Path.Combine(resourcesPath, "users.json");
 
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 //Converters = { new AccountConverter() }
             };
-       
-            string jsonString = JsonSerializer.Serialize(_users, options);
-            File.WriteAllText(filePath, jsonString);
- 
+
+            try 
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (StreamWriter writer = new StreamWriter(fs))
+                {
+                    string jsonString = JsonSerializer.Serialize(_users, options);
+                    writer.Write(jsonString);
+                    Console.WriteLine(jsonString);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            //File.WriteAllText(filePath, jsonString);
+          
+
         }
 
         // Deserialise the users list from a JSON file
@@ -100,7 +116,7 @@ namespace BankSystem.Controllers
         public void AddUser(User user)
         {
             _users.Add(user);
-            SaveUsersToJsonFile("users.json");
+            SaveUsersToJsonFile();
         }
         private string GetFilePath(string fileName)
         {
