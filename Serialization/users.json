@@ -1,0 +1,75 @@
+[
+  {
+    "UserID": "JD12345",
+    "UserName": "John Dee",
+    "ContactDetails": "027 778 999",
+    "IsEmployee": true,
+    "Accounts": [
+      {
+        "AccountType": "Everyday",
+        "AccountID": 12,
+        "AccountName": "Everyday",
+        "Balance": 510,
+        "Transactions": []
+      },
+      {
+        "AccountType": "Omni",
+        "AccountID": 13,
+        "AccountName": "Omni",
+        "Balance": 340,
+        "Transactions": []
+      },
+      {
+        "AccountType": "Invest",
+        "AccountID": 14,
+        "AccountName": "Invest",
+        "Balance": 320,
+        "Transactions": []
+      }
+    ]
+  },
+  {
+    "UserID": "AB12345",
+    "UserName": "Andrea Bolneli",
+    "ContactDetails": "",
+    "IsEmployee": false,
+    "Accounts": [
+      {
+        "AccountType": "Everyday",
+        "AccountID": 15,
+        "AccountName": "Everyday",
+        "Balance": 30,
+        "Transactions": []
+      },
+      {
+        "AccountType": "Omni",
+        "AccountID": 16,
+        "AccountName": "Omni",
+        "Balance": 1000,
+        "Transactions": []
+      }
+    ]
+  },
+  {
+    "UserID": "SA23479",
+    "UserName": "Steph Anie",
+    "ContactDetails": "",
+    "IsEmployee": false,
+    "Accounts": [
+      {
+        "AccountType": "Everyday",
+        "AccountID": 17,
+        "AccountName": "Everyday",
+        "Balance": 200,
+        "Transactions": []
+      },
+      {
+        "AccountType": "Invest",
+        "AccountID": 18,
+        "AccountName": "Invest",
+        "Balance": 900,
+        "Transactions": []
+      }
+    ]
+  }
+]
