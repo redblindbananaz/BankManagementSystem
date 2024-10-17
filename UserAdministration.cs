@@ -45,9 +45,14 @@ namespace BankSystem
 
                     DisplayUserDetails(userData);
                 }
+                else 
+                { 
+                    MessageBox.Show("Please select a valid User", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
                 MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
             }
         }
 
@@ -55,25 +60,23 @@ namespace BankSystem
         private void DisplayUserDetails(UserDetailsDTO userData)
         {
             
-            if (userData != null)
-            {
-                
-                UserIdData.Text = userData.SelectedID;
-                NameData.Text = userData.SelectedUserName;
-                rbtnYes.Checked = userData.SelectedBoolEmployee == "Yes";
-                rbtnNo.Checked = userData.SelectedBoolEmployee == "No";
-                UpdateRadioBUttonColors(rbtnYes.Checked);
+            if (userData == null) return;
 
 
-                ContactData.Text = userData.SelectedContact;
+            UserIdData.Text = userData.SelectedID;
+            NameData.Text = userData.SelectedUserName;
+            rbtnYes.Checked = userData.SelectedBoolEmployee == "Yes";
+            rbtnNo.Checked = userData.SelectedBoolEmployee == "No";
+            UpdateRadioBUttonColors(rbtnYes.Checked);
 
-                EverydayData.Text = userData.SelectedEveryday;
-                OmniData.Text = userData.SelectedOmni;
-                InvestData.Text = userData.SelectedInvest;
 
-            }
-            MessageBox.Show("SelectedUser == null", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
+            ContactData.Text = userData.SelectedContact;
+
+            EverydayData.Text = userData.SelectedEveryday;
+            OmniData.Text = userData.SelectedOmni;
+            InvestData.Text = userData.SelectedInvest;
+
+           
         }
 
         private void SwitchToViewPanel()
@@ -162,12 +165,23 @@ namespace BankSystem
             {
                 var selectedRow = dataGridView1.CurrentRow;
                 var selectedUserID = selectedRow.Cells[0].Value.ToString();
-                DisplayUserDetails(_userAdmin.GetSelectedUserData(selectedUserID));
-                ChangeOpacityOfButton(ViewBtn);
-                ResetOpacityOfButton(CreateBtn);
-                ResetOpacityOfButton(EditBtn);
-                ResetOpacityOfButton(DeleteBtn);
-                SwitchToViewPanel();
+
+                var userData = _userAdmin.GetSelectedUserData(selectedUserID);
+                if (userData != null)
+                {
+                    DisplayUserDetails(userData);
+                    ChangeOpacityOfButton(ViewBtn);
+                    ResetOpacityOfButton(CreateBtn);
+                    ResetOpacityOfButton(EditBtn);
+                    ResetOpacityOfButton(DeleteBtn);
+                    SwitchToViewPanel();
+                }
+                else
+                {
+                    MessageBox.Show("No User data found for the selected user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+               
             }
             
 
