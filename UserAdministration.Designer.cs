@@ -36,6 +36,8 @@ namespace BankSystem
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
+            GridPAnel = new Panel();
+            ViewBtn = new CustomButton();
             dataGridView1 = new DataGridView();
             UserId = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
@@ -47,6 +49,8 @@ namespace BankSystem
             ViewPanel = new Panel();
             InvestData = new Label();
             OmniData = new Label();
+            EditBtn = new CustomButton();
+            DeleteBtn = new CustomButton();
             EverydayData = new Label();
             ContactData = new Label();
             NameData = new Label();
@@ -69,13 +73,11 @@ namespace BankSystem
             labelFullName = new Label();
             labelUserID = new Label();
             BottomPanel = new Panel();
-            ViewBtn = new CustomButton();
             CreateBtn = new CustomButton();
-            DeleteBtn = new CustomButton();
-            EditBtn = new CustomButton();
             TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             customPanel1.SuspendLayout();
+            GridPAnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ViewPanel.SuspendLayout();
             EditablePanel.SuspendLayout();
@@ -87,7 +89,6 @@ namespace BankSystem
             TopPanel.Anchor = AnchorStyles.Top;
             TopPanel.Controls.Add(pictureBox1);
             TopPanel.Controls.Add(label1);
-            TopPanel.Controls.Add(LogoutBtn);
             TopPanel.Location = new Point(0, 0);
             TopPanel.Name = "TopPanel";
             TopPanel.Size = new Size(934, 82);
@@ -97,7 +98,7 @@ namespace BankSystem
             // 
             pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = Properties.Resources.icons8_home_50;
-            pictureBox1.Location = new Point(8, 5);
+            pictureBox1.Location = new Point(29, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(82, 73);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -110,7 +111,7 @@ namespace BankSystem
             label1.AutoSize = true;
             label1.Font = new Font("Verdana", 36F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(255, 242, 204);
-            label1.Location = new Point(85, 12);
+            label1.Location = new Point(288, 12);
             label1.Name = "label1";
             label1.Size = new Size(324, 59);
             label1.TabIndex = 5;
@@ -126,7 +127,7 @@ namespace BankSystem
             LogoutBtn.FlatStyle = FlatStyle.Flat;
             LogoutBtn.Font = new Font("Verdana", 16F, FontStyle.Bold);
             LogoutBtn.ForeColor = Color.FromArgb(215, 155, 0);
-            LogoutBtn.Location = new Point(722, 12);
+            LogoutBtn.Location = new Point(28, 12);
             LogoutBtn.Name = "LogoutBtn";
             LogoutBtn.Size = new Size(200, 57);
             LogoutBtn.TabIndex = 4;
@@ -140,7 +141,7 @@ namespace BankSystem
             customPanel1.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel1.BorderRadius = 24;
             customPanel1.BorderSize = 8;
-            customPanel1.Controls.Add(dataGridView1);
+            customPanel1.Controls.Add(GridPAnel);
             customPanel1.Controls.Add(ViewPanel);
             customPanel1.Controls.Add(label2);
             customPanel1.Controls.Add(EditablePanel);
@@ -148,6 +149,33 @@ namespace BankSystem
             customPanel1.Name = "customPanel1";
             customPanel1.Size = new Size(934, 496);
             customPanel1.TabIndex = 1;
+            // 
+            // GridPAnel
+            // 
+            GridPAnel.Controls.Add(ViewBtn);
+            GridPAnel.Controls.Add(dataGridView1);
+            GridPAnel.Location = new Point(28, 64);
+            GridPAnel.Name = "GridPAnel";
+            GridPAnel.Size = new Size(880, 411);
+            GridPAnel.TabIndex = 15;
+            // 
+            // ViewBtn
+            // 
+            ViewBtn.BackColor = Color.FromArgb(169, 196, 235);
+            ViewBtn.BorderColor = Color.FromArgb(255, 242, 204);
+            ViewBtn.BorderRadius = 24;
+            ViewBtn.BorderSize = 8;
+            ViewBtn.FlatAppearance.BorderSize = 0;
+            ViewBtn.FlatStyle = FlatStyle.Flat;
+            ViewBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
+            ViewBtn.ForeColor = Color.FromArgb(0, 51, 102);
+            ViewBtn.Location = new Point(676, 335);
+            ViewBtn.Name = "ViewBtn";
+            ViewBtn.Size = new Size(200, 60);
+            ViewBtn.TabIndex = 3;
+            ViewBtn.Text = "View";
+            ViewBtn.UseVisualStyleBackColor = false;
+            ViewBtn.Click += ViewBtn_Click;
             // 
             // dataGridView1
             // 
@@ -164,10 +192,10 @@ namespace BankSystem
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
-            dataGridView1.Location = new Point(29, 66);
+            dataGridView1.Location = new Point(1, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(879, 410);
+            dataGridView1.Size = new Size(879, 327);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
@@ -223,6 +251,8 @@ namespace BankSystem
             // 
             ViewPanel.Controls.Add(InvestData);
             ViewPanel.Controls.Add(OmniData);
+            ViewPanel.Controls.Add(EditBtn);
+            ViewPanel.Controls.Add(DeleteBtn);
             ViewPanel.Controls.Add(EverydayData);
             ViewPanel.Controls.Add(ContactData);
             ViewPanel.Controls.Add(NameData);
@@ -253,6 +283,42 @@ namespace BankSystem
             OmniData.TabIndex = 13;
             OmniData.Text = "Omni here";
             OmniData.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // EditBtn
+            // 
+            EditBtn.BackColor = Color.FromArgb(169, 196, 235);
+            EditBtn.BorderColor = Color.FromArgb(255, 242, 204);
+            EditBtn.BorderRadius = 24;
+            EditBtn.BorderSize = 8;
+            EditBtn.FlatAppearance.BorderSize = 0;
+            EditBtn.FlatStyle = FlatStyle.Flat;
+            EditBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
+            EditBtn.ForeColor = Color.FromArgb(0, 51, 102);
+            EditBtn.Location = new Point(457, 332);
+            EditBtn.Name = "EditBtn";
+            EditBtn.Size = new Size(200, 60);
+            EditBtn.TabIndex = 0;
+            EditBtn.Text = "Edit";
+            EditBtn.UseVisualStyleBackColor = false;
+            EditBtn.Click += EditBtn_Click;
+            // 
+            // DeleteBtn
+            // 
+            DeleteBtn.BackColor = Color.FromArgb(169, 196, 235);
+            DeleteBtn.BorderColor = Color.FromArgb(255, 242, 204);
+            DeleteBtn.BorderRadius = 24;
+            DeleteBtn.BorderSize = 8;
+            DeleteBtn.FlatAppearance.BorderSize = 0;
+            DeleteBtn.FlatStyle = FlatStyle.Flat;
+            DeleteBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
+            DeleteBtn.ForeColor = Color.FromArgb(0, 51, 102);
+            DeleteBtn.Location = new Point(675, 331);
+            DeleteBtn.Name = "DeleteBtn";
+            DeleteBtn.Size = new Size(200, 60);
+            DeleteBtn.TabIndex = 1;
+            DeleteBtn.Text = "Delete";
+            DeleteBtn.UseVisualStyleBackColor = false;
+            DeleteBtn.Click += DeleteBtn_Click;
             // 
             // EverydayData
             // 
@@ -472,32 +538,12 @@ namespace BankSystem
             // BottomPanel
             // 
             BottomPanel.Anchor = AnchorStyles.Bottom;
-            BottomPanel.Controls.Add(ViewBtn);
             BottomPanel.Controls.Add(CreateBtn);
-            BottomPanel.Controls.Add(DeleteBtn);
-            BottomPanel.Controls.Add(EditBtn);
+            BottomPanel.Controls.Add(LogoutBtn);
             BottomPanel.Location = new Point(0, 583);
             BottomPanel.Name = "BottomPanel";
             BottomPanel.Size = new Size(934, 75);
             BottomPanel.TabIndex = 2;
-            // 
-            // ViewBtn
-            // 
-            ViewBtn.BackColor = Color.FromArgb(169, 196, 235);
-            ViewBtn.BorderColor = Color.FromArgb(255, 242, 204);
-            ViewBtn.BorderRadius = 24;
-            ViewBtn.BorderSize = 8;
-            ViewBtn.FlatAppearance.BorderSize = 0;
-            ViewBtn.FlatStyle = FlatStyle.Flat;
-            ViewBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
-            ViewBtn.ForeColor = Color.FromArgb(0, 51, 102);
-            ViewBtn.Location = new Point(12, 9);
-            ViewBtn.Name = "ViewBtn";
-            ViewBtn.Size = new Size(200, 60);
-            ViewBtn.TabIndex = 3;
-            ViewBtn.Text = "View";
-            ViewBtn.UseVisualStyleBackColor = false;
-            ViewBtn.Click += ViewBtn_Click;
             // 
             // CreateBtn
             // 
@@ -509,49 +555,13 @@ namespace BankSystem
             CreateBtn.FlatStyle = FlatStyle.Flat;
             CreateBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
             CreateBtn.ForeColor = Color.FromArgb(215, 155, 0);
-            CreateBtn.Location = new Point(722, 9);
+            CreateBtn.Location = new Point(704, 9);
             CreateBtn.Name = "CreateBtn";
             CreateBtn.Size = new Size(200, 60);
             CreateBtn.TabIndex = 2;
             CreateBtn.Text = "NEW";
             CreateBtn.UseVisualStyleBackColor = false;
             CreateBtn.Click += CreateBtn_Click;
-            // 
-            // DeleteBtn
-            // 
-            DeleteBtn.BackColor = Color.FromArgb(169, 196, 235);
-            DeleteBtn.BorderColor = Color.FromArgb(255, 242, 204);
-            DeleteBtn.BorderRadius = 24;
-            DeleteBtn.BorderSize = 8;
-            DeleteBtn.FlatAppearance.BorderSize = 0;
-            DeleteBtn.FlatStyle = FlatStyle.Flat;
-            DeleteBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
-            DeleteBtn.ForeColor = Color.FromArgb(0, 51, 102);
-            DeleteBtn.Location = new Point(485, 9);
-            DeleteBtn.Name = "DeleteBtn";
-            DeleteBtn.Size = new Size(200, 60);
-            DeleteBtn.TabIndex = 1;
-            DeleteBtn.Text = "Delete";
-            DeleteBtn.UseVisualStyleBackColor = false;
-            DeleteBtn.Click += DeleteBtn_Click;
-            // 
-            // EditBtn
-            // 
-            EditBtn.BackColor = Color.FromArgb(169, 196, 235);
-            EditBtn.BorderColor = Color.FromArgb(255, 242, 204);
-            EditBtn.BorderRadius = 24;
-            EditBtn.BorderSize = 8;
-            EditBtn.FlatAppearance.BorderSize = 0;
-            EditBtn.FlatStyle = FlatStyle.Flat;
-            EditBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
-            EditBtn.ForeColor = Color.FromArgb(0, 51, 102);
-            EditBtn.Location = new Point(249, 9);
-            EditBtn.Name = "EditBtn";
-            EditBtn.Size = new Size(200, 60);
-            EditBtn.TabIndex = 0;
-            EditBtn.Text = "Edit";
-            EditBtn.UseVisualStyleBackColor = false;
-            EditBtn.Click += EditBtn_Click;
             // 
             // UserAdministration
             // 
@@ -569,6 +579,7 @@ namespace BankSystem
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
+            GridPAnel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ViewPanel.ResumeLayout(false);
             EditablePanel.ResumeLayout(false);
@@ -621,5 +632,6 @@ namespace BankSystem
         private TextBox textBoxContact;
         private TextBox textBoxName;
         private TextBox textBoxID;
+        private Panel GridPAnel;
     }
 }

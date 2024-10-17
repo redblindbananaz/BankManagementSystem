@@ -25,7 +25,7 @@ namespace BankSystem
         {
             InitializeComponent();
             _userAdmin = new UserAdmin();
-            _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            ReturnToGridView();
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
@@ -134,7 +134,9 @@ namespace BankSystem
         private void ReturnToGridView()
         {
             ViewPanel.Visible = false;
+            EditablePanel.Visible = false;
             dataGridView1.Visible = true;
+            ViewBtn.Visible = true;
             _userAdmin.LoadUsersIntoGrid(dataGridView1);
             ResetOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(EditBtn);
@@ -159,8 +161,6 @@ namespace BankSystem
 
         private void ViewBtn_Click(object sender, EventArgs e)
         {
-
-
             if (dataGridView1.CurrentRow != null) 
             {
                 var selectedRow = dataGridView1.CurrentRow;
@@ -180,15 +180,9 @@ namespace BankSystem
                 {
                     MessageBox.Show("No User data found for the selected user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
-               
+  
             }
-            
-
-
-
-            
-        }
+       }
 
         private void UpdateRadioBUttonColors(bool isEmployee)
         {
@@ -211,6 +205,7 @@ namespace BankSystem
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
             SwitchToViewPanel();
+            label2.Text = "User Deletion:";
             ResetOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(EditBtn);
             ChangeOpacityOfButton(DeleteBtn);
