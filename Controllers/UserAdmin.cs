@@ -10,6 +10,7 @@ using System.Text.Json.Serialization.Metadata;
 using System.Diagnostics;
 using Microsoft.VisualBasic.ApplicationServices;
 using User = BankSystem.Models.User;
+using System.Windows.Forms;
 
 namespace BankSystem.Controllers
 {
@@ -18,11 +19,8 @@ namespace BankSystem.Controllers
     {
         private List<User> _users = null!;
 
-        public List<User> Users
-        {
-            get => _users;
-            private set => _users = value;
-        }
+        public List<User> Users { get; private set; } = new();
+        
 
         public UserAdmin()
         {
@@ -65,9 +63,57 @@ namespace BankSystem.Controllers
             return _users.FirstOrDefault(user => user.UserID == userID);
         }
 
-        public List<User> GetUsers()
+        public object? GetSelectedUserData(string userID)
+        {
+            var selectedUser = GetUserByID(userID);
+            if (selectedUser != null)
+            {
+                return new
+                {
+                    SelectedID = selectedUser.UserID,
+                    SelectedUserName = selectedUser.UserName,
+                    SelectedBoolEmployee = selectedUser.IsEmployee ? "Yes" : "No",
+                    SelectedContact = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails,
+                    SelectedEveryday = GetAccountBalance(selectedUser, typeof(Everyday)),
+                    SelectedOmni = GetAccountBalance(selectedUser, typeof(Omni)),
+                    SelectedInvest = GetAccountBalance(selectedUser, typeof(Invest))
+
+                };
+            }
+            MessageBox.Show("User not found");
+            return null;
+        }
+
+        private string GetAccountBalance(User user, Type accountType)
+        {
+            var account = user.Accounts.FirstOrDefault(account => account.GetType() == accountType);
+            return account != null ? $"${account.Balance}" : "N/A";
+        }
+
+        public List<User> GetAllUsers()
         {
             return _users;
+        }
+
+        public void LoadUsersIntoGrid(DataGridView grid)
+        {
+            grid.Rows.Clear(); // Otherwise i have duplicates!!!
+            GetAllUsers();
+
+
+            foreach (User user in GetAllUsers())
+            {
+                string everydayBalance = GetAccountBalance(user, typeof(Everyday));
+                string omniBalance = GetAccountBalance(user, typeof(Omni));
+                string investBalance = GetAccountBalance(user, typeof(Invest));
+
+                string isEmployee = user.IsEmployee ? "Yes" : "No";
+
+                string ContactDetails = string.IsNullOrEmpty(user.ContactDetails) ? "N/A" : user.ContactDetails;
+
+                grid.Rows.Add(user.UserID, user.UserName, isEmployee, ContactDetails, everydayBalance, omniBalance, investBalance);
+            }
+
         }
         public void AddUser(User user)
         {

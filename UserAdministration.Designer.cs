@@ -30,30 +30,12 @@ namespace BankSystem
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TopPanel = new Panel();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
-            ViewPanel = new Panel();
-            rbtnNo = new RadioButton();
-            rbtnYes = new RadioButton();
-            InvestData = new Label();
-            OmniData = new Label();
-            EverydayData = new Label();
-            ContactData = new Label();
-            NameData = new Label();
-            UserIdData = new Label();
-            label2 = new Label();
-            EditablePanel = new Panel();
-            labelInvest = new Label();
-            labelOmni = new Label();
-            labelEveryday = new Label();
-            labelUSerContact = new Label();
-            labelIsEmployee = new Label();
-            labelFullName = new Label();
-            labelUserID = new Label();
             dataGridView1 = new DataGridView();
             UserId = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
@@ -62,23 +44,41 @@ namespace BankSystem
             Everyday = new DataGridViewTextBoxColumn();
             Omni = new DataGridViewTextBoxColumn();
             Invest = new DataGridViewTextBoxColumn();
+            ViewPanel = new Panel();
+            InvestData = new Label();
+            OmniData = new Label();
+            EverydayData = new Label();
+            ContactData = new Label();
+            NameData = new Label();
+            UserIdData = new Label();
+            label2 = new Label();
+            EditablePanel = new Panel();
+            textBoxInvest = new TextBox();
+            textBoxOmni = new TextBox();
+            textBoxEveryday = new TextBox();
+            textBoxContact = new TextBox();
+            textBoxName = new TextBox();
+            textBoxID = new TextBox();
+            rbtnNo = new RadioButton();
+            rbtnYes = new RadioButton();
+            labelInvest = new Label();
+            labelOmni = new Label();
+            labelEveryday = new Label();
+            labelUSerContact = new Label();
+            labelIsEmployee = new Label();
+            labelFullName = new Label();
+            labelUserID = new Label();
             BottomPanel = new Panel();
             ViewBtn = new CustomButton();
             CreateBtn = new CustomButton();
             DeleteBtn = new CustomButton();
             EditBtn = new CustomButton();
-            textBoxID = new TextBox();
-            textBoxName = new TextBox();
-            textBoxContact = new TextBox();
-            textBoxEveryday = new TextBox();
-            textBoxOmni = new TextBox();
-            textBoxInvest = new TextBox();
             TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             customPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ViewPanel.SuspendLayout();
             EditablePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             BottomPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -144,54 +144,93 @@ namespace BankSystem
             customPanel1.Controls.Add(ViewPanel);
             customPanel1.Controls.Add(label2);
             customPanel1.Controls.Add(EditablePanel);
-            
             customPanel1.Location = new Point(0, 82);
             customPanel1.Name = "customPanel1";
             customPanel1.Size = new Size(934, 496);
             customPanel1.TabIndex = 1;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.BackgroundColor = Color.AliceBlue;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Info;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 30;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
+            dataGridView1.Location = new Point(29, 66);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.Size = new Size(879, 410);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            // 
+            // UserId
+            // 
+            UserId.HeaderText = "User ID";
+            UserId.Name = "UserId";
+            UserId.ReadOnly = true;
+            UserId.Width = 86;
+            // 
+            // LastName
+            // 
+            LastName.HeaderText = "Full Name";
+            LastName.Name = "LastName";
+            LastName.ReadOnly = true;
+            LastName.Width = 220;
+            // 
+            // Employee
+            // 
+            Employee.FillWeight = 200F;
+            Employee.HeaderText = "IsEmployee";
+            Employee.Name = "Employee";
+            Employee.ReadOnly = true;
+            Employee.Width = 120;
+            // 
+            // Contact
+            // 
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.ReadOnly = true;
+            Contact.Width = 110;
+            // 
+            // Everyday
+            // 
+            Everyday.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Everyday.HeaderText = "Everyday";
+            Everyday.Name = "Everyday";
+            Everyday.ReadOnly = true;
+            // 
+            // Omni
+            // 
+            Omni.HeaderText = "Omni";
+            Omni.Name = "Omni";
+            Omni.ReadOnly = true;
+            // 
+            // Invest
+            // 
+            Invest.HeaderText = "Invest";
+            Invest.Name = "Invest";
+            Invest.ReadOnly = true;
+            // 
             // ViewPanel
             // 
-            
             ViewPanel.Controls.Add(InvestData);
             ViewPanel.Controls.Add(OmniData);
             ViewPanel.Controls.Add(EverydayData);
             ViewPanel.Controls.Add(ContactData);
             ViewPanel.Controls.Add(NameData);
             ViewPanel.Controls.Add(UserIdData);
-            ViewPanel.Location = new Point(1556, 66);
+            ViewPanel.Location = new Point(29, 67);
             ViewPanel.Name = "ViewPanel";
             ViewPanel.Size = new Size(879, 410);
             ViewPanel.TabIndex = 6;
-            
-            // 
-            // rbtnNo
-            // 
-            rbtnNo.AutoSize = true;
-            rbtnNo.Enabled = false;
-            rbtnNo.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbtnNo.ForeColor = Color.White;
-            rbtnNo.Location = new Point(177, 255);
-            rbtnNo.Name = "rbtnNo";
-            rbtnNo.Size = new Size(48, 22);
-            rbtnNo.TabIndex = 16;
-            rbtnNo.TabStop = true;
-            rbtnNo.Text = "No";
-            rbtnNo.UseVisualStyleBackColor = true;
-            // 
-            // rbtnYes
-            // 
-            rbtnYes.AutoSize = true;
-            rbtnYes.Enabled = false;
-            rbtnYes.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbtnYes.ForeColor = Color.White;
-            rbtnYes.Location = new Point(49, 255);
-            rbtnYes.Name = "rbtnYes";
-            rbtnYes.Size = new Size(55, 22);
-            rbtnYes.TabIndex = 15;
-            rbtnYes.TabStop = true;
-            rbtnYes.Text = "Yes";
-            rbtnYes.UseVisualStyleBackColor = true;
             // 
             // InvestData
             // 
@@ -282,6 +321,83 @@ namespace BankSystem
             EditablePanel.Name = "EditablePanel";
             EditablePanel.Size = new Size(879, 410);
             EditablePanel.TabIndex = 17;
+            EditablePanel.Visible = false;
+            // 
+            // textBoxInvest
+            // 
+            textBoxInvest.Location = new Point(457, 259);
+            textBoxInvest.Name = "textBoxInvest";
+            textBoxInvest.PlaceholderText = "Enter Amount";
+            textBoxInvest.Size = new Size(332, 23);
+            textBoxInvest.TabIndex = 17;
+            // 
+            // textBoxOmni
+            // 
+            textBoxOmni.Location = new Point(457, 155);
+            textBoxOmni.Name = "textBoxOmni";
+            textBoxOmni.PlaceholderText = "Enter Amount";
+            textBoxOmni.Size = new Size(332, 23);
+            textBoxOmni.TabIndex = 16;
+            // 
+            // textBoxEveryday
+            // 
+            textBoxEveryday.Location = new Point(457, 53);
+            textBoxEveryday.Name = "textBoxEveryday";
+            textBoxEveryday.PlaceholderText = "Enter Amount";
+            textBoxEveryday.Size = new Size(332, 23);
+            textBoxEveryday.TabIndex = 15;
+            // 
+            // textBoxContact
+            // 
+            textBoxContact.Location = new Point(49, 358);
+            textBoxContact.Name = "textBoxContact";
+            textBoxContact.PlaceholderText = "Enter Contact Details";
+            textBoxContact.Size = new Size(332, 23);
+            textBoxContact.TabIndex = 14;
+            // 
+            // textBoxName
+            // 
+            textBoxName.Location = new Point(49, 155);
+            textBoxName.Name = "textBoxName";
+            textBoxName.PlaceholderText = "Enter Full Name";
+            textBoxName.Size = new Size(332, 23);
+            textBoxName.TabIndex = 13;
+            // 
+            // textBoxID
+            // 
+            textBoxID.Location = new Point(49, 53);
+            textBoxID.Name = "textBoxID";
+            textBoxID.PlaceholderText = "Enter Unique ID";
+            textBoxID.Size = new Size(332, 23);
+            textBoxID.TabIndex = 12;
+            // 
+            // rbtnNo
+            // 
+            rbtnNo.AutoSize = true;
+            rbtnNo.Enabled = false;
+            rbtnNo.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnNo.ForeColor = Color.White;
+            rbtnNo.Location = new Point(177, 255);
+            rbtnNo.Name = "rbtnNo";
+            rbtnNo.Size = new Size(48, 22);
+            rbtnNo.TabIndex = 16;
+            rbtnNo.TabStop = true;
+            rbtnNo.Text = "No";
+            rbtnNo.UseVisualStyleBackColor = true;
+            // 
+            // rbtnYes
+            // 
+            rbtnYes.AutoSize = true;
+            rbtnYes.Enabled = false;
+            rbtnYes.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbtnYes.ForeColor = Color.White;
+            rbtnYes.Location = new Point(49, 255);
+            rbtnYes.Name = "rbtnYes";
+            rbtnYes.Size = new Size(55, 22);
+            rbtnYes.TabIndex = 15;
+            rbtnYes.TabStop = true;
+            rbtnYes.Text = "Yes";
+            rbtnYes.UseVisualStyleBackColor = true;
             // 
             // labelInvest
             // 
@@ -352,69 +468,6 @@ namespace BankSystem
             labelUserID.Size = new Size(372, 25);
             labelUserID.TabIndex = 5;
             labelUserID.Text = "User ID:";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = Color.AliceBlue;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.Info;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
-            dataGridView1.Location = new Point(29, 66);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(879, 410);
-            dataGridView1.TabIndex = 0;
-            
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-            // 
-            // UserId
-            // 
-            UserId.HeaderText = "User ID";
-            UserId.Name = "UserId";
-            UserId.Width = 86;
-            // 
-            // LastName
-            // 
-            LastName.HeaderText = "Full Name";
-            LastName.Name = "LastName";
-            LastName.Width = 220;
-            // 
-            // Employee
-            // 
-            Employee.FillWeight = 200F;
-            Employee.HeaderText = "IsEmployee";
-            Employee.Name = "Employee";
-            Employee.Width = 120;
-            // 
-            // Contact
-            // 
-            Contact.HeaderText = "Contact";
-            Contact.Name = "Contact";
-            Contact.Width = 110;
-            // 
-            // Everyday
-            // 
-            Everyday.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Everyday.HeaderText = "Everyday";
-            Everyday.Name = "Everyday";
-            // 
-            // Omni
-            // 
-            Omni.HeaderText = "Omni";
-            Omni.Name = "Omni";
-            // 
-            // Invest
-            // 
-            Invest.HeaderText = "Invest";
-            Invest.Name = "Invest";
             // 
             // BottomPanel
             // 
@@ -500,54 +553,6 @@ namespace BankSystem
             EditBtn.UseVisualStyleBackColor = false;
             EditBtn.Click += EditBtn_Click;
             // 
-            // textBoxID
-            // 
-            textBoxID.Location = new Point(49, 53);
-            textBoxID.Name = "textBoxID";
-            textBoxID.PlaceholderText = "Enter Unique ID";
-            textBoxID.Size = new Size(332, 23);
-            textBoxID.TabIndex = 12;
-            // 
-            // textBoxName
-            // 
-            textBoxName.Location = new Point(49, 155);
-            textBoxName.Name = "textBoxName";
-            textBoxName.PlaceholderText = "Enter Full Name";
-            textBoxName.Size = new Size(332, 23);
-            textBoxName.TabIndex = 13;
-            // 
-            // textBoxContact
-            // 
-            textBoxContact.Location = new Point(49, 358);
-            textBoxContact.Name = "textBoxContact";
-            textBoxContact.PlaceholderText = "Enter Contact Details";
-            textBoxContact.Size = new Size(332, 23);
-            textBoxContact.TabIndex = 14;
-            // 
-            // textBoxEveryday
-            // 
-            textBoxEveryday.Location = new Point(457, 53);
-            textBoxEveryday.Name = "textBoxEveryday";
-            textBoxEveryday.PlaceholderText = "Enter Amount";
-            textBoxEveryday.Size = new Size(332, 23);
-            textBoxEveryday.TabIndex = 15;
-            // 
-            // textBoxOmni
-            // 
-            textBoxOmni.Location = new Point(457, 155);
-            textBoxOmni.Name = "textBoxOmni";
-            textBoxOmni.PlaceholderText = "Enter Amount";
-            textBoxOmni.Size = new Size(332, 23);
-            textBoxOmni.TabIndex = 16;
-            // 
-            // textBoxInvest
-            // 
-            textBoxInvest.Location = new Point(457, 259);
-            textBoxInvest.Name = "textBoxInvest";
-            textBoxInvest.PlaceholderText = "Enter Amount";
-            textBoxInvest.Size = new Size(332, 23);
-            textBoxInvest.TabIndex = 17;
-            // 
             // UserAdministration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -564,11 +569,10 @@ namespace BankSystem
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ViewPanel.ResumeLayout(false);
-            ViewPanel.PerformLayout();
             EditablePanel.ResumeLayout(false);
             EditablePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
         }

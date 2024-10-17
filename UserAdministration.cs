@@ -25,33 +25,11 @@ namespace BankSystem
         {
             InitializeComponent();
             _userAdmin = new UserAdmin();
-            LoadUsersIntoGrid();
-
+            _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
-
-        private void LoadUsersIntoGrid()
-        {
-            dataGridView1.Rows.Clear(); // Otherwise i have duplicates!!!
-            var users = _userAdmin.GetUsers();
-
-
-            foreach (User user in users)
-            {
-                string everydayBalance = GetAccountBalance(user, typeof(Everyday));
-                string omniBalance = GetAccountBalance(user, typeof(Omni));
-                string investBalance = GetAccountBalance(user, typeof(Invest));
-
-                string isEmployee = user.IsEmployee ? "Yes" : "No";
-
-                string ContactDetails = string.IsNullOrEmpty(user.ContactDetails) ? "N/A" : user.ContactDetails;
-
-                dataGridView1.Rows.Add(user.UserID, user.UserName, isEmployee, ContactDetails, everydayBalance, omniBalance, investBalance);
-            }
-
-        }
-
-
+        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -70,9 +48,11 @@ namespace BankSystem
         {
             label2.Text = "User Details:";
             dataGridView1.Visible = false;
-            ViewPanel.Visible = true;
             EditablePanel.Visible = false;
-            RemoveIdenticalLabels(EditablePanel);
+            ViewPanel.Visible = true;
+            ViewPanel.BringToFront();
+
+            //RemoveIdenticalLabels(EditablePanel);
             AddingIdenticalLabels(ViewPanel);
             
         }
@@ -120,7 +100,7 @@ namespace BankSystem
         {
             ViewPanel.Visible = false;
             dataGridView1.Visible = true;
-            LoadUsersIntoGrid();
+            _userAdmin.LoadUsersIntoGrid(dataGridView1);
             ResetOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(EditBtn);
             ResetOpacityOfButton(DeleteBtn);
@@ -144,41 +124,48 @@ namespace BankSystem
 
         private void ViewBtn_Click(object sender, EventArgs e)
         {
+
+            if (selectedRowIndex < 0 || selectedRowIndex > dataGridView1.Rows.Count)
+            {
+                MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+           
+
+            var users = _userAdmin.GetAllUsers();
+            var selectedRow = dataGridView1.SelectedRows[0];
+            string selectedUserID = selectedRow.Cells[0].Value.ToString();
+            var selectedUser = users.FirstOrDefault(user => user.UserID == selectedUserID);
+
+
+            if (selectedUser == null)
+            {
+                MessageBox.Show("SelectedUser == null", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             
+        
+            _selectedUserID = selectedUserID;
+            UserIdData.Text = selectedUser.UserID;
+            NameData.Text = selectedUser.UserName;
+            rbtnYes.Checked = selectedUser.IsEmployee;
+            rbtnNo.Checked = !selectedUser.IsEmployee;
+            UpdateRadioBUttonColors(selectedUser.IsEmployee);
+
+
+            ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails;
+
+            EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
+            OmniData.Text = GetAccountBalance(selectedUser, typeof(Omni));
+            InvestData.Text = GetAccountBalance(selectedUser, typeof(Invest));
+
+              
+
             ChangeOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(CreateBtn);
             ResetOpacityOfButton(EditBtn);
             ResetOpacityOfButton(DeleteBtn);
             SwitchToViewPanel();
-
-            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count)
-            {
-                var users = _userAdmin.GetUsers();
-                var selectedRow = dataGridView1.SelectedRows[0];
-                string selectedUserID = selectedRow.Cells[0].Value.ToString();
-                var selectedUser = users.FirstOrDefault(user => user.UserID == selectedUserID);
-
-
-                if (selectedUser != null)
-                {
-                    _selectedUserID = selectedUserID;
-                    UserIdData.Text = selectedUser.UserID;
-                    NameData.Text = selectedUser.UserName;
-                    rbtnYes.Checked = selectedUser.IsEmployee;
-                    rbtnNo.Checked = !selectedUser.IsEmployee;
-                    UpdateRadioBUttonColors(selectedUser.IsEmployee);
-
-
-                    ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails;
-
-                    EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
-                    OmniData.Text = GetAccountBalance(selectedUser, typeof(Omni));
-                    InvestData.Text = GetAccountBalance(selectedUser, typeof(Invest));
-
-                }
-
-            }
-            MessageBox.Show("Please select a user to view their details", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void UpdateRadioBUttonColors(bool isEmployee)
