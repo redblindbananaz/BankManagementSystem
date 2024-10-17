@@ -17,31 +17,70 @@ namespace BankSystem
 {
     public partial class UserAdministration : Form
     {
-
+        private bool isFormLoaded = false;
         private UserAdmin _userAdmin;
         private string? _selectedUserID;
         private int selectedRowIndex = -1;
         public UserAdministration()
         {
             InitializeComponent();
+            isFormLoaded = true;
             _userAdmin = new UserAdmin();
-            _userAdmin.LoadUsersIntoGrid(dataGridView1);
-            
+            LoadingData(this, EventArgs.Empty);
+
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        }
-        
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-            }
+            
         }
 
-        private string GetAccountBalance(User user, Type accountType)
+        private void LoadingData(object sender, EventArgs e)
         {
-            var account = user.Accounts.FirstOrDefault(account => account.GetType() == accountType);
-            return account != null ? $"${account.Balance}" : "N/A";
+            dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+            _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!isFormLoaded)
+            {
+                return;
+            }
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedUserID = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                var selectedUserData = _userAdmin.GetSelectedUserData(selectedUserID);
+                DisplayUserDetails(selectedUserData);
+
+            }
+            MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // Suggestion from web to use Dynamic or try DTO Class fior user details
+        private void DisplayUserDetails(UserDetailsDTO userData)
+        {
+            if(!isFormLoaded)
+            {
+                return;
+            }
+            if (userData != null)
+            {
+                
+                UserIdData.Text = userData.SelectedID;
+                NameData.Text = userData.SelectedUserName;
+                rbtnYes.Checked = userData.SelectedBoolEmployee == "Yes";
+                rbtnNo.Checked = userData.SelectedBoolEmployee == "No";
+                UpdateRadioBUttonColors(rbtnYes.Checked);
+
+
+                ContactData.Text = userData.SelectedContact;
+
+                EverydayData.Text = userData.SelectedEveryday;
+                OmniData.Text = userData.SelectedOmni;
+                InvestData.Text = userData.SelectedInvest;
+
+            }
+            MessageBox.Show("SelectedUser == null", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
         }
 
         private void SwitchToViewPanel()
@@ -100,7 +139,7 @@ namespace BankSystem
         {
             ViewPanel.Visible = false;
             dataGridView1.Visible = true;
-            _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            LoadingData(this, EventArgs.Empty);
             ResetOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(EditBtn);
             ResetOpacityOfButton(DeleteBtn);
@@ -125,55 +164,32 @@ namespace BankSystem
         private void ViewBtn_Click(object sender, EventArgs e)
         {
 
-            if (selectedRowIndex < 0 || selectedRowIndex > dataGridView1.Rows.Count)
+
+            if (dataGridView1.CurrentRow != null) 
             {
-                MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-           
-
-            var users = _userAdmin.GetAllUsers();
-            var selectedRow = dataGridView1.SelectedRows[0];
-            string selectedUserID = selectedRow.Cells[0].Value.ToString();
-            var selectedUser = users.FirstOrDefault(user => user.UserID == selectedUserID);
-
-
-            if (selectedUser == null)
-            {
-                MessageBox.Show("SelectedUser == null", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                var selectedRow = dataGridView1.CurrentRow;
+                var selectedUserID = selectedRow.Cells[0].Value.ToString();
+                DisplayUserDetails(_userAdmin.GetSelectedUserData(selectedUserID));
+                ChangeOpacityOfButton(ViewBtn);
+                ResetOpacityOfButton(CreateBtn);
+                ResetOpacityOfButton(EditBtn);
+                ResetOpacityOfButton(DeleteBtn);
+                SwitchToViewPanel();
             }
             
-        
-            _selectedUserID = selectedUserID;
-            UserIdData.Text = selectedUser.UserID;
-            NameData.Text = selectedUser.UserName;
-            rbtnYes.Checked = selectedUser.IsEmployee;
-            rbtnNo.Checked = !selectedUser.IsEmployee;
-            UpdateRadioBUttonColors(selectedUser.IsEmployee);
 
 
-            ContactData.Text = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails;
 
-            EverydayData.Text = GetAccountBalance(selectedUser, typeof(Everyday));
-            OmniData.Text = GetAccountBalance(selectedUser, typeof(Omni));
-            InvestData.Text = GetAccountBalance(selectedUser, typeof(Invest));
-
-              
-
-            ChangeOpacityOfButton(ViewBtn);
-            ResetOpacityOfButton(CreateBtn);
-            ResetOpacityOfButton(EditBtn);
-            ResetOpacityOfButton(DeleteBtn);
-            SwitchToViewPanel();
+            
         }
 
         private void UpdateRadioBUttonColors(bool isEmployee)
         {
             rbtnNo.Enabled = false;
             rbtnYes.Enabled = false;
+            
 
-            if (isEmployee)
+            if (rbtnYes.Checked)
             {
                 rbtnYes.Enabled = true;
             }

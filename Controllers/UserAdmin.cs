@@ -12,6 +12,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using User = BankSystem.Models.User;
 using System.Windows.Forms;
 
+
 namespace BankSystem.Controllers
 {
 
@@ -63,12 +64,12 @@ namespace BankSystem.Controllers
             return _users.FirstOrDefault(user => user.UserID == userID);
         }
 
-        public object? GetSelectedUserData(string userID)
+        public UserDetailsDTO? GetSelectedUserData(string userID)
         {
             var selectedUser = GetUserByID(userID);
             if (selectedUser != null)
             {
-                return new
+                return new UserDetailsDTO
                 {
                     SelectedID = selectedUser.UserID,
                     SelectedUserName = selectedUser.UserName,
@@ -98,7 +99,7 @@ namespace BankSystem.Controllers
         public void LoadUsersIntoGrid(DataGridView grid)
         {
             grid.Rows.Clear(); // Otherwise i have duplicates!!!
-            GetAllUsers();
+            
 
 
             foreach (User user in GetAllUsers())
