@@ -56,7 +56,6 @@ namespace BankSystem.Controllers
 
             _users.Add(user3);
 
-            //SaveUsersToJsonFile();
         }
 
         public User? GetUserByID(string userID)
@@ -73,7 +72,7 @@ namespace BankSystem.Controllers
                 {
                     SelectedID = selectedUser.UserID,
                     SelectedUserName = selectedUser.UserName,
-                    SelectedBoolEmployee = selectedUser.IsEmployee ? "Yes" : "No",
+                    SelectedBoolEmployee = selectedUser.IsEmployee,
                     SelectedContact = string.IsNullOrEmpty(selectedUser.ContactDetails) ? "N/A" : selectedUser.ContactDetails,
                     SelectedEveryday = GetAccountBalance(selectedUser, typeof(Everyday)),
                     SelectedOmni = GetAccountBalance(selectedUser, typeof(Omni)),
@@ -116,16 +115,60 @@ namespace BankSystem.Controllers
             }
 
         }
+
+        // CRUD Main Operations:
+
+        public bool AddUserToAdmin(UserDetailsDTO userDetails)
+        {
+            try
+            {
+                User newUser = User.CreateUser(userDetails.SelectedID, userDetails.SelectedUserName, userDetails.SelectedBoolEmployee, userDetails.SelectedContact);
+                if (decimal.TryParse(userDetails.SelectedEveryday, out decimal everydayAmount))
+                {
+                    newUser.CreateAccount(new Everyday(everydayAmount));
+                }
+                if (decimal.TryParse(userDetails.SelectedOmni, out decimal omniAmount))
+                {
+                    newUser.CreateAccount(new Omni(omniAmount));
+                }
+                if(decimal.TryParse(userDetails.SelectedInvest,out decimal investAmount))
+                {
+                    newUser.CreateAccount(new Invest(investAmount));
+                }
+
+                AddUser(newUser);
+                return true;
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return false;
+            }
+        }
+
         public void AddUser(User user)
         {
             _users.Add(user);
-            //SaveUsersToJsonFile();
+           
         }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+        //=============================SERIALISATION================================
         // Serialise the users list to a JSON file -- NOT WORKING AT THE MOMENT
         public void SaveUsersToJsonFile()
         {

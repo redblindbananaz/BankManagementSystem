@@ -11,7 +11,7 @@ namespace BankSystem.Controllers
     {
         public string SelectedID { get; set; } = "";
         public string SelectedUserName { get; set; } = "";
-        public string SelectedBoolEmployee { get; set; } = "";
+        public bool SelectedBoolEmployee { get; set; } = false;
         public string SelectedContact { get; set; } = "";
         public string SelectedEveryday { get; set; } = "";
         public string SelectedOmni { get; set; } = "";

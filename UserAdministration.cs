@@ -45,8 +45,8 @@ namespace BankSystem
 
                     DisplayUserDetails(userData);
                 }
-                else 
-                { 
+                else
+                {
                     MessageBox.Show("Please select a valid User", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -59,14 +59,14 @@ namespace BankSystem
         // Suggestion from web to use Dynamic or try DTO Class fior user details
         private void DisplayUserDetails(UserDetailsDTO userData)
         {
-            
+
             if (userData == null) return;
 
 
             UserIdData.Text = userData.SelectedID;
             NameData.Text = userData.SelectedUserName;
-            rbtnYes.Checked = userData.SelectedBoolEmployee == "Yes";
-            rbtnNo.Checked = userData.SelectedBoolEmployee == "No";
+            rbtnYes.Checked = userData.SelectedBoolEmployee;
+            rbtnNo.Checked = !userData.SelectedBoolEmployee;
             UpdateRadioBUttonColors(rbtnYes.Checked);
 
 
@@ -76,7 +76,7 @@ namespace BankSystem
             OmniData.Text = userData.SelectedOmni;
             InvestData.Text = userData.SelectedInvest;
 
-           
+
         }
 
         private void SwitchToViewPanel()
@@ -89,7 +89,7 @@ namespace BankSystem
 
             //RemoveIdenticalLabels(EditablePanel);
             AddingIdenticalLabels(ViewPanel);
-            
+
         }
 
         private void AddingIdenticalLabels(Panel panel)
@@ -120,7 +120,7 @@ namespace BankSystem
 
         private void SwitchToEditPanel()
         {
-            
+
             dataGridView1.Visible = false;
             ViewPanel.Visible = false;
             EditablePanel.Visible = true;
@@ -128,7 +128,7 @@ namespace BankSystem
             AddingIdenticalLabels(EditablePanel);
             rbtnNo.Enabled = true;
             rbtnYes.Enabled = true;
-            ChangeOpacityOfButton(EditBtn);
+
         }
 
         private void ReturnToGridView()
@@ -138,10 +138,8 @@ namespace BankSystem
             dataGridView1.Visible = true;
             ViewBtn.Visible = true;
             _userAdmin.LoadUsersIntoGrid(dataGridView1);
-            ResetOpacityOfButton(ViewBtn);
-            ResetOpacityOfButton(EditBtn);
-            ResetOpacityOfButton(DeleteBtn);
-            ResetOpacityOfButton(CreateBtn);
+
+
         }
         private void ChangeOpacityOfButton(CustomButton button)
         {
@@ -159,9 +157,19 @@ namespace BankSystem
             button.BorderColor = Color.FromArgb(255, 242, 204);
         }
 
+        private void ClearForm()
+        {
+            textBoxID.Text = string.Empty;
+            textBoxName.Text = string.Empty;
+            textBoxContact.Text = string.Empty;
+            textBoxEveryday.Text = string.Empty;
+            textBoxOmni.Text = string.Empty;
+            textBoxInvest.Text = string.Empty;
+        }
+
         private void ViewBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow != null) 
+            if (dataGridView1.CurrentRow != null)
             {
                 var selectedRow = dataGridView1.CurrentRow;
                 var selectedUserID = selectedRow.Cells[0].Value.ToString();
@@ -170,25 +178,47 @@ namespace BankSystem
                 if (userData != null)
                 {
                     DisplayUserDetails(userData);
-                    ChangeOpacityOfButton(ViewBtn);
-                    ResetOpacityOfButton(CreateBtn);
-                    ResetOpacityOfButton(EditBtn);
-                    ResetOpacityOfButton(DeleteBtn);
                     SwitchToViewPanel();
                 }
                 else
                 {
                     MessageBox.Show("No User data found for the selected user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-  
+
             }
-       }
+        }
+
+        private void AddBtn_Click(object sender, EventArgs e)
+        {
+            var userDetailsDTO = new UserDetailsDTO
+            {
+                SelectedID = textBoxID.Text,
+                SelectedUserName = textBoxName.Text,
+                SelectedBoolEmployee = rbtnYes.Checked,
+                SelectedContact = textBoxContact.Text,
+                SelectedEveryday = textBoxEveryday.Text,
+                SelectedOmni = textBoxOmni.Text,
+                SelectedInvest = textBoxInvest.Text,
+
+            };
+            bool isCreated = _userAdmin.AddUserToAdmin(userDetailsDTO);
+
+            if (isCreated)
+            {
+                MessageBox.Show("New User Created Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ReturnToGridView();
+            }
+            else
+            {
+                MessageBox.Show("Failed to create user. Please Check Input Values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
 
         private void UpdateRadioBUttonColors(bool isEmployee)
         {
             rbtnNo.Enabled = false;
             rbtnYes.Enabled = false;
-            
 
             if (rbtnYes.Checked)
             {
@@ -200,43 +230,43 @@ namespace BankSystem
             }
         }
 
-       
-
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
             SwitchToViewPanel();
             label2.Text = "User Deletion:";
-            ResetOpacityOfButton(ViewBtn);
-            ResetOpacityOfButton(EditBtn);
-            ChangeOpacityOfButton(DeleteBtn);
-            ResetOpacityOfButton(CreateBtn);
         }
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
             SwitchToEditPanel();
             label2.Text = "New User Details:";
-            ResetOpacityOfButton(ViewBtn);
-            ResetOpacityOfButton(EditBtn);
-            ResetOpacityOfButton(DeleteBtn);
-            ChangeOpacityOfButton(CreateBtn);
+            ClearForm();
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
             SwitchToEditPanel();
             label2.Text = "Edit User Details:";
-            ResetOpacityOfButton(ViewBtn);
-            ResetOpacityOfButton(DeleteBtn);
-            ResetOpacityOfButton(CreateBtn);
-            ChangeOpacityOfButton(EditBtn);
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             ReturnToGridView();
+        }
 
+        private void LogoutBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to Logout?", "Logging out of the  Admin Panel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Application.Exit(); // Exit first then will create another Form for Login
+            }
+
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            ReturnToGridView();
         }
     }
 }
