@@ -17,13 +17,11 @@ namespace BankSystem.Models
      * Ability to calculate and add interest to the balance
      */
 
-    [Serializable]
     public class Invest: Account
     {
         public const decimal InterestRate = 0.05m;
         private const decimal FailingFee = 10m;
-        [JsonConstructor]
-        public Invest() { }
+
         public Invest(decimal balance) : base("Invest", balance)
         {
         }

@@ -13,10 +13,16 @@ using User = BankSystem.Models.User;
 
 namespace BankSystem.Controllers
 {
-    [Serializable]
+
     public class UserAdmin
     {
         private List<User> _users = null!;
+
+        public List<User> Users
+        {
+            get => _users;
+            private set => _users = value;
+        }
 
         public UserAdmin()
         {
@@ -63,8 +69,17 @@ namespace BankSystem.Controllers
         {
             return _users;
         }
+        public void AddUser(User user)
+        {
+            _users.Add(user);
+            //SaveUsersToJsonFile();
+        }
 
-        // Serialise the users list to a JSON file
+
+
+
+
+        // Serialise the users list to a JSON file -- NOT WORKING AT THE MOMENT
         public void SaveUsersToJsonFile()
         {
             string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
@@ -116,11 +131,7 @@ namespace BankSystem.Controllers
            
         }
         
-        public void AddUser(User user)
-        {
-            _users.Add(user);
-            SaveUsersToJsonFile();
-        }
+       
         private string GetFilePath(string fileName)
         {
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BankSystem");

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 
@@ -16,11 +14,10 @@ namespace BankSystem.Models
      * No Overdraft
      * No Transaction Fees
      */
-    [Serializable]
+  
     public class Everyday : Account
     {
-        [JsonConstructor]
-        public Everyday() { }
+       
         public Everyday(decimal balance) : base("Everyday", balance)
         {
 

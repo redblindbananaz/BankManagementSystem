@@ -58,7 +58,7 @@ namespace BankSystem.Models
             _contactDetails = string.Empty;
             _accounts = new List<Account>();
         }
-        [JsonConstructor]
+      
         protected User(string userID, string userName,bool isEmployee, string contactDetails)
         {
             _userID = userID;

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BankSystem.Models
@@ -23,8 +21,7 @@ namespace BankSystem.Models
         public const decimal InterestRate = 0.04m; // 4% Interest Rate
         private const decimal Overdraft = 100m; // Overdraft of $100
         private const decimal FailingFee = 5m; // Fee for Failed Transactions
-        [JsonConstructor]
-        public Omni() { }
+
         public Omni (decimal balance) : base("Omni", balance)
         {
         }
