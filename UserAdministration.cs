@@ -17,51 +17,44 @@ namespace BankSystem
 {
     public partial class UserAdministration : Form
     {
-        private bool isFormLoaded = false;
+        private bool _isFormLoading = false;
         private UserAdmin _userAdmin;
         private string? _selectedUserID;
         private int selectedRowIndex = -1;
         public UserAdministration()
         {
             InitializeComponent();
-            isFormLoaded = true;
             _userAdmin = new UserAdmin();
-            LoadingData(this, EventArgs.Empty);
+            _userAdmin.LoadUsersIntoGrid(dataGridView1);
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            
+            dataGridView1.MultiSelect = false;
+
         }
 
-        private void LoadingData(object sender, EventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
-            _userAdmin.LoadUsersIntoGrid(dataGridView1);
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-        }
+            if (e.RowIndex < 0) return; // No row selected - Ignore header clicks
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            if (!isFormLoaded)
+            string selectedUserID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            if (!string.IsNullOrEmpty(selectedUserID))
             {
-                return;
-            }
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                var selectedUserID = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                var selectedUserData = _userAdmin.GetSelectedUserData(selectedUserID);
-                DisplayUserDetails(selectedUserData);
+                var userData = _userAdmin.GetSelectedUserData(selectedUserID);
+                if (userData != null)
+                {
+
+                    DisplayUserDetails(userData);
+                }
+                MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             }
-            MessageBox.Show("Please select a user to view", "No User Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Suggestion from web to use Dynamic or try DTO Class fior user details
         private void DisplayUserDetails(UserDetailsDTO userData)
         {
-            if(!isFormLoaded)
-            {
-                return;
-            }
+            
             if (userData != null)
             {
                 
@@ -139,7 +132,7 @@ namespace BankSystem
         {
             ViewPanel.Visible = false;
             dataGridView1.Visible = true;
-            LoadingData(this, EventArgs.Empty);
+            _userAdmin.LoadUsersIntoGrid(dataGridView1);
             ResetOpacityOfButton(ViewBtn);
             ResetOpacityOfButton(EditBtn);
             ResetOpacityOfButton(DeleteBtn);

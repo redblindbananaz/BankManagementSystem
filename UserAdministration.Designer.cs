@@ -169,7 +169,7 @@ namespace BankSystem
             dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(879, 410);
             dataGridView1.TabIndex = 0;
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // UserId
             // 
