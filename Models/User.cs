@@ -19,7 +19,7 @@ namespace BankSystem.Models
         public string UserID
         {
             get => _userID;
-            private set => _userID = value;
+            set => _userID = value;
         }
 
         public string UserName
@@ -37,7 +37,7 @@ namespace BankSystem.Models
         public bool IsEmployee
         {
             get => _isEmployee;
-            private set => _isEmployee = value;
+            set => _isEmployee = value;
         }
 
         public List<Account> Accounts

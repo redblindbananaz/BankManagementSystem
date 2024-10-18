@@ -27,8 +27,6 @@ namespace BankSystem.Controllers
         {
             _users = new List<User>();
             InitializeUsers();
-            //LoadUsersFromJsonFile();
-
         }
 
         private void InitializeUsers()
@@ -87,7 +85,7 @@ namespace BankSystem.Controllers
         private string GetAccountBalance(User user, Type accountType)
         {
             var account = user.Accounts.FirstOrDefault(account => account.GetType() == accountType);
-            return account != null ? $"${account.Balance}" : "N/A";
+            return account != null ? $"{account.Balance}" : "N/A";
         }
 
         public List<User> GetAllUsers()
@@ -98,9 +96,7 @@ namespace BankSystem.Controllers
         public void LoadUsersIntoGrid(DataGridView grid)
         {
             grid.Rows.Clear(); // Otherwise i have duplicates!!!
-            
-
-
+  
             foreach (User user in GetAllUsers())
             {
                 string everydayBalance = GetAccountBalance(user, typeof(Everyday));
@@ -118,27 +114,15 @@ namespace BankSystem.Controllers
 
         // CRUD Main Operations:
 
-        public bool AddUserToAdmin(UserDetailsDTO userDetails)
+        public bool SaveOrUpdateUser(UserDetailsDTO userDetails, bool isNewUser)
         {
             try
             {
-                User newUser = User.CreateUser(userDetails.SelectedID, userDetails.SelectedUserName, userDetails.SelectedBoolEmployee, userDetails.SelectedContact);
-                if (decimal.TryParse(userDetails.SelectedEveryday, out decimal everydayAmount))
-                {
-                    newUser.CreateAccount(new Everyday(everydayAmount));
-                }
-                if (decimal.TryParse(userDetails.SelectedOmni, out decimal omniAmount))
-                {
-                    newUser.CreateAccount(new Omni(omniAmount));
-                }
-                if(decimal.TryParse(userDetails.SelectedInvest,out decimal investAmount))
-                {
-                    newUser.CreateAccount(new Invest(investAmount));
-                }
+                var user = isNewUser ? CreateUserFromDTO(userDetails) : UpdateExistingUser(userDetails);
+                if (user == null) return false;
 
-                AddUser(newUser);
+                if (isNewUser) AddUser(user);
                 return true;
-
 
             }
             catch (Exception ex)
@@ -148,10 +132,72 @@ namespace BankSystem.Controllers
             }
         }
 
+        public User CreateUserFromDTO(UserDetailsDTO userDetails)
+        {
+            var newUser = User.CreateUser(
+                userDetails.SelectedID,
+                userDetails.SelectedUserName,
+                userDetails.SelectedBoolEmployee,
+                userDetails.SelectedContact
+
+                );
+            AddAccountsToUser(newUser, userDetails);
+            return newUser;
+           
+        }
+
+        public User? UpdateExistingUser(UserDetailsDTO userDetails)
+        {
+            var user = GetUserByID(userDetails.SelectedID);
+            if (user == null) return null;
+
+            user.UserID = userDetails.SelectedID;
+            user.UserName = userDetails.SelectedUserName;
+            user.ContactDetails = userDetails.SelectedContact;
+            user.IsEmployee = userDetails.SelectedBoolEmployee;
+
+            UpdateUserAccount(user, userDetails);
+            return user;
+        }
+
+        private void AddAccountsToUser(User user, UserDetailsDTO userDetails)
+        {
+            if (decimal.TryParse(userDetails.SelectedEveryday, out decimal everydayAmount))
+            {
+                user.CreateAccount(new Everyday(everydayAmount));
+            }
+            if (decimal.TryParse(userDetails.SelectedOmni, out decimal omniAmount))
+            {
+                user.CreateAccount(new Omni(omniAmount));
+            }
+            if (decimal.TryParse(userDetails.SelectedInvest, out decimal investAmount))
+            {
+                user.CreateAccount(new Invest(investAmount));
+            }
+
+        }
+
+        private void UpdateUserAccount(User user, UserDetailsDTO userDetails)
+        {
+            user.Accounts.Clear(); // REset account to apply the new one
+            AddAccountsToUser(user, userDetails);
+        }
+
         public void AddUser(User user)
         {
             _users.Add(user);
            
+        }
+
+        public bool DeleteUser(UserDetailsDTO userDetails)
+        {
+            var user = _users.FirstOrDefault(u=> u.UserID == userDetails.SelectedID && u.UserName == userDetails.SelectedUserName);
+            if (user != null)
+            {
+                _users.Remove(user);
+                return true; //Delete is successfull
+            }
+            return false;
         }
 
 

@@ -83,6 +83,7 @@ namespace BankSystem
         {
             label2.Text = "User Details:";
             dataGridView1.Visible = false;
+            GridPAnel.Visible = false;
             EditablePanel.Visible = false;
             ViewPanel.Visible = true;
             ViewPanel.BringToFront();
@@ -118,12 +119,28 @@ namespace BankSystem
             panel.Controls.Remove(rbtnYes);
         }
 
-        private void SwitchToEditPanel()
+        private void SwitchToEditPanel(UserDetailsDTO? userData = null)
         {
-
             dataGridView1.Visible = false;
             ViewPanel.Visible = false;
+            GridPAnel.Visible = false;
             EditablePanel.Visible = true;
+            
+            if (userData !=null) // Means we are editing
+            {
+                PopulateEditablePanel(userData);
+                label2.Text = "Edit User Details";
+                AddBtn.Visible = false;
+                saveBtn.Visible = true;
+            }
+            else
+            {
+                ClearForm();
+                label2.Text = "New User Details";
+                AddBtn.Visible = true;
+                saveBtn.Visible = false;
+            }
+
             RemoveIdenticalLabels(ViewPanel);
             AddingIdenticalLabels(EditablePanel);
             rbtnNo.Enabled = true;
@@ -131,30 +148,30 @@ namespace BankSystem
 
         }
 
+        private void PopulateEditablePanel(UserDetailsDTO userData)
+        {
+            textBoxID.Text = userData.SelectedID;
+            textBoxName.Text = userData.SelectedUserName;
+            textBoxContact.Text = userData.SelectedContact;
+            rbtnYes.Checked = userData.SelectedBoolEmployee;
+            rbtnNo.Checked = !userData.SelectedBoolEmployee;
+            textBoxEveryday.Text = userData.SelectedEveryday;
+            textBoxOmni.Text = userData.SelectedOmni;
+            textBoxInvest.Text = userData.SelectedInvest;
+
+        }
+
         private void ReturnToGridView()
         {
             ViewPanel.Visible = false;
             EditablePanel.Visible = false;
+            GridPAnel.Visible = true;
             dataGridView1.Visible = true;
             ViewBtn.Visible = true;
             _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            label2.Text = "List of Users";
 
 
-        }
-        private void ChangeOpacityOfButton(CustomButton button)
-        {
-            button.Enabled = false;
-            button.BackColor = Color.FromArgb(128, 169, 196, 235);
-            button.ForeColor = Color.FromArgb(128, 0, 51, 102);
-            button.BorderColor = Color.FromArgb(128, 255, 242, 204);
-        }
-
-        private void ResetOpacityOfButton(CustomButton button)
-        {
-            button.Enabled = true;
-            button.BackColor = Color.FromArgb(169, 196, 235);
-            button.ForeColor = Color.FromArgb(0, 51, 102);
-            button.BorderColor = Color.FromArgb(255, 242, 204);
         }
 
         private void ClearForm()
@@ -188,9 +205,9 @@ namespace BankSystem
             }
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+        private UserDetailsDTO GetUserDetailsFromForm()
         {
-            var userDetailsDTO = new UserDetailsDTO
+            return new UserDetailsDTO
             {
                 SelectedID = textBoxID.Text,
                 SelectedUserName = textBoxName.Text,
@@ -199,21 +216,29 @@ namespace BankSystem
                 SelectedEveryday = textBoxEveryday.Text,
                 SelectedOmni = textBoxOmni.Text,
                 SelectedInvest = textBoxInvest.Text,
-
             };
-            bool isCreated = _userAdmin.AddUserToAdmin(userDetailsDTO);
+        }
 
-            if (isCreated)
+        private void HandleUserSaveOrUpdate(object sender, EventArgs e)
+        {
+            bool isNewUser = string.IsNullOrEmpty(textBoxID.Text) || _userAdmin.GetUserByID(textBoxID.Text)==null;
+            UserDetailsDTO userDetailsDTO = GetUserDetailsFromForm();
+
+            bool success = _userAdmin.SaveOrUpdateUser(userDetailsDTO, isNewUser);
+
+            string action = isNewUser ? "Created" : "Updated";
+            if (success)
             {
-                MessageBox.Show("New User Created Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"User {action}Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ReturnToGridView();
             }
             else
             {
-                MessageBox.Show("Failed to create user. Please Check Input Values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Failed to {action} User. Please Check Input Values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
+
 
         private void UpdateRadioBUttonColors(bool isEmployee)
         {
@@ -234,6 +259,31 @@ namespace BankSystem
         {
             SwitchToViewPanel();
             label2.Text = "User Deletion:";
+            var userDetailsDTO = GetUserDetailsFromForm();
+
+           
+
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to Delete User?", "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                bool isDeleted = _userAdmin.DeleteUser(userDetailsDTO);
+                if (isDeleted)
+                {
+                    MessageBox.Show("User Deleted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReturnToGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to  Deleted User!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ReturnToGridView();
+
+
+                }
+            }
+            else
+            {
+                ReturnToGridView();
+            }
         }
 
         private void CreateBtn_Click(object sender, EventArgs e)
@@ -245,8 +295,26 @@ namespace BankSystem
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            SwitchToEditPanel();
-            label2.Text = "Edit User Details:";
+            if (dataGridView1.CurrentRow != null)
+            {
+                var selectedRow = dataGridView1.CurrentRow;
+                var selectedUserID = selectedRow.Cells[0].Value.ToString();
+
+                var userData = _userAdmin.GetSelectedUserData(selectedUserID);
+                if (userData != null)
+                {
+                    DisplayUserDetails(userData);
+                    SwitchToEditPanel(userData);
+                }
+                else
+                {
+                    MessageBox.Show("Error: UserData not found from EDIT", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nodata Selected from the Grid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
