@@ -87,6 +87,7 @@ namespace BankSystem
             EditablePanel.Visible = false;
             ViewPanel.Visible = true;
             ViewPanel.BringToFront();
+            label3.Visible = false;
 
             //RemoveIdenticalLabels(EditablePanel);
             AddingIdenticalLabels(ViewPanel);
@@ -125,7 +126,8 @@ namespace BankSystem
             ViewPanel.Visible = false;
             GridPAnel.Visible = false;
             EditablePanel.Visible = true;
-            
+            label3.Visible = true;
+
             if (userData !=null) // Means we are editing
             {
                 PopulateEditablePanel(userData);
@@ -168,6 +170,7 @@ namespace BankSystem
             GridPAnel.Visible = true;
             dataGridView1.Visible = true;
             ViewBtn.Visible = true;
+            label3.Visible = false;
             _userAdmin.LoadUsersIntoGrid(dataGridView1);
             dataGridView1.ClearSelection();
             label2.Text = "List of Users";
@@ -220,24 +223,25 @@ namespace BankSystem
             };
         }
 
+    
+
         private void HandleUserSaveOrUpdate(object sender, EventArgs e)
         {
-            bool isNewUser = string.IsNullOrEmpty(textBoxID.Text) || _userAdmin.GetUserByID(textBoxID.Text)==null;
-            UserDetailsDTO userDetailsDTO = GetUserDetailsFromForm();
+                bool isNewUser = string.IsNullOrEmpty(textBoxID.Text) || _userAdmin.GetUserByID(textBoxID.Text) == null;
+                UserDetailsDTO userDetailsDTO = GetUserDetailsFromForm();
 
-            bool success = _userAdmin.SaveOrUpdateUser(userDetailsDTO, isNewUser);
+                bool success = _userAdmin.SaveOrUpdateUser(userDetailsDTO, isNewUser);
 
-            string action = isNewUser ? "Created" : "Updated";
-            if (success)
-            {
-                MessageBox.Show($"User {action}Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ReturnToGridView();
-            }
-            else
-            {
-                MessageBox.Show($"Failed to {action} User. Please Check Input Values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+                string action = isNewUser ? "Created" : "Updated";
+                if (success)
+                {
+                    MessageBox.Show($"User {action}Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReturnToGridView();
+                }
+                else
+                {
+                    MessageBox.Show($"Failed to {action} User. Please Check Input Values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
 
 

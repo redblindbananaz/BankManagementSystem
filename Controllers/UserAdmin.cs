@@ -151,7 +151,7 @@ namespace BankSystem.Controllers
             var user = GetUserByID(userDetails.SelectedID);
             if (user == null) return null;
 
-            user.UserID = userDetails.SelectedID;
+            
             user.UserName = userDetails.SelectedUserName;
             user.ContactDetails = userDetails.SelectedContact;
             user.IsEmployee = userDetails.SelectedBoolEmployee;

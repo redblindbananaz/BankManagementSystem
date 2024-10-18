@@ -30,22 +30,12 @@ namespace BankSystem
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TopPanel = new Panel();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             LogoutBtn = new CustomButton();
             customPanel1 = new CustomPanel();
-            EditablePanel = new Panel();
-            saveBtn = new CustomButton();
-            cancelBtn = new CustomButton();
-            AddBtn = new CustomButton();
-            textBoxInvest = new TextBox();
-            textBoxOmni = new TextBox();
-            textBoxEveryday = new TextBox();
-            textBoxContact = new TextBox();
-            textBoxName = new TextBox();
-            textBoxID = new TextBox();
             GridPAnel = new Panel();
             ViewBtn = new CustomButton();
             dataGridView1 = new DataGridView();
@@ -65,6 +55,16 @@ namespace BankSystem
             ContactData = new Label();
             NameData = new Label();
             UserIdData = new Label();
+            EditablePanel = new Panel();
+            saveBtn = new CustomButton();
+            cancelBtn = new CustomButton();
+            AddBtn = new CustomButton();
+            textBoxInvest = new TextBox();
+            textBoxOmni = new TextBox();
+            textBoxEveryday = new TextBox();
+            textBoxContact = new TextBox();
+            textBoxName = new TextBox();
+            textBoxID = new TextBox();
             label2 = new Label();
             rbtnNo = new RadioButton();
             rbtnYes = new RadioButton();
@@ -77,13 +77,14 @@ namespace BankSystem
             labelUserID = new Label();
             BottomPanel = new Panel();
             CreateBtn = new CustomButton();
+            label3 = new Label();
             TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             customPanel1.SuspendLayout();
-            EditablePanel.SuspendLayout();
             GridPAnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ViewPanel.SuspendLayout();
+            EditablePanel.SuspendLayout();
             BottomPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -145,6 +146,7 @@ namespace BankSystem
             customPanel1.BorderColor = Color.FromArgb(215, 155, 0);
             customPanel1.BorderRadius = 24;
             customPanel1.BorderSize = 8;
+            customPanel1.Controls.Add(label3);
             customPanel1.Controls.Add(GridPAnel);
             customPanel1.Controls.Add(ViewPanel);
             customPanel1.Controls.Add(EditablePanel);
@@ -153,126 +155,6 @@ namespace BankSystem
             customPanel1.Name = "customPanel1";
             customPanel1.Size = new Size(934, 496);
             customPanel1.TabIndex = 1;
-            // 
-            // EditablePanel
-            // 
-            EditablePanel.Controls.Add(saveBtn);
-            EditablePanel.Controls.Add(cancelBtn);
-            EditablePanel.Controls.Add(AddBtn);
-            EditablePanel.Controls.Add(textBoxInvest);
-            EditablePanel.Controls.Add(textBoxOmni);
-            EditablePanel.Controls.Add(textBoxEveryday);
-            EditablePanel.Controls.Add(textBoxContact);
-            EditablePanel.Controls.Add(textBoxName);
-            EditablePanel.Controls.Add(textBoxID);
-            EditablePanel.Location = new Point(28, 64);
-            EditablePanel.Name = "EditablePanel";
-            EditablePanel.Size = new Size(879, 410);
-            EditablePanel.TabIndex = 17;
-            // 
-            // saveBtn
-            // 
-            saveBtn.BackColor = Color.FromArgb(255, 242, 204);
-            saveBtn.BorderColor = Color.FromArgb(66, 107, 62);
-            saveBtn.BorderRadius = 24;
-            saveBtn.BorderSize = 8;
-            saveBtn.FlatAppearance.BorderColor = Color.FromArgb(215, 155, 0);
-            saveBtn.FlatAppearance.BorderSize = 8;
-            saveBtn.FlatStyle = FlatStyle.Flat;
-            saveBtn.Font = new Font("Verdana", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            saveBtn.ForeColor = Color.FromArgb(66, 107, 62);
-            saveBtn.Location = new Point(676, 339);
-            saveBtn.Name = "saveBtn";
-            saveBtn.Size = new Size(200, 60);
-            saveBtn.TabIndex = 20;
-            saveBtn.Text = "SAVE";
-            saveBtn.UseVisualStyleBackColor = false;
-            saveBtn.Click += HandleUserSaveOrUpdate;
-            // 
-            // cancelBtn
-            // 
-            cancelBtn.BackColor = Color.FromArgb(0, 51, 102);
-            cancelBtn.BorderColor = Color.FromArgb(0, 51, 102);
-            cancelBtn.BorderRadius = 24;
-            cancelBtn.BorderSize = 8;
-            cancelBtn.FlatAppearance.BorderSize = 0;
-            cancelBtn.FlatStyle = FlatStyle.Flat;
-            cancelBtn.Font = new Font("Verdana", 15F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
-            cancelBtn.ForeColor = Color.FromArgb(215, 155, 0);
-            cancelBtn.Location = new Point(457, 339);
-            cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(200, 60);
-            cancelBtn.TabIndex = 19;
-            cancelBtn.Text = "Cancel";
-            cancelBtn.UseVisualStyleBackColor = false;
-            cancelBtn.Click += cancelBtn_Click;
-            // 
-            // AddBtn
-            // 
-            AddBtn.BackColor = Color.FromArgb(255, 242, 204);
-            AddBtn.BorderColor = Color.FromArgb(215, 155, 0);
-            AddBtn.BorderRadius = 24;
-            AddBtn.BorderSize = 8;
-            AddBtn.FlatAppearance.BorderColor = Color.FromArgb(215, 155, 0);
-            AddBtn.FlatAppearance.BorderSize = 8;
-            AddBtn.FlatStyle = FlatStyle.Flat;
-            AddBtn.Font = new Font("Verdana", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddBtn.ForeColor = Color.FromArgb(215, 155, 0);
-            AddBtn.Location = new Point(676, 339);
-            AddBtn.Name = "AddBtn";
-            AddBtn.Size = new Size(200, 60);
-            AddBtn.TabIndex = 18;
-            AddBtn.Text = "Create New";
-            AddBtn.UseVisualStyleBackColor = false;
-            AddBtn.Click += HandleUserSaveOrUpdate;
-            // 
-            // textBoxInvest
-            // 
-            textBoxInvest.Location = new Point(457, 259);
-            textBoxInvest.Name = "textBoxInvest";
-            textBoxInvest.PlaceholderText = "Enter Amount";
-            textBoxInvest.Size = new Size(332, 23);
-            textBoxInvest.TabIndex = 17;
-            // 
-            // textBoxOmni
-            // 
-            textBoxOmni.Location = new Point(457, 155);
-            textBoxOmni.Name = "textBoxOmni";
-            textBoxOmni.PlaceholderText = "Enter Amount";
-            textBoxOmni.Size = new Size(332, 23);
-            textBoxOmni.TabIndex = 16;
-            // 
-            // textBoxEveryday
-            // 
-            textBoxEveryday.Location = new Point(457, 53);
-            textBoxEveryday.Name = "textBoxEveryday";
-            textBoxEveryday.PlaceholderText = "Enter Amount";
-            textBoxEveryday.Size = new Size(332, 23);
-            textBoxEveryday.TabIndex = 15;
-            // 
-            // textBoxContact
-            // 
-            textBoxContact.Location = new Point(49, 358);
-            textBoxContact.Name = "textBoxContact";
-            textBoxContact.PlaceholderText = "Enter Contact Details";
-            textBoxContact.Size = new Size(332, 23);
-            textBoxContact.TabIndex = 14;
-            // 
-            // textBoxName
-            // 
-            textBoxName.Location = new Point(49, 155);
-            textBoxName.Name = "textBoxName";
-            textBoxName.PlaceholderText = "Enter Full Name";
-            textBoxName.Size = new Size(332, 23);
-            textBoxName.TabIndex = 13;
-            // 
-            // textBoxID
-            // 
-            textBoxID.Location = new Point(49, 53);
-            textBoxID.Name = "textBoxID";
-            textBoxID.PlaceholderText = "Enter Unique ID";
-            textBoxID.Size = new Size(332, 23);
-            textBoxID.TabIndex = 12;
             // 
             // GridPAnel
             // 
@@ -293,7 +175,7 @@ namespace BankSystem
             ViewBtn.FlatStyle = FlatStyle.Flat;
             ViewBtn.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
             ViewBtn.ForeColor = Color.FromArgb(0, 51, 102);
-            ViewBtn.Location = new Point(676, 335);
+            ViewBtn.Location = new Point(675, 331);
             ViewBtn.Name = "ViewBtn";
             ViewBtn.Size = new Size(200, 60);
             ViewBtn.TabIndex = 3;
@@ -306,14 +188,14 @@ namespace BankSystem
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.AliceBlue;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.Info;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.Info;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { UserId, LastName, Employee, Contact, Everyday, Omni, Invest });
             dataGridView1.Location = new Point(1, 0);
@@ -488,6 +370,126 @@ namespace BankSystem
             UserIdData.Text = "User ID here";
             UserIdData.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // EditablePanel
+            // 
+            EditablePanel.Controls.Add(saveBtn);
+            EditablePanel.Controls.Add(cancelBtn);
+            EditablePanel.Controls.Add(AddBtn);
+            EditablePanel.Controls.Add(textBoxInvest);
+            EditablePanel.Controls.Add(textBoxOmni);
+            EditablePanel.Controls.Add(textBoxEveryday);
+            EditablePanel.Controls.Add(textBoxContact);
+            EditablePanel.Controls.Add(textBoxName);
+            EditablePanel.Controls.Add(textBoxID);
+            EditablePanel.Location = new Point(28, 64);
+            EditablePanel.Name = "EditablePanel";
+            EditablePanel.Size = new Size(879, 410);
+            EditablePanel.TabIndex = 17;
+            // 
+            // saveBtn
+            // 
+            saveBtn.BackColor = Color.FromArgb(255, 242, 204);
+            saveBtn.BorderColor = Color.FromArgb(66, 107, 62);
+            saveBtn.BorderRadius = 24;
+            saveBtn.BorderSize = 8;
+            saveBtn.FlatAppearance.BorderColor = Color.FromArgb(215, 155, 0);
+            saveBtn.FlatAppearance.BorderSize = 8;
+            saveBtn.FlatStyle = FlatStyle.Flat;
+            saveBtn.Font = new Font("Verdana", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            saveBtn.ForeColor = Color.FromArgb(66, 107, 62);
+            saveBtn.Location = new Point(675, 331);
+            saveBtn.Name = "saveBtn";
+            saveBtn.Size = new Size(200, 60);
+            saveBtn.TabIndex = 20;
+            saveBtn.Text = "SAVE";
+            saveBtn.UseVisualStyleBackColor = false;
+            saveBtn.Click += HandleUserSaveOrUpdate;
+            // 
+            // cancelBtn
+            // 
+            cancelBtn.BackColor = Color.FromArgb(0, 51, 102);
+            cancelBtn.BorderColor = Color.FromArgb(0, 51, 102);
+            cancelBtn.BorderRadius = 24;
+            cancelBtn.BorderSize = 8;
+            cancelBtn.FlatAppearance.BorderSize = 0;
+            cancelBtn.FlatStyle = FlatStyle.Flat;
+            cancelBtn.Font = new Font("Verdana", 15F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            cancelBtn.ForeColor = Color.FromArgb(215, 155, 0);
+            cancelBtn.Location = new Point(457, 331);
+            cancelBtn.Name = "cancelBtn";
+            cancelBtn.Size = new Size(200, 60);
+            cancelBtn.TabIndex = 19;
+            cancelBtn.Text = "Cancel";
+            cancelBtn.UseVisualStyleBackColor = false;
+            cancelBtn.Click += cancelBtn_Click;
+            // 
+            // AddBtn
+            // 
+            AddBtn.BackColor = Color.FromArgb(255, 242, 204);
+            AddBtn.BorderColor = Color.FromArgb(215, 155, 0);
+            AddBtn.BorderRadius = 24;
+            AddBtn.BorderSize = 8;
+            AddBtn.FlatAppearance.BorderColor = Color.FromArgb(215, 155, 0);
+            AddBtn.FlatAppearance.BorderSize = 8;
+            AddBtn.FlatStyle = FlatStyle.Flat;
+            AddBtn.Font = new Font("Verdana", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AddBtn.ForeColor = Color.FromArgb(215, 155, 0);
+            AddBtn.Location = new Point(676, 339);
+            AddBtn.Name = "AddBtn";
+            AddBtn.Size = new Size(200, 60);
+            AddBtn.TabIndex = 18;
+            AddBtn.Text = "Create New";
+            AddBtn.UseVisualStyleBackColor = false;
+            AddBtn.Click += HandleUserSaveOrUpdate;
+            // 
+            // textBoxInvest
+            // 
+            textBoxInvest.Location = new Point(457, 259);
+            textBoxInvest.Name = "textBoxInvest";
+            textBoxInvest.PlaceholderText = "Enter Amount";
+            textBoxInvest.Size = new Size(332, 23);
+            textBoxInvest.TabIndex = 17;
+            // 
+            // textBoxOmni
+            // 
+            textBoxOmni.Location = new Point(457, 155);
+            textBoxOmni.Name = "textBoxOmni";
+            textBoxOmni.PlaceholderText = "Enter Amount";
+            textBoxOmni.Size = new Size(332, 23);
+            textBoxOmni.TabIndex = 16;
+            // 
+            // textBoxEveryday
+            // 
+            textBoxEveryday.Location = new Point(457, 53);
+            textBoxEveryday.Name = "textBoxEveryday";
+            textBoxEveryday.PlaceholderText = "Enter Amount";
+            textBoxEveryday.Size = new Size(332, 23);
+            textBoxEveryday.TabIndex = 15;
+            // 
+            // textBoxContact
+            // 
+            textBoxContact.Location = new Point(49, 358);
+            textBoxContact.Name = "textBoxContact";
+            textBoxContact.PlaceholderText = "Enter Contact Details";
+            textBoxContact.Size = new Size(332, 23);
+            textBoxContact.TabIndex = 14;
+            // 
+            // textBoxName
+            // 
+            textBoxName.Location = new Point(49, 155);
+            textBoxName.Name = "textBoxName";
+            textBoxName.PlaceholderText = "Enter Full Name";
+            textBoxName.Size = new Size(332, 23);
+            textBoxName.TabIndex = 13;
+            // 
+            // textBoxID
+            // 
+            textBoxID.Location = new Point(49, 53);
+            textBoxID.Name = "textBoxID";
+            textBoxID.PlaceholderText = "Enter Unique ID";
+            textBoxID.Size = new Size(332, 23);
+            textBoxID.TabIndex = 12;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -625,6 +627,15 @@ namespace BankSystem
             CreateBtn.UseVisualStyleBackColor = false;
             CreateBtn.Click += CreateBtn_Click;
             // 
+            // label3
+            // 
+            label3.Location = new Point(288, 30);
+            label3.Name = "label3";
+            label3.Size = new Size(616, 23);
+            label3.TabIndex = 18;
+            label3.Text = "label3";
+            label3.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // UserAdministration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -641,11 +652,11 @@ namespace BankSystem
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             customPanel1.ResumeLayout(false);
             customPanel1.PerformLayout();
-            EditablePanel.ResumeLayout(false);
-            EditablePanel.PerformLayout();
             GridPAnel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ViewPanel.ResumeLayout(false);
+            EditablePanel.ResumeLayout(false);
+            EditablePanel.PerformLayout();
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -698,5 +709,6 @@ namespace BankSystem
         private CustomButton AddBtn;
         private CustomButton cancelBtn;
         private CustomButton saveBtn;
+        private Label label3;
     }
 }
