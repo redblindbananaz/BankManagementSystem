@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 
@@ -15,10 +14,10 @@ namespace BankSystem.Models
      * No Overdraft
      * No Transaction Fees
      */
-
+  
     public class Everyday : Account
     {
-
+       
         public Everyday(decimal balance) : base("Everyday", balance)
         {
 

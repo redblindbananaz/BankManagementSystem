@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -16,7 +17,6 @@ namespace BankSystem.Models
      * Ability to calculate and add interest to the balance
      */
 
-
     public class Invest: Account
     {
         public const decimal InterestRate = 0.05m;
@@ -25,6 +25,7 @@ namespace BankSystem.Models
         public Invest(decimal balance) : base("Invest", balance)
         {
         }
+       
         public Invest(string accountName, decimal balance) : base("Invest", balance)
         { 
            

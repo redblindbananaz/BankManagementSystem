@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BankSystem.Models
@@ -15,7 +14,8 @@ namespace BankSystem.Models
      * Simple deposit method
      * Ability to calculate and add interest to the balance
      */
-    internal class Omni : Account
+    [Serializable]
+    public class Omni : Account
     {
 
         public const decimal InterestRate = 0.04m; // 4% Interest Rate
@@ -25,7 +25,7 @@ namespace BankSystem.Models
         public Omni (decimal balance) : base("Omni", balance)
         {
         }
-        
+     
         public Omni(string accountName, decimal balance ) : base ("Omni",  balance)
         {
         }

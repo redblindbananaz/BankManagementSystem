@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace BankSystem.Models
 {
@@ -18,7 +19,7 @@ namespace BankSystem.Models
         public string UserID
         {
             get => _userID;
-            private set => _userID = value;
+            set => _userID = value;
         }
 
         public string UserName
@@ -36,7 +37,7 @@ namespace BankSystem.Models
         public bool IsEmployee
         {
             get => _isEmployee;
-            private set => _isEmployee = value;
+            set => _isEmployee = value;
         }
 
         public List<Account> Accounts
@@ -47,6 +48,8 @@ namespace BankSystem.Models
 
         public static User? CurrentUser { get; private set; }
 
+       
+      
         protected User(string userID, string userName, bool isEmployee)
         {
             _userID = userID;
@@ -55,6 +58,7 @@ namespace BankSystem.Models
             _contactDetails = string.Empty;
             _accounts = new List<Account>();
         }
+      
         protected User(string userID, string userName,bool isEmployee, string contactDetails)
         {
             _userID = userID;
@@ -64,7 +68,6 @@ namespace BankSystem.Models
             _accounts = new List<Account>();
         }
 
-
         //Methods:
 
         public void CreateAccount(Account account)
@@ -72,9 +75,14 @@ namespace BankSystem.Models
             _accounts.Add(account);
         }
 
-        public static User CreateUser(string userID, string userName, bool isEmployee)
+        public void RemoveAccount(Account account)
         {
-            return new User(userID, userName, isEmployee);
+            _accounts.Remove(account);
+        }
+
+        public static User CreateUser(string userID, string userName, bool isEmployee, string contactdetails)
+        {
+            return new User(userID, userName, isEmployee, contactdetails);
         }
 
         public static void SetCurrentUser(User user)
