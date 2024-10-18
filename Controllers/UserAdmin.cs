@@ -189,9 +189,9 @@ namespace BankSystem.Controllers
            
         }
 
-        public bool DeleteUser(UserDetailsDTO userDetails)
+        public bool DeleteUser(string userID)
         {
-            var user = _users.FirstOrDefault(u=> u.UserID == userDetails.SelectedID && u.UserName == userDetails.SelectedUserName);
+            var user = _users.FirstOrDefault(u=> u.UserID == userID);
             if (user != null)
             {
                 _users.Remove(user);

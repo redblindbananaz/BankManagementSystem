@@ -169,6 +169,7 @@ namespace BankSystem
             dataGridView1.Visible = true;
             ViewBtn.Visible = true;
             _userAdmin.LoadUsersIntoGrid(dataGridView1);
+            dataGridView1.ClearSelection();
             label2.Text = "List of Users";
 
 
@@ -259,25 +260,28 @@ namespace BankSystem
         {
             SwitchToViewPanel();
             label2.Text = "User Deletion:";
-            var userDetailsDTO = GetUserDetailsFromForm();
 
-           
-
-            DialogResult dialogResult = MessageBox.Show("Are you sure you want to Delete User?", "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
+            if (dataGridView1.CurrentRow != null)
             {
-                bool isDeleted = _userAdmin.DeleteUser(userDetailsDTO);
-                if (isDeleted)
+                var selectedRow = dataGridView1.CurrentRow;
+                var selectedUserID = selectedRow.Cells[0].Value.ToString();
+
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to Delete User?", "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show("User Deleted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ReturnToGridView();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to  Deleted User!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ReturnToGridView();
+
+                    if (_userAdmin.DeleteUser(selectedUserID))
+                    {
+                        MessageBox.Show("User Deleted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ReturnToGridView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to  Deleted User!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ReturnToGridView();
 
 
+                    }
                 }
             }
             else
