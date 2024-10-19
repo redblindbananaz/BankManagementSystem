@@ -4,7 +4,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
 
 ## Table of Contents
 
-- [Part 1: Banking System Interface For Handling User Transactions](#part-1:-banking-system-interface-for-handling-transactions)
+- [Part 1: Banking System Interface For Handling User Transactions](#part-1-banking-system-interface-for-handling-transactions)
    - [Introduction](#introduction)
    - [Features](#features)
    - [Installation](#installation)
@@ -12,7 +12,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
    - [Project Structure](#project-structure)
    - [Key Design Patterns](#key-design-patterns)
    - [License](#license)
-- [Part 2: Banking System Interface CMS for Users](#part-2:-banking-system-interface-cMS-for-users)
+- [Part 2: Banking System Interface CMS for Users](#part-2-banking-system-interface-cMS-for-users)
 
 ## Introduction
 
@@ -81,7 +81,9 @@ This project demonstrates a basic banking application with functionality for dif
 
 This project is licensed under the MIT License. 
 
-# Part 2: Banking System Interface CMS for Users [Back to Top](##table-of-contents)
+# Part 2: Banking System Interface CMS for Users 
+
+[Back to Top](##table-of-contents)
 
 
 
