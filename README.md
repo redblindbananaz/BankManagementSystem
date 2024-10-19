@@ -12,7 +12,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
    - [Project Structure](#project-structure)
    - [Key Design Patterns](#key-design-patterns)
    - [License](#license)
-- [Part 2: Banking System Interface CMS for Users](#part-2:-banking-system-interface-cms-for-users)
+- [Part 2: Banking System Interface CMS for Users](#part-2:-banking-system-interface-cMS-for-users)
 
 ## Introduction
 
@@ -81,7 +81,7 @@ This project demonstrates a basic banking application with functionality for dif
 
 This project is licensed under the MIT License. 
 
-# Part 2: Banking System Interface CMS for Users
+# Part 2: Banking System Interface CMS for Users [Back to Top](##table-of-contents)
 
 
 
