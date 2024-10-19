@@ -85,7 +85,7 @@ This project is licensed under the MIT License.
 
 # Part 2: Banking System Interface CMS for Users 
 
-[Back to Top](##table-of-contents)
+[Back to Top](#table-of-contents)
 
 ## 2.1 Introduction
 
