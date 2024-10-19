@@ -1,16 +1,18 @@
-# Banking System Application
+# Part 1: Banking System Interface For Handling User Transations
 
 A C# Windows Forms application for managing user accounts, handling deposits, withdrawals, and displaying transaction histories. This project was developed with a focus on inheritance, encapsulation, and abstract class design to implement a simplified banking system.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Key Design Patterns](#key-design-patterns)
-- [License](#license)
+- [Part 1: Banking System Interface For Handling User Transactions](#part-1:-banking-system-interface-for-handling-transactions)
+   - [Introduction](#introduction)
+   - [Features](#features)
+   - [Installation](#installation)
+   - [Usage](#usage)
+   - [Project Structure](#project-structure)
+   - [Key Design Patterns](#key-design-patterns)
+   - [License](#license)
+- [Part 2: Banking System Interface CMS for Users](#part-2:-banking-system-interface-cms-for-users)
 
 ## Introduction
 
@@ -78,6 +80,9 @@ This project demonstrates a basic banking application with functionality for dif
 ## License
 
 This project is licensed under the MIT License. 
+
+# Part 2: Banking System Interface CMS for Users
+
 
 
 
