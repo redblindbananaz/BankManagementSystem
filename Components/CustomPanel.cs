@@ -18,7 +18,7 @@ namespace BankSystem.Components
         private Color backgroundColor = CustomColors.LightBlue;
 
         //Properties:
-        [Category("Custom Properties")]
+
         public int BorderSize
         {
             get { return borderSize; }
@@ -28,7 +28,7 @@ namespace BankSystem.Components
                 Invalidate();
             }
         }
-        [Category("Custom Properties")]
+
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -38,7 +38,7 @@ namespace BankSystem.Components
                 Invalidate();
             }
         }
-        [Category("Custom Properties")]
+
         public Color BorderColor
         {
             get { return borderColor; }
@@ -48,7 +48,7 @@ namespace BankSystem.Components
                 Invalidate();
             }
         }
-        [Category("Custom Properties")]
+
         public Color BackgroundColor
         {
             get { return backgroundColor; }
