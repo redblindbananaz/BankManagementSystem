@@ -15,6 +15,7 @@ A C# Windows Forms application for managing user accounts, handling deposits, wi
 - [Part 2: Banking System Interface CMS for Users](#part-2-banking-system-interface-cMS-for-users)
   - [2.1 Introduction](#21-introduction)
   - [2.2 Features](#22-features)
+  - [2.3 Testing](#23-testing)
 
 ## 1.1 Introduction
 
@@ -96,6 +97,14 @@ At this stage of the development, there is no Login Form to switch from the Bank
 
 **MVC Pattern**: In the Model-View-Controller (MVC) pattern, the controller serves as the intermediary between the UI and the data model. The goal is to centralize data management within the controller, ensuring that the business logic is kept separate from the user interface and that data flows between the UI and models in a controlled way.
 In my design, the UserAdmin controller manages a centralized list of users, performs CRUD operations, and handles account management.
+**Friendly UI**: Creation of  a user interface that incorporates the company’s branding elements and interact with the Controller Class.
+**Exception Classes**: Creation of an exception class that inherits from a base exception class. Implementing custom exceptions reflecting different types of accounts (e.g., Everyday, Omni and Invest) with meaningful messages.
+
+## 2.3 testing
+
+### Testing Results:
+
+![Testing results](https://github.com/redblindbananaz/BankManagementSystem/blob/master/Images/TestResults.png)
 
 
 
