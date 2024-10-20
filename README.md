@@ -91,14 +91,15 @@ This project is licensed under the MIT License.
 ## 2.1 Introduction
 
 Development of a prototype for the management of the banking customer information. Using MVC Pattern, this User Form is designed for adding, updating and deleting customer informations. It integrates the Form with a Controller Class (UserAdmin.cs) to manage interactions.
+
 At this stage of the development, there is no Login Form to switch from the Banking application and the CMS for Customers (Part 3 of this project)
 
 ## 2.2 Features
 
-**MVC Pattern**: In the Model-View-Controller (MVC) pattern, the controller serves as the intermediary between the UI and the data model. The goal is to centralize data management within the controller, ensuring that the business logic is kept separate from the user interface and that data flows between the UI and models in a controlled way.
+- **MVC Pattern**: In the Model-View-Controller (MVC) pattern, the controller serves as the intermediary between the UI and the data model. The goal is to centralize data management within the controller, ensuring that the business logic is kept separate from the user interface and that data flows between the UI and models in a controlled way.
 In my design, the UserAdmin controller manages a centralized list of users, performs CRUD operations, and handles account management.
-**Friendly UI**: Creation of  a user interface that incorporates the company’s branding elements and interact with the Controller Class.
-**Exception Classes**: Creation of an exception class that inherits from a base exception class. Implementing custom exceptions reflecting different types of accounts (e.g., Everyday, Omni and Invest) with meaningful messages.
+- **Friendly UI**: Creation of  a user interface that incorporates the company’s branding elements and interact with the Controller Class.
+- **Exception Classes**: Creation of an exception class that inherits from a base exception class. Implementing custom exceptions reflecting different types of accounts (e.g., Everyday, Omni and Invest) with meaningful messages.
 
 ## 2.3 testing
 
