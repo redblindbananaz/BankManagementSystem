@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankSystem.Models.Exceptions
 {
-    internal class InvestWithdrawException : WithdrawException
+    public class InvestWithdrawException : WithdrawException
     {
         public InvestWithdrawException(string message) : base(message)
         {

@@ -41,7 +41,7 @@ namespace BankSystem.Models
             string baseDetails = base.FormatTransaction(type, amount, isSuccessful);
             if (!isSuccessful)
             {
-                baseDetails += $" - {FailingFee}";
+                baseDetails += $" - {FailingFee:C}";
             }
             return baseDetails;
         }
@@ -51,6 +51,7 @@ namespace BankSystem.Models
         {
             string transactionDetails = FormatTransaction("Withdraw", amount, isSuccessful);
             Transactions.Add(transactionDetails);
+
             if (!isSuccessful) 
             {
                 Balance -= FailingFee;
@@ -70,9 +71,12 @@ namespace BankSystem.Models
             }
             if (Balance - amount < 0)
             {
+               
                 AddInvestTransaction("Withdraw", amount, false);
+                
                 throw new InvestWithdrawException("Invest - " +
                     "Withdraw amount must be smaller than the current Balance");
+                
             }
             Balance -= amount;
             AddInvestTransaction("Withdraw", amount, true);
